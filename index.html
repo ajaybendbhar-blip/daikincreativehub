@@ -162,7 +162,8 @@
 
     async function loadDsps() {
       try {
-        const res = await fetch(APP_SCRIPT_URL);  // doGet returns list
+        // Simple GET – no custom headers, so no CORS preflight
+        const res = await fetch(APP_SCRIPT_URL);
         const data = await res.json();
         if (!data.ok) {
           console.error('Error loading DSPs', data.error);
@@ -238,11 +239,13 @@
       status.className = 'status';
 
       try {
+        // SIMPLE POST: text/plain to avoid CORS preflight
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
+
         const data = await res.json();
         if (!data.ok) {
           status.textContent = data.error || 'Error generating copy.';
