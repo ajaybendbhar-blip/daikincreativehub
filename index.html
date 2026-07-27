@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daikin Solution Plaza Creative Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 16px; background:#f3f4f6; }
+    .shell { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1.2fr; gap: 16px; }
+    @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } }
+    .panel { background:#fff; border-radius: 12px; padding:16px; box-shadow:0 8px 24px rgba(15,23,42,0.15); }
+    h1 { margin:0 0 8px; font-size:1.4rem; }
+    label { display:block; font-size:0.8rem; margin-bottom:4px; color:#6b7280; text-transform:uppercase; letter-spacing:0.08em; }
+    input, select, textarea { width:100%; padding:6px 8px; font-size:0.9rem; border-radius:8px; border:1px solid #d1d5db; }
+    textarea { min-height:60px; resize:vertical; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px 12px; }
+    .full { grid-column:1/3; }
+    button { padding:8px 16px; border-radius:999px; border:none; background:#005bac; color:#fff; font-size:0.9rem; font-weight:600; cursor:pointer; }
+    .status { margin-top:8px; font-size:0.8rem; color:#6b7280; }
+    .status.error { color:#b91c1c; }
+    .preview-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    .logo { width:80px; height:26px; background:#fff; color:#005bac; display:flex; align-items:center; justify-content:center; font-size:0.9rem; font-weight:700; border-radius:4px; letter-spacing:0.12em; }
+    .card { background:#0f172a; color:#e5e7eb; border-radius:12px; padding:14px; box-shadow:0 12px 32px rgba(15,23,42,0.7); }
+    .headline { font-size:1rem; font-weight:600; margin-bottom:4px; }
+    .sub { font-size:0.85rem; color:#cbd5f5; margin-bottom:6px; }
+    .pill-row span { display:inline-block; font-size:0.75rem; padding:3px 8px; border-radius:999px; border:1px solid rgba(122,201,67,0.7); background:rgba(122,201,67,0.16); margin-right:4px; margin-bottom:4px; }
+    .copy { font-size:0.8rem; margin-top:6px; }
+    .dealer { margin-top:8px; font-size:0.8rem; border-top:1px dashed rgba(148,163,184,0.8); padding-top:6px; display:flex; justify-content:space-between; }
+    .compliance { margin-top:6px; font-size:0.75rem; padding:4px 8px; border-radius:999px; display:inline-flex; align-items:center; gap:4px; background:rgba(22,163,74,0.18); color:#bbf7d0; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- LEFT: form -->
+    <div class="panel">
+      <h1>Daikin Solution Plaza Creative Studio</h1>
+      <p style="font-size:0.85rem;color:#6b7280;margin-top:0;">
+        Restricted to authorised Daikin Solution Plaza dealers. Fill approved fields and generate compliant copy.
+      </p>
+      <form id="creative-form" class="grid">
+        <div class="full">
+          <label>Dealer (from master)</label>
+          <select id="dsp-select" name="dspCode"></select>
+        </div>
+        <div class="full">
+          <label>Dealership Name</label>
+          <input name="dealer" id="dealer-input" placeholder="Dealership Name" required>
+        </div>
+        <div>
+          <label>Locality / City</label>
+          <input name="locality" placeholder="City / Area" required>
+        </div>
+        <div>
+          <label>Contact Number</label>
+          <input name="phone" placeholder="Dealer contact" required>
+        </div>
+        <div>
+          <label>Campaign</label>
+          <select name="campaign">
+            <option>Ganesh Chaturthi</option>
+            <option>Diwali</option>
+            <option>Independence Day</option>
+            <option>Summer</option>
+            <option>Monsoon</option>
+          </select>
+        </div>
+        <div>
+          <label>Approved Scheme</label>
+          <select name="scheme">
+            <option>Green Exchange</option>
+            <option>Festive Cashback</option>
+            <option>Zero Cost EMI</option>
+            <option>Extended Warranty</option>
+          </select>
+        </div>
+        <div>
+          <label>Benefit</label>
+          <select name="benefit">
+            <option>5% Cashback</option>
+            <option>Exchange Bonus</option>
+            <option>No Cashback</option>
+          </select>
+        </div>
+        <div>
+          <label>Installation</label>
+          <select name="installation">
+            <option>Subsidized Installation</option>
+            <option>Standard Installation</option>
+            <option>Free Installation</option>
+          </select>
+        </div>
+        <div>
+          <label>Product</label>
+          <select name="product">
+            <option>1.5 Ton Inverter Split</option>
+            <option>1 Ton Inverter Split</option>
+            <option>3 Star Split AC</option>
+            <option>Premium IAQ Series</option>
+          </select>
+        </div>
+        <div>
+          <label>Language</label>
+          <select name="language">
+            <option>Marathi + English</option>
+            <option>Hindi + English</option>
+            <option>Gujarati + English</option>
+            <option>English Only</option>
+          </select>
+        </div>
+        <div class="full">
+          <label>Internal Notes (optional)</label>
+          <textarea name="notes" placeholder="E.g. focus on family comfort, highlight energy savings."></textarea>
+        </div>
+      </form>
+      <button id="generate-btn">Generate Creative Copy</button>
+      <div id="status" class="status"></div>
+    </div>
+
+    <!-- RIGHT: preview card -->
+    <div class="panel">
+      <div class="card">
+        <div class="preview-header">
+          <div class="logo">DAIKIN</div>
+          <div style="font-size:0.8rem;color:#9ca3af;">Brand Zone – Locked</div>
+        </div>
+        <div class="headline" id="headline">Headline will appear here.</div>
+        <div class="sub" id="subheadline">Supporting copy will appear here.</div>
+        <div class="pill-row" id="pills"></div>
+        <div class="copy">
+          <strong>Local language:</strong>
+          <div id="body-local">Local language copy will appear here.</div>
+          <strong style="display:block;margin-top:4px;">English:</strong>
+          <div id="body-en">English copy will appear here.</div>
+        </div>
+        <div class="dealer">
+          <div>
+            <div id="dealer-name">Dealer Name</div>
+            <div style="font-size:0.75rem;color:#9ca3af;" id="dealer-contact">City · Phone</div>
+            <a id="gmb-link" href="#" target="_blank" style="font-size:0.75rem;color:#93c5fd;">
+              View location & rate us
+            </a>
+            <div style="font-size:0.75rem;color:#9ca3af;" id="rating-info"></div>
+          </div>
+          <div id="qr-container">
+            <img id="qr-img" alt="Rate us QR" style="width:64px;height:64px;border-radius:4px;">
+          </div>
+        </div>
+        <div class="compliance" id="compliance-pill">
+          <span>✔</span> <span>Brand Compliance: Pending</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNAGK8go4qNCZxw1XOg6-Xp0miTshAm_nRO6UbmIMW7D97u9PAGpa2cXQN78QhfXlV/exec';
+
+    const dspSelect = document.getElementById('dsp-select');
+    const dealerInput = document.getElementById('dealer-input');
+    const localityInput = document.querySelector('input[name="locality"]');
+    const phoneInput = document.querySelector('input[name="phone"]');
+
+    async function loadDsps() {
+      try {
+        const res = await fetch(APP_SCRIPT_URL + '?mode=list');
+        const data = await res.json();
+        if (!data.ok) {
+          console.error('Error loading DSPs', data.error);
+          return;
+        }
+        dspSelect.innerHTML = '';
+        data.dsps.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.dspCode;
+          opt.textContent = `${d.dspCode} - ${d.dspName}`;
+          opt.dataset.city = d.city;
+          opt.dataset.contact = d.ownerContact;
+          opt.dataset.gmbUrl = d.gmbUrl;
+          opt.dataset.rating = d.currentRating;
+          opt.dataset.reviews = d.reviewsCount;
+          dspSelect.appendChild(opt);
+        });
+        const firstOpt = dspSelect.options[0];
+        if (firstOpt) {
+          dspSelect.value = firstOpt.value;
+          dealerInput.value = firstOpt.textContent.split(' - ')[1];
+          localityInput.value = firstOpt.dataset.city;
+          phoneInput.value = firstOpt.dataset.contact;
+          updateRatingInfo(firstOpt.dataset.rating, firstOpt.dataset.reviews);
+          updateQr(firstOpt.dataset.gmbUrl);
+        }
+      } catch (err) {
+        console.error('Error loading DSPs', err);
+      }
+    }
+
+    dspSelect.addEventListener('change', () => {
+      const opt = dspSelect.selectedOptions[0];
+      if (!opt) return;
+      dealerInput.value = opt.textContent.split(' - ')[1];
+      localityInput.value = opt.dataset.city;
+      phoneInput.value = opt.dataset.contact;
+      updateRatingInfo(opt.dataset.rating, opt.dataset.reviews);
+      updateQr(opt.dataset.gmbUrl);
+    });
+
+    function updateRatingInfo(rating, reviews) {
+      const el = document.getElementById('rating-info');
+      if (rating || reviews) {
+        el.textContent = `Current rating: ${rating || '-'} · Reviews: ${reviews || '-'}`;
+      } else {
+        el.textContent = '';
+      }
+    }
+
+    function updateQr(gmbUrl) {
+      if (!gmbUrl) return;
+      const encoded = encodeURIComponent(gmbUrl);
+      const qrImg = document.getElementById('qr-img');
+      qrImg.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encoded}`;
+      const gmbLink = document.getElementById('gmb-link');
+      gmbLink.href = gmbUrl;
+    }
+
+    document.getElementById('generate-btn').addEventListener('click', async () => {
+      const form = document.getElementById('creative-form');
+      const status = document.getElementById('status');
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      const opt = dspSelect.selectedOptions[0];
+      if (opt) {
+        payload.dspCode = opt.value;
+        payload.dealer = dealerInput.value;
+      }
+
+      status.textContent = 'Generating copy...';
+      status.className = 'status';
+
+      try {
+        const res = await fetch(APP_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.ok) {
+          status.textContent = data.error || 'Error generating copy.';
+          status.className = 'status error';
+          return;
+        }
+        const copy = data.data;
+
+        document.getElementById('headline').textContent = copy.headline_en || 'Generated headline';
+        document.getElementById('subheadline').textContent = copy.body_en || '';
+        document.getElementById('body-en').textContent = copy.body_en || '';
+        document.getElementById('body-local').textContent = copy.body_local || '';
+
+        document.getElementById('dealer-name').textContent = copy.dealer;
+        document.getElementById('dealer-contact').textContent = `${copy.locality} · ${copy.phone}`;
+
+        const pills = document.getElementById('pills');
+        pills.innerHTML = '';
+        [payload.scheme, payload.benefit, payload.installation].forEach(t => {
+          if (!t) return;
+          const span = document.createElement('span');
+          span.textContent = t;
+          pills.appendChild(span);
+        });
+
+        updateQr(copy.gmbUrl);
+        updateRatingInfo(copy.currentRating, copy.reviewsCount);
+
+        const compliance = document.getElementById('compliance-pill');
+        if (copy.compliance === 'approved') {
+          compliance.innerHTML = '<span>✔</span> <span>Brand Compliance: Approved</span>';
+        } else {
+          compliance.innerHTML = '<span>!</span> <span>Brand Compliance: Needs Review</span>';
+        }
+
+        status.textContent = 'Copy generated successfully.';
+        status.className = 'status';
+      } catch (err) {
+        status.textContent = 'Network/server error: ' + err;
+        status.className = 'status error';
+      }
+    });
+
+    // Initial load
+    loadDsps();
+  </script>
+</body>
+</html>
