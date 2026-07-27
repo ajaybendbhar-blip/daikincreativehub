@@ -161,7 +161,7 @@
   </div>
 
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5rOhqqYyhV5lGyXJQNyqAeaZpWYes3xxzmQElCkwBJrav5NDnZJkDb84GsZYIpK93/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygMW17oHIIIXOA7RjVIT1YC-7MwkbbwAYKtR5OAU_PbMfdx9MwaONgjXyb3VnYWUXR/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
@@ -288,9 +288,9 @@
           compliance.innerHTML = '<span>!</span> <span>Brand Compliance: Needs Review</span>';
         }
 
-        // NEW: set festival background image
-        if (copy.bgImageUrl) {
-          bgImg.src = copy.bgImageUrl;
+        // Use GPT image data URL as background
+        if (copy.bgImageDataUrl) {
+          bgImg.src = copy.bgImageDataUrl;
         } else {
           bgImg.removeAttribute('src');
         }
@@ -362,7 +362,7 @@
     loadDsps();
   </script>
 
-  <!-- html2canvas for capturing card + background as image -->
+  <!-- html2canvas for capturing card + background as PNG -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
