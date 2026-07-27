@@ -153,7 +153,7 @@
   </div>
 
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNAGK8go4qNCZxw1XOg6-Xp0miTshAm_nRO6UbmIMW7D97u9PAGpa2cXQN78QhfXlV/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqSL3YYCFbmygm1AGoZLhwl7m5iZtxaooho3QhHsgIezQv1b1eB4fgj9iRYG6owBu8/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
@@ -162,7 +162,7 @@
 
     async function loadDsps() {
       try {
-        const res = await fetch(APP_SCRIPT_URL + '?mode=list');
+        const res = await fetch(APP_SCRIPT_URL);  // doGet returns list
         const data = await res.json();
         if (!data.ok) {
           console.error('Error loading DSPs', data.error);
