@@ -18,9 +18,12 @@
     button { padding:8px 16px; border-radius:999px; border:none; background:#005bac; color:#fff; font-size:0.9rem; font-weight:600; cursor:pointer; }
     .status { margin-top:8px; font-size:0.8rem; color:#6b7280; }
     .status.error { color:#b91c1c; }
+
+    .preview-wrapper { position:relative; border-radius:16px; overflow:hidden; box-shadow:0 16px 40px rgba(15,23,42,0.45); }
+    #bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.45); }
+    .card { position:relative; background:rgba(15,23,42,0.9); color:#e5e7eb; border-radius:16px; padding:14px; }
     .preview-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
     .logo { width:80px; height:26px; background:#fff; color:#005bac; display:flex; align-items:center; justify-content:center; font-size:0.9rem; font-weight:700; border-radius:4px; letter-spacing:0.12em; }
-    .card { background:#0f172a; color:#e5e7eb; border-radius:12px; padding:14px; box-shadow:0 12px 32px rgba(15,23,42,0.7); }
     .headline { font-size:1rem; font-weight:600; margin-bottom:4px; }
     .sub { font-size:0.85rem; color:#cbd5f5; margin-bottom:6px; }
     .pill-row span { display:inline-block; font-size:0.75rem; padding:3px 8px; border-radius:999px; border:1px solid rgba(122,201,67,0.7); background:rgba(122,201,67,0.16); margin-right:4px; margin-bottom:4px; }
@@ -116,56 +119,58 @@
       <div id="status" class="status"></div>
     </div>
 
-    <!-- RIGHT: preview card + submit -->
+    <!-- RIGHT: festival background + text card + submit -->
     <div class="panel">
-      <div class="card">
-        <div class="preview-header">
-          <div class="logo">DAIKIN</div>
-          <div style="font-size:0.8rem;color:#9ca3af;">Brand Zone – Locked</div>
-        </div>
-        <div class="headline" id="headline">Headline will appear here.</div>
-        <div class="sub" id="subheadline">Supporting copy will appear here.</div>
-        <div class="pill-row" id="pills"></div>
-        <div class="copy">
-          <strong>Local language:</strong>
-          <div id="body-local">Local language copy will appear here.</div>
-          <strong style="display:block;margin-top:4px;">English:</strong>
-          <div id="body-en">English copy will appear here.</div>
-        </div>
-        <div class="dealer">
-          <div>
-            <div id="dealer-name">Dealer Name</div>
-            <div style="font-size:0.75rem;color:#9ca3af;" id="dealer-contact">City · Phone</div>
-            <a id="gmb-link" href="#" target="_blank" style="font-size:0.75rem;color:#93c5fd;">
-              View location & rate us
-            </a>
-            <div style="font-size:0.75rem;color:#9ca3af;" id="rating-info"></div>
+      <div class="preview-wrapper" id="preview-wrapper">
+        <img id="bg-img" alt="Festival background">
+        <div class="card">
+          <div class="preview-header">
+            <div class="logo">DAIKIN</div>
+            <div style="font-size:0.8rem;color:#9ca3af;">Brand Zone – Locked</div>
           </div>
-          <div id="qr-container">
-            <img id="qr-img" alt="Rate us QR" style="width:64px;height:64px;border-radius:4px;">
+          <div class="headline" id="headline">Headline will appear here.</div>
+          <div class="sub" id="subheadline">Supporting copy will appear here.</div>
+          <div class="pill-row" id="pills"></div>
+          <div class="copy">
+            <strong>Local language:</strong>
+            <div id="body-local">Local language copy will appear here.</div>
+            <strong style="display:block;margin-top:4px;">English:</strong>
+            <div id="body-en">English copy will appear here.</div>
           </div>
-        </div>
-        <div class="compliance" id="compliance-pill">
-          <span>✔</span> <span>Brand Compliance: Pending</span>
+          <div class="dealer">
+            <div>
+              <div id="dealer-name">Dealer Name</div>
+              <div style="font-size:0.75rem;color:#9ca3af;" id="dealer-contact">City · Phone</div>
+              <a id="gmb-link" href="#" target="_blank" style="font-size:0.75rem;color:#93c5fd;">
+                View location & rate us
+              </a>
+              <div style="font-size:0.75rem;color:#9ca3af;" id="rating-info"></div>
+            </div>
+            <div id="qr-container">
+              <img id="qr-img" alt="Rate us QR" style="width:64px;height:64px;border-radius:4px;">
+            </div>
+          </div>
+          <div class="compliance" id="compliance-pill">
+            <span>✔</span> <span>Brand Compliance: Pending</span>
+          </div>
         </div>
       </div>
 
-      <!-- New button: submit for review -->
       <button id="submit-btn" style="margin-top:8px;">Submit Creative for Review</button>
     </div>
   </div>
 
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz67-ltU-dE-Vx4GEZZgfGsnOA-nJzxK3-zYIFETIZCj2-6EGpilgSaUwDbOzGQn6oE/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5rOhqqYyhV5lGyXJQNyqAeaZpWYes3xxzmQElCkwBJrav5NDnZJkDb84GsZYIpK93/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
     const localityInput = document.querySelector('input[name="locality"]');
     const phoneInput = document.querySelector('input[name="phone"]');
+    const bgImg = document.getElementById('bg-img');
 
     async function loadDsps() {
       try {
-        // Simple GET – no custom headers (avoids CORS preflight)
         const res = await fetch(APP_SCRIPT_URL);
         const data = await res.json();
         if (!data.ok) {
@@ -238,11 +243,10 @@
         payload.dealer = dealerInput.value;
       }
 
-      status.textContent = 'Generating copy...';
+      status.textContent = 'Generating copy & artwork...';
       status.className = 'status';
 
       try {
-        // SIMPLE POST: text/plain to avoid CORS preflight
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -284,7 +288,14 @@
           compliance.innerHTML = '<span>!</span> <span>Brand Compliance: Needs Review</span>';
         }
 
-        status.textContent = 'Copy generated successfully.';
+        // NEW: set festival background image
+        if (copy.bgImageUrl) {
+          bgImg.src = copy.bgImageUrl;
+        } else {
+          bgImg.removeAttribute('src');
+        }
+
+        status.textContent = 'Copy & artwork generated successfully.';
         status.className = 'status';
       } catch (err) {
         status.textContent = 'Network/server error: ' + err;
@@ -292,17 +303,17 @@
       }
     });
 
-    // SUBMIT FOR REVIEW: capture card as image & send to Apps Script
+    // SUBMIT FOR REVIEW: capture full preview (background + card)
     document.getElementById('submit-btn').addEventListener('click', async () => {
       const status = document.getElementById('status');
-      const card = document.querySelector('.card');
-      if (!card) return;
+      const wrapper = document.getElementById('preview-wrapper');
+      if (!wrapper) return;
 
       status.textContent = 'Preparing image for review...';
       status.className = 'status';
 
       try {
-        const canvas = await html2canvas(card, {
+        const canvas = await html2canvas(wrapper, {
           scale: 2,
           useCORS: true
         });
@@ -351,7 +362,7 @@
     loadDsps();
   </script>
 
-  <!-- html2canvas for capturing card as image -->
+  <!-- html2canvas for capturing card + background as image -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
