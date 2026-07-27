@@ -116,7 +116,7 @@
       <div id="status" class="status"></div>
     </div>
 
-    <!-- RIGHT: preview card -->
+    <!-- RIGHT: preview card + submit -->
     <div class="panel">
       <div class="card">
         <div class="preview-header">
@@ -149,11 +149,14 @@
           <span>✔</span> <span>Brand Compliance: Pending</span>
         </div>
       </div>
+
+      <!-- New button: submit for review -->
+      <button id="submit-btn" style="margin-top:8px;">Submit Creative for Review</button>
     </div>
   </div>
 
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqSL3YYCFbmygm1AGoZLhwl7m5iZtxaooho3QhHsgIezQv1b1eB4fgj9iRYG6owBu8/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz67-ltU-dE-Vx4GEZZgfGsnOA-nJzxK3-zYIFETIZCj2-6EGpilgSaUwDbOzGQn6oE/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
@@ -162,7 +165,7 @@
 
     async function loadDsps() {
       try {
-        // Simple GET – no custom headers, so no CORS preflight
+        // Simple GET – no custom headers (avoids CORS preflight)
         const res = await fetch(APP_SCRIPT_URL);
         const data = await res.json();
         if (!data.ok) {
@@ -289,8 +292,66 @@
       }
     });
 
+    // SUBMIT FOR REVIEW: capture card as image & send to Apps Script
+    document.getElementById('submit-btn').addEventListener('click', async () => {
+      const status = document.getElementById('status');
+      const card = document.querySelector('.card');
+      if (!card) return;
+
+      status.textContent = 'Preparing image for review...';
+      status.className = 'status';
+
+      try {
+        const canvas = await html2canvas(card, {
+          scale: 2,
+          useCORS: true
+        });
+        const dataUrl = canvas.toDataURL('image/png');
+
+        const payload = {
+          action: 'submit_for_review',
+          dealerCode: dspSelect.value,
+          dealerName: document.getElementById('dealer-name').textContent,
+          locality: document.getElementById('dealer-contact').textContent,
+          headline_en: document.getElementById('headline').textContent,
+          body_en: document.getElementById('body-en').textContent,
+          body_local: document.getElementById('body-local').textContent,
+          scheme: document.querySelector('select[name="scheme"]').value,
+          benefit: document.querySelector('select[name="benefit"]').value,
+          installation: document.querySelector('select[name="installation"]').value,
+          campaign: document.querySelector('select[name="campaign"]').value,
+          product: document.querySelector('select[name="product"]').value,
+          language: document.querySelector('select[name="language"]').value,
+          notes: document.querySelector('textarea[name="notes"]').value,
+          imageDataUrl: dataUrl
+        };
+
+        const res = await fetch(APP_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (!data.ok) {
+          status.textContent = data.error || 'Error submitting for review.';
+          status.className = 'status error';
+          return;
+        }
+
+        status.textContent = 'Creative submitted for review. URL: ' + data.reviewUrl;
+        status.className = 'status';
+      } catch (err) {
+        status.textContent = 'Error creating/submitting image: ' + err;
+        status.className = 'status error';
+      }
+    });
+
     // Initial load
     loadDsps();
   </script>
+
+  <!-- html2canvas for capturing card as image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
