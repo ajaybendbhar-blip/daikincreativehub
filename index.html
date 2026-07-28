@@ -1,114 +1,256 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daikin Creative Studio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.4rem);
+      --text-xl: clamp(1.35rem, 1.15rem + 1vw, 2rem);
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #dbe3ee;
+      --primary: #005bac;
+      --primary-2: #0b76d1;
+      --success: #0f9d58;
+      --danger: #b42318;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f3f4f6;
-      color: #111827;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #eef4fb 0%, #f7f9fc 100%);
+      color: var(--text);
+      min-height: 100vh;
     }
 
-    .wrap {
-      max-width: 1200px;
+    .page {
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 16px;
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 16px;
+      padding: var(--space-6);
     }
 
-    @media (max-width: 900px) {
-      .wrap {
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--text-lg);
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(0, 91, 172, 0.24);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .layout {
         grid-template-columns: 1fr;
       }
     }
 
     .panel {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
-      padding: 16px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 1.35rem;
+    .panel-body {
+      padding: var(--space-5);
     }
 
-    p.note {
-      margin-top: 0;
-      color: #6b7280;
-      font-size: 0.9rem;
+    .panel h2 {
+      margin: 0 0 var(--space-2);
+      font-size: var(--text-xl);
+      line-height: 1.15;
     }
 
-    .grid {
+    .subtext {
+      margin: 0 0 var(--space-5);
+      color: var(--muted);
+      font-size: var(--text-sm);
+      line-height: 1.55;
+    }
+
+    .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: var(--space-4);
     }
 
-    .full {
-      grid-column: 1 / -1;
+    .full { grid-column: 1 / -1; }
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    label {
+    .field label {
       display: block;
-      margin-bottom: 4px;
-      font-size: 0.8rem;
-      color: #6b7280;
+      margin-bottom: 6px;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
     }
 
-    input, select, textarea, button {
+    .field input,
+    .field select,
+    .field textarea {
       width: 100%;
-      box-sizing: border-box;
-      border-radius: 10px;
-      border: 1px solid #d1d5db;
-      padding: 10px 12px;
-      font-size: 0.95rem;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: var(--text-sm);
+      outline: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
     }
 
-    textarea {
-      min-height: 72px;
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 91, 172, 0.12);
+    }
+
+    .field textarea {
+      min-height: 82px;
       resize: vertical;
     }
 
-    button {
-      background: #005bac;
-      border: none;
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 12px;
+    .btn-row {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-top: var(--space-5);
     }
 
-    button.secondary {
-      background: #374151;
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      font-size: var(--text-sm);
+      cursor: pointer;
+      min-height: 44px;
+      transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      box-shadow: 0 10px 24px rgba(0, 91, 172, 0.22);
+    }
+
+    .btn-secondary {
+      background: #eaf2fb;
+      color: var(--primary);
+      border: 1px solid #cfe1f4;
     }
 
     .status {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #374151;
+      margin-top: var(--space-4);
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      font-size: var(--text-sm);
+      color: var(--text);
       white-space: pre-wrap;
     }
 
     .status.error {
-      color: #b91c1c;
+      background: #fff4f2;
+      border-color: #f3c4bd;
+      color: var(--danger);
+    }
+
+    .debug-box {
+      margin-top: var(--space-4);
+      padding: 14px;
+      border-radius: 12px;
+      background: #0f172a;
+      color: #dbeafe;
+      font-size: 12px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      max-height: 240px;
+      overflow: auto;
+      display: none;
+    }
+
+    .preview-wrap {
+      padding: var(--space-5);
     }
 
     .preview-shell {
       position: relative;
-      border-radius: 18px;
-      overflow: hidden;
       min-height: 760px;
-      background: #111827;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      border-radius: 24px;
+      overflow: hidden;
+      background: #0f172a;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.28);
+      isolation: isolate;
     }
 
     #bg-img {
@@ -117,270 +259,342 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.5);
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 30%), linear-gradient(180deg, #20324f, #0f172a);
+      filter: brightness(0.58) saturate(1.02);
+      z-index: 0;
     }
 
-    .card {
-      position: relative;
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8,15,28,0.32) 0%, rgba(8,15,28,0.6) 100%),
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 30%);
       z-index: 1;
-      padding: 16px;
-      color: #f9fafb;
-      background: rgba(17, 24, 39, 0.88);
-      min-height: 760px;
-      backdrop-filter: blur(2px);
     }
 
-    .topline {
+    .creative-card {
+      position: relative;
+      z-index: 2;
+      min-height: 760px;
+      padding: 24px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: var(--space-6);
     }
 
-    .logo {
-      background: #fff;
-      color: #005bac;
+    .daikin-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.96);
+      color: var(--primary);
       font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 6px;
-      letter-spacing: 0.08em;
-      display: inline-block;
+      letter-spacing: 0.12em;
+      font-size: var(--text-sm);
     }
 
-    .brand-lock {
-      color: #d1d5db;
-      font-size: 0.85rem;
+    .brand-zone {
+      color: rgba(255,255,255,0.72);
+      font-size: var(--text-sm);
     }
 
     .headline {
-      font-size: 1.35rem;
+      font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.7rem);
       font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 8px;
+      line-height: 1.1;
+      max-width: 14ch;
+      margin-bottom: var(--space-4);
+      text-shadow: 0 2px 18px rgba(0,0,0,0.16);
     }
 
-    .body {
-      font-size: 1rem;
-      line-height: 1.45;
-      color: #e5e7eb;
-      margin-bottom: 10px;
+    .subheadline {
+      max-width: 54ch;
+      font-size: var(--text-base);
+      line-height: 1.55;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: var(--space-5);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.14);
     }
 
-    .chips {
+    .pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0 14px;
+      gap: 10px;
+      margin-bottom: var(--space-6);
     }
 
-    .chip {
-      border: 1px solid rgba(167, 243, 208, 0.45);
-      color: #d1fae5;
-      background: rgba(34, 197, 94, 0.14);
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
       border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.85rem;
+      font-size: var(--text-sm);
+      color: #e8fff4;
+      background: rgba(86, 190, 128, 0.18);
+      border: 1px solid rgba(151, 255, 189, 0.42);
+      backdrop-filter: blur(8px);
     }
 
-    .section-title {
-      font-weight: 700;
-      margin-top: 12px;
+    .copy-block {
+      max-width: 58ch;
+      background: rgba(8, 15, 28, 0.28);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .copy-label {
+      font-size: var(--text-sm);
+      font-weight: 800;
       margin-bottom: 6px;
-      color: #fff;
+      color: #ffffff;
     }
 
-    .local-copy, .english-copy {
-      color: #e5e7eb;
-      font-size: 0.96rem;
-      line-height: 1.45;
-      margin-bottom: 8px;
+    .copy-text {
+      font-size: var(--text-base);
+      line-height: 1.55;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 14px;
     }
 
-    .dealer-area {
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px dashed rgba(209, 213, 219, 0.5);
+    .card-bottom {
+      margin-top: var(--space-8);
+      padding-top: var(--space-5);
+      border-top: 1px dashed rgba(255,255,255,0.24);
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      align-items: flex-start;
+      gap: var(--space-4);
+      align-items: flex-end;
     }
 
     .dealer-meta {
-      font-size: 0.92rem;
-      color: #e5e7eb;
+      max-width: 60ch;
+    }
+
+    .dealer-name {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .dealer-contact,
+    .rating-info,
+    .dealer-meta a {
+      color: rgba(255,255,255,0.86);
+      font-size: var(--text-sm);
+      line-height: 1.5;
     }
 
     .dealer-meta a {
-      color: #93c5fd;
+      display: inline-block;
+      margin-top: 6px;
       text-decoration: underline;
     }
 
     .compliance {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 12px;
-      background: rgba(34, 197, 94, 0.16);
-      color: #bbf7d0;
+      gap: 8px;
+      margin-top: 14px;
       border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.85rem;
+      padding: 9px 14px;
+      background: rgba(34,197,94,0.16);
+      border: 1px solid rgba(158,255,190,0.28);
+      color: #d9ffe7;
+      font-size: var(--text-sm);
+      font-weight: 700;
     }
 
-    .debug-box {
-      margin-top: 12px;
-      border-radius: 12px;
-      background: #111827;
-      color: #d1d5db;
-      padding: 12px;
-      font-size: 0.82rem;
-      white-space: pre-wrap;
-      border: 1px solid #374151;
-    }
-
-    .qr {
-      width: 72px;
-      height: 72px;
-      background: #fff;
-      border-radius: 6px;
-      object-fit: cover;
+    .qr-box {
       flex: 0 0 auto;
+      background: rgba(255,255,255,0.96);
+      padding: 8px;
+      border-radius: 14px;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+    }
+
+    .qr-box img {
+      width: 86px;
+      height: 86px;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .image-note {
+      margin-top: var(--space-3);
+      font-size: 12px;
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="panel">
-      <h1>Daikin Creative Studio</h1>
-      <p class="note">Generate approved festival creatives with image background and text copy.</p>
-
-      <div class="grid">
-        <div class="full">
-          <label>Dealer</label>
-          <select id="dsp-select"></select>
-        </div>
-
-        <div class="full">
-          <label>Dealership Name</label>
-          <input id="dealer-input" placeholder="Dealership name" />
-        </div>
-
-        <div>
-          <label>Locality / City</label>
-          <input id="locality-input" placeholder="City / locality" />
-        </div>
-
-        <div>
-          <label>Contact Number</label>
-          <input id="phone-input" placeholder="Phone number" />
-        </div>
-
-        <div>
-          <label>Campaign</label>
-          <select id="campaign">
-            <option>Ganesh Chaturthi</option>
-            <option>Diwali</option>
-            <option>Summer</option>
-            <option>Monsoon</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Scheme</label>
-          <select id="scheme">
-            <option>Green Exchange</option>
-            <option>Festive Cashback</option>
-            <option>Zero Cost EMI</option>
-            <option>Extended Warranty</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Benefit</label>
-          <select id="benefit">
-            <option>5% Cashback</option>
-            <option>Exchange Bonus</option>
-            <option>No Cashback</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Installation</label>
-          <select id="installation">
-            <option>Subsidized Installation</option>
-            <option>Standard Installation</option>
-            <option>Free Installation</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Product</label>
-          <select id="product">
-            <option>1.5 Ton Inverter Split</option>
-            <option>1 Ton Inverter Split</option>
-            <option>3 Star Split AC</option>
-            <option>Premium IAQ Series</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Language</label>
-          <select id="language">
-            <option>Marathi + English</option>
-            <option>Hindi + English</option>
-            <option>Gujarati + English</option>
-            <option>English Only</option>
-          </select>
-        </div>
-
-        <div class="full">
-          <label>Notes</label>
-          <textarea id="notes" placeholder="Optional notes"></textarea>
-        </div>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark">D</div>
+        <div>Daikin Creative Studio</div>
       </div>
-
-      <button id="generate-btn">Generate Creative Copy</button>
-      <button class="secondary" id="submit-btn">Submit Creative for Review</button>
-
-      <div id="status" class="status"></div>
-      <div id="debug" class="debug-box" style="display:none;"></div>
     </div>
 
-    <div class="panel">
-      <div class="preview-shell" id="preview-shell">
-        <img id="bg-img" alt="Generated background" />
-        <div class="card">
-          <div class="topline">
-            <div class="logo">DAIKIN</div>
-            <div class="brand-lock">Brand Zone – Locked</div>
+    <div class="layout">
+      <section class="panel">
+        <div class="panel-body">
+          <h2>Create festival creative</h2>
+          <p class="subtext">This version is wired to your updated Apps Script endpoint and shows backend debug directly on the page for faster troubleshooting.[web:272]</p>
+
+          <div class="form-grid">
+            <div class="field full">
+              <label for="dsp-select">Dealer</label>
+              <select id="dsp-select"></select>
+            </div>
+
+            <div class="field full">
+              <label for="dealer-input">Dealership Name</label>
+              <input id="dealer-input" type="text" placeholder="Dealership name" />
+            </div>
+
+            <div class="field">
+              <label for="locality-input">Locality / City</label>
+              <input id="locality-input" type="text" placeholder="City / locality" />
+            </div>
+
+            <div class="field">
+              <label for="phone-input">Contact Number</label>
+              <input id="phone-input" type="text" placeholder="Contact number" />
+            </div>
+
+            <div class="field">
+              <label for="campaign">Campaign</label>
+              <select id="campaign">
+                <option>Ganesh Chaturthi</option>
+                <option>Diwali</option>
+                <option>Summer</option>
+                <option>Monsoon</option>
+                <option>Independence Day</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="scheme">Scheme</label>
+              <select id="scheme">
+                <option>Green Exchange</option>
+                <option>Festive Cashback</option>
+                <option>Zero Cost EMI</option>
+                <option>Extended Warranty</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="benefit">Benefit</label>
+              <select id="benefit">
+                <option>5% Cashback</option>
+                <option>Exchange Bonus</option>
+                <option>No Cashback</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="installation">Installation</label>
+              <select id="installation">
+                <option>Subsidized Installation</option>
+                <option>Standard Installation</option>
+                <option>Free Installation</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="product">Product</label>
+              <select id="product">
+                <option>1.5 Ton Inverter Split</option>
+                <option>1 Ton Inverter Split</option>
+                <option>3 Star Split AC</option>
+                <option>Premium IAQ Series</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="language">Language</label>
+              <select id="language">
+                <option>Marathi + English</option>
+                <option>Hindi + English</option>
+                <option>Gujarati + English</option>
+                <option>English Only</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="notes">Notes</label>
+              <textarea id="notes" placeholder="Optional notes for the creative"></textarea>
+            </div>
           </div>
 
-          <div class="headline" id="headline">Headline will appear here.</div>
-          <div class="body" id="body-en">English body will appear here.</div>
+          <div class="btn-row">
+            <button class="btn btn-primary" id="generate-btn">Generate Creative</button>
+            <button class="btn btn-secondary" id="submit-btn">Submit for Review</button>
+          </div>
 
-          <div class="chips" id="chips"></div>
+          <div id="status" class="status">Ready.</div>
+          <div id="debug" class="debug-box"></div>
+          <div class="image-note">The generated background is rendered as an inline base64 image using a data URL in the preview image `src`.[web:261][web:271]</div>
+        </div>
+      </section>
 
-          <div class="section-title">Local language</div>
-          <div class="local-copy" id="body-local">Local language copy will appear here.</div>
+      <section class="panel">
+        <div class="preview-wrap">
+          <div class="preview-shell" id="preview-shell">
+            <img id="bg-img" alt="Generated creative background" />
+            <div class="overlay"></div>
 
-          <div class="section-title">English</div>
-          <div class="english-copy" id="english-copy">English copy will appear here.</div>
+            <div class="creative-card">
+              <div>
+                <div class="card-top">
+                  <div class="daikin-badge">DAIKIN</div>
+                  <div class="brand-zone">Brand Zone – Locked</div>
+                </div>
 
-          <div class="dealer-area">
-            <div class="dealer-meta">
-              <div id="dealer-name">Dealer Name</div>
-              <div id="dealer-contact">City · Phone</div>
-              <div style="margin-top:4px;">
-                <a id="gmb-link" href="#" target="_blank">View location &amp; rate us</a>
+                <div class="headline" id="headline">Headline will appear here.</div>
+                <div class="subheadline" id="subheadline">Supporting copy will appear here.</div>
+
+                <div class="pills" id="pills"></div>
+
+                <div class="copy-block">
+                  <div class="copy-label">Local language</div>
+                  <div class="copy-text" id="body-local">Local language copy will appear here.</div>
+
+                  <div class="copy-label">English</div>
+                  <div class="copy-text" id="body-en">English copy will appear here.</div>
+                </div>
               </div>
-              <div id="rating-info" style="font-size:0.8rem;color:#cbd5e1;margin-top:4px;"></div>
-              <div class="compliance" id="compliance-pill">✔ Brand Compliance: Pending</div>
+
+              <div class="card-bottom">
+                <div class="dealer-meta">
+                  <div class="dealer-name" id="dealer-name">Dealer Name</div>
+                  <div class="dealer-contact" id="dealer-contact">City · Contact</div>
+                  <a id="gmb-link" href="#" target="_blank" rel="noopener noreferrer">View location &amp; rate us</a>
+                  <div class="rating-info" id="rating-info"></div>
+                  <div class="compliance" id="compliance-pill">✔ Brand Compliance: Pending</div>
+                </div>
+
+                <div class="qr-box">
+                  <img id="qr-img" alt="QR code for Google business link" />
+                </div>
+              </div>
             </div>
-            <img id="qr-img" class="qr" alt="QR code" />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </div>
 
@@ -392,155 +606,181 @@
     const dealerInput = document.getElementById('dealer-input');
     const localityInput = document.getElementById('locality-input');
     const phoneInput = document.getElementById('phone-input');
+
+    const headlineEl = document.getElementById('headline');
+    const subheadlineEl = document.getElementById('subheadline');
+    const bodyEnEl = document.getElementById('body-en');
+    const bodyLocalEl = document.getElementById('body-local');
+    const dealerNameEl = document.getElementById('dealer-name');
+    const dealerContactEl = document.getElementById('dealer-contact');
+    const ratingInfoEl = document.getElementById('rating-info');
+    const gmbLinkEl = document.getElementById('gmb-link');
+    const complianceEl = document.getElementById('compliance-pill');
     const bgImg = document.getElementById('bg-img');
+    const qrImg = document.getElementById('qr-img');
+    const pillsEl = document.getElementById('pills');
     const statusEl = document.getElementById('status');
     const debugEl = document.getElementById('debug');
 
-    function setStatus(msg, isError = false) {
-      statusEl.textContent = msg;
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
       statusEl.className = isError ? 'status error' : 'status';
     }
 
-    function showDebug(data) {
-      if (!data) {
+    function showDebug(debug) {
+      if (!debug || (Array.isArray(debug) && !debug.length)) {
         debugEl.style.display = 'none';
         debugEl.textContent = '';
         return;
       }
       debugEl.style.display = 'block';
-      debugEl.textContent = Array.isArray(data) ? data.join('\n') : String(data);
+      debugEl.textContent = Array.isArray(debug) ? debug.join('\n') : String(debug);
     }
 
-    async function loadDsps() {
+    function updateQr(url) {
+      if (!url) {
+        qrImg.removeAttribute('src');
+        gmbLinkEl.href = '#';
+        return;
+      }
+      qrImg.src = 'https://chart.googleapis.com/chart?cht=qr&chs=240x240&chl=' + encodeURIComponent(url);
+      gmbLinkEl.href = url;
+    }
+
+    function updateRating(rating, reviews) {
+      ratingInfoEl.textContent = (rating || reviews)
+        ? `Current rating: ${rating || '-'} · Reviews: ${reviews || '-'}`
+        : '';
+    }
+
+    function populateDealerFieldsFromOption() {
+      const opt = dspSelect.selectedOptions[0];
+      if (!opt) return;
+
+      const dealerName = opt.dataset.name || '';
+      dealerInput.value = dealerName;
+      localityInput.value = opt.dataset.city || '';
+      phoneInput.value = opt.dataset.contact || '';
+
+      dealerNameEl.textContent = dealerName || 'Dealer Name';
+      dealerContactEl.textContent = `${opt.dataset.city || ''} · ${opt.dataset.contact || ''}`;
+      updateQr(opt.dataset.gmb || '');
+      updateRating(opt.dataset.rating || '', opt.dataset.reviews || '');
+    }
+
+    async function loadDealers() {
       try {
+        setStatus('Loading dealer master...');
         const res = await fetch(APP_SCRIPT_URL);
         const data = await res.json();
+
         if (!data.ok) {
-          setStatus(data.error || 'Failed to load DSP list', true);
+          setStatus(data.error || 'Could not load dealers.', true);
           return;
         }
 
         dspSelect.innerHTML = '';
-        data.dsps.forEach(d => {
+        (data.dsps || []).forEach(d => {
           const opt = document.createElement('option');
-          opt.value = d.dspCode;
-          opt.textContent = `${d.dspCode} - ${d.dspName}`;
-          opt.dataset.city = d.city;
-          opt.dataset.contact = d.ownerContact;
-          opt.dataset.gmbUrl = d.gmbUrl;
-          opt.dataset.rating = d.currentRating;
-          opt.dataset.reviews = d.reviewsCount;
+          opt.value = d.dspCode || '';
+          opt.textContent = `${d.dspCode || ''} - ${d.dspName || ''}`;
+          opt.dataset.name = d.dspName || '';
+          opt.dataset.city = d.city || '';
+          opt.dataset.contact = d.ownerContact || '';
+          opt.dataset.gmb = d.gmbUrl || '';
+          opt.dataset.rating = d.currentRating || '';
+          opt.dataset.reviews = d.reviewsCount || '';
           dspSelect.appendChild(opt);
         });
 
         if (dspSelect.options.length) {
-          fillFromSelected();
+          populateDealerFieldsFromOption();
         }
+        setStatus('Dealer master loaded.');
       } catch (err) {
         setStatus('Load error: ' + err, true);
       }
     }
 
-    function updateQr(url) {
-      const qr = document.getElementById('qr-img');
-      const gmbLink = document.getElementById('gmb-link');
-      if (!url) {
-        qr.removeAttribute('src');
-        gmbLink.href = '#';
-        return;
-      }
-      qr.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(url)}`;
-      gmbLink.href = url;
-    }
+    dspSelect.addEventListener('change', populateDealerFieldsFromOption);
 
-    function updateRatingInfo(rating, reviews) {
-      document.getElementById('rating-info').textContent =
-        (rating || reviews) ? `Current rating: ${rating || '-'} · Reviews: ${reviews || '-'}` : '';
-    }
-
-    function fillFromSelected() {
-      const opt = dspSelect.selectedOptions[0];
-      if (!opt) return;
-      const dealerName = opt.textContent.split(' - ')[1] || opt.textContent;
-      dealerInput.value = dealerName;
-      localityInput.value = opt.dataset.city || '';
-      phoneInput.value = opt.dataset.contact || '';
-      updateQr(opt.dataset.gmbUrl || '');
-      updateRatingInfo(opt.dataset.rating || '', opt.dataset.reviews || '');
-      document.getElementById('dealer-name').textContent = dealerName;
-      document.getElementById('dealer-contact').textContent = `${opt.dataset.city || ''} · ${opt.dataset.contact || ''}`;
-    }
-
-    dspSelect.addEventListener('change', fillFromSelected);
-
-    function payloadFromForm() {
+    function getPayload() {
       return {
         dspCode: dspSelect.value,
-        dealer: dealerInput.value,
-        locality: localityInput.value,
-        phone: phoneInput.value,
+        dealer: dealerInput.value.trim(),
+        locality: localityInput.value.trim(),
+        phone: phoneInput.value.trim(),
         campaign: document.getElementById('campaign').value,
         scheme: document.getElementById('scheme').value,
         benefit: document.getElementById('benefit').value,
         installation: document.getElementById('installation').value,
         product: document.getElementById('product').value,
         language: document.getElementById('language').value,
-        notes: document.getElementById('notes').value
+        notes: document.getElementById('notes').value.trim()
       };
+    }
+
+    function renderPills(payload, copy) {
+      pillsEl.innerHTML = '';
+      [payload.scheme, payload.benefit, payload.installation].filter(Boolean).forEach(text => {
+        const pill = document.createElement('div');
+        pill.className = 'pill';
+        pill.textContent = text;
+        pillsEl.appendChild(pill);
+      });
+    }
+
+    function renderCreative(copy, payload) {
+      headlineEl.textContent = copy.headline_en || 'Headline will appear here.';
+      subheadlineEl.textContent = copy.body_en || '';
+      bodyEnEl.textContent = copy.body_en || '';
+      bodyLocalEl.textContent = copy.body_local || '';
+
+      dealerNameEl.textContent = copy.dealer || payload.dealer || 'Dealer Name';
+      dealerContactEl.textContent = `${copy.locality || payload.locality || ''} · ${copy.phone || payload.phone || ''}`;
+
+      updateQr(copy.gmbUrl || '');
+      updateRating(copy.currentRating || '', copy.reviewsCount || '');
+      renderPills(payload, copy);
+
+      complianceEl.textContent = copy.compliance === 'approved'
+        ? '✔ Brand Compliance: Approved'
+        : '✔ Brand Compliance: Pending';
+
+      if (copy.bgImageDataUrl && copy.bgImageDataUrl.startsWith('data:image/')) {
+        bgImg.src = copy.bgImageDataUrl;
+      } else {
+        bgImg.removeAttribute('src');
+      }
     }
 
     document.getElementById('generate-btn').addEventListener('click', async () => {
       try {
-        setStatus('Generating copy and image...');
+        const payload = getPayload();
+        setStatus('Generating creative...');
         showDebug(null);
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payloadFromForm())
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
         });
 
         const data = await res.json();
 
         if (!data.ok) {
-          setStatus(data.error || 'Generation failed', true);
+          setStatus(data.error || 'Creative generation failed.', true);
           showDebug(data.debug || null);
           return;
         }
 
-        const copy = data.data || {};
-        document.getElementById('headline').textContent = copy.headline_en || 'Headline will appear here.';
-        document.getElementById('body-en').textContent = copy.body_en || '';
-        document.getElementById('english-copy').textContent = copy.body_en || '';
-        document.getElementById('body-local').textContent = copy.body_local || '';
-        document.getElementById('dealer-name').textContent = copy.dealer || '';
-        document.getElementById('dealer-contact').textContent = `${copy.locality || ''} · ${copy.phone || ''}`;
-
-        const chips = document.getElementById('chips');
-        chips.innerHTML = '';
-        [copy.scheme, copy.benefit, copy.installation].filter(Boolean).forEach(t => {
-          const span = document.createElement('div');
-          span.className = 'chip';
-          span.textContent = t;
-          chips.appendChild(span);
-        });
-
-        updateQr(copy.gmbUrl || '');
-        updateRatingInfo(copy.currentRating || '', copy.reviewsCount || '');
-
-        const compliance = document.getElementById('compliance-pill');
-        compliance.textContent = copy.compliance === 'approved'
-          ? '✔ Brand Compliance: Approved'
-          : 'Brand Compliance: Pending';
-
-        if (copy.bgImageDataUrl) {
-          bgImg.src = copy.bgImageDataUrl;
-        } else {
-          bgImg.removeAttribute('src');
-        }
-
-        setStatus('Creative generated successfully.');
+        renderCreative(data.data || {}, payload);
         showDebug(data.debug || null);
+        setStatus((data.data && data.data.bgImageDataUrl)
+          ? 'Creative generated successfully with image.'
+          : 'Creative generated, but no image was returned.');
       } catch (err) {
         setStatus('Network/server error: ' + err, true);
       }
@@ -548,46 +788,51 @@
 
     document.getElementById('submit-btn').addEventListener('click', async () => {
       try {
-        setStatus('Capturing preview...');
-        const shell = document.getElementById('preview-shell');
-        const canvas = await html2canvas(shell, { scale: 2, useCORS: true });
-        const imageDataUrl = canvas.toDataURL('image/png');
+        setStatus('Capturing preview for review...');
+        const canvas = await html2canvas(document.getElementById('preview-shell'), {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: null
+        });
 
         const payload = {
           action: 'submit_for_review',
           dealerCode: dspSelect.value,
-          dealerName: document.getElementById('dealer-name').textContent,
+          dealerName: dealerNameEl.textContent,
           campaign: document.getElementById('campaign').value,
           scheme: document.getElementById('scheme').value,
           product: document.getElementById('product').value,
           language: document.getElementById('language').value,
-          headline_en: document.getElementById('headline').textContent,
-          body_en: document.getElementById('body-en').textContent,
-          body_local: document.getElementById('body-local').textContent,
-          imageDataUrl
+          headline_en: headlineEl.textContent,
+          body_en: bodyEnEl.textContent,
+          body_local: bodyLocalEl.textContent,
+          imageDataUrl: canvas.toDataURL('image/png')
         };
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
           body: JSON.stringify(payload)
         });
 
         const data = await res.json();
+
         if (!data.ok) {
-          setStatus(data.error || 'Review submission failed', true);
+          setStatus(data.error || 'Submit failed.', true);
           showDebug(data.debug || null);
           return;
         }
 
-        setStatus('Submitted for review: ' + data.reviewUrl);
         showDebug(data.debug || null);
+        setStatus('Submitted for review: ' + (data.reviewUrl || 'Success'));
       } catch (err) {
         setStatus('Submit error: ' + err, true);
       }
     });
 
-    loadDsps();
+    loadDealers();
   </script>
 </body>
 </html>
