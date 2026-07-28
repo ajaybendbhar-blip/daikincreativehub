@@ -54,6 +54,27 @@
       padding: 24px;
     }
 
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+    }
+
     .layout {
       display: grid;
       grid-template-columns: 420px 1fr;
@@ -76,27 +97,6 @@
     .panel-body,
     .preview-wrap {
       padding: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-weight: 800;
     }
 
     h2 {
@@ -401,12 +401,6 @@
       display: block;
       border-radius: 8px;
     }
-
-    .small-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 12px;
-    }
   </style>
 </head>
 <body>
@@ -420,7 +414,7 @@
       <section class="panel">
         <div class="panel-body">
           <h2>Create festival creative</h2>
-          <p class="subtext">This version is updated to your latest Apps Script deployment and keeps the same working frontend flow as your current file.[file:327]</p>
+          <p class="subtext">Preview keeps the same creative layout, but final exported image excludes duplicate overlay text.[file:342][file:343]</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -506,13 +500,6 @@
               <label for="notes">Notes</label>
               <textarea id="notes" placeholder="Optional notes for the creative"></textarea>
             </div>
-
-            <div class="field full">
-              <label>
-                <input type="checkbox" id="image-only-export" />
-                Export image only without HTML text overlay
-              </label>
-            </div>
           </div>
 
           <div class="btn-row">
@@ -522,7 +509,6 @@
 
           <div id="status" class="status">Ready.</div>
           <div id="debug" class="debug-box" data-html2canvas-ignore="true"></div>
-          <div class="small-note" data-html2canvas-ignore="true">Debug area is excluded from export and the background image is rendered from the backend `bgImageDataUrl` response field.[file:327]</div>
         </div>
       </section>
 
@@ -536,7 +522,7 @@
               <div>
                 <div class="card-top">
                   <div class="daikin-badge">DAIKIN</div>
-                  <div class="brand-zone">WORLD'S LEADING<br>AIR CONDITIONING<br>COMPANY FROM JAPAN</div>
+                  <div class="brand-zone">Brand Zone – Locked</div>
                 </div>
 
                 <div id="text-layer">
@@ -598,7 +584,6 @@
     const pillsEl = document.getElementById('pills');
     const statusEl = document.getElementById('status');
     const debugEl = document.getElementById('debug');
-    const imageOnlyExportEl = document.getElementById('image-only-export');
     const textLayer = document.getElementById('text-layer');
     const dealerLayer = document.getElementById('dealer-layer');
 
@@ -768,14 +753,8 @@
       try {
         setStatus('Capturing preview for review...');
 
-        const imageOnly = imageOnlyExportEl.checked;
-        if (imageOnly) {
-          textLayer.setAttribute('data-html2canvas-ignore', 'true');
-          dealerLayer.setAttribute('data-html2canvas-ignore', 'true');
-        } else {
-          textLayer.removeAttribute('data-html2canvas-ignore');
-          dealerLayer.removeAttribute('data-html2canvas-ignore');
-        }
+        textLayer.setAttribute('data-html2canvas-ignore', 'true');
+        dealerLayer.setAttribute('data-html2canvas-ignore', 'true');
 
         const canvas = await html2canvas(document.getElementById('preview-shell'), {
           scale: 2,
