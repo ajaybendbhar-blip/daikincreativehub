@@ -22,7 +22,6 @@
       --danger: #b42318;
       --success: #0f9d58;
       --radius: 18px;
-      --radius-sm: 12px;
       --shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
     }
 
@@ -64,19 +63,17 @@
 
     .layout {
       display: grid;
-      grid-template-columns: 460px 1fr;
+      grid-template-columns: 470px 1fr;
       gap: 24px;
       align-items: start;
     }
 
     @media (max-width: 1040px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
+      .layout { grid-template-columns: 1fr; }
     }
 
     .panel {
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.97);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -107,14 +104,10 @@
       gap: 16px;
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
+    .full { grid-column: 1 / -1; }
 
     @media (max-width: 640px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
+      .form-grid { grid-template-columns: 1fr; }
     }
 
     .field label {
@@ -143,14 +136,11 @@
 
     .field input:focus,
     .field select:focus,
-    .field textarea:focus {
+    .field textarea:focus,
+    .ms-trigger:focus-within,
+    .ms-search:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 4px rgba(0, 91, 172, 0.12);
-    }
-
-    .field select[multiple] {
-      min-height: 196px;
-      padding: 10px;
     }
 
     .field textarea {
@@ -180,15 +170,6 @@
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
-      transition: transform 160ms ease, opacity 160ms ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn:active {
-      transform: translateY(0);
     }
 
     .btn-primary {
@@ -234,6 +215,157 @@
       display: none;
     }
 
+    .hidden { display: none !important; }
+
+    .multi-select {
+      position: relative;
+    }
+
+    .ms-trigger {
+      min-height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      cursor: pointer;
+    }
+
+    .ms-placeholder {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .ms-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: #eaf2fb;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .ms-tag button {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .ms-caret {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 12px;
+      padding-right: 4px;
+    }
+
+    .ms-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.16);
+      padding: 10px;
+      z-index: 20;
+      display: none;
+    }
+
+    .multi-select.open .ms-dropdown {
+      display: block;
+    }
+
+    .ms-toolbar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .ms-search {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .ms-mini-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .ms-options {
+      max-height: 240px;
+      overflow: auto;
+      display: grid;
+      gap: 6px;
+    }
+
+    .ms-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .ms-option:hover {
+      background: #f8fbff;
+    }
+
+    .ms-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 1px solid #b8c8dc;
+      background: #fff;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .ms-option.selected .ms-check {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .ms-option.selected .ms-check::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 5px;
+      height: 9px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(40deg);
+    }
+
+    .ms-count {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
     .preview-shell {
       position: relative;
       min-height: 780px;
@@ -250,7 +382,7 @@
       height: 100%;
       object-fit: cover;
       background: linear-gradient(180deg, #20324f, #0f172a);
-      filter: brightness(0.62) saturate(1.04);
+      filter: brightness(0.65) saturate(1.04);
       z-index: 0;
     }
 
@@ -278,8 +410,8 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 22px;
       gap: 12px;
+      margin-bottom: 22px;
     }
 
     .daikin-badge {
@@ -299,7 +431,7 @@
       color: rgba(255,255,255,0.92);
       font-size: 12px;
       text-align: right;
-      max-width: 210px;
+      max-width: 220px;
       line-height: 1.35;
       font-weight: 700;
       text-transform: uppercase;
@@ -320,7 +452,6 @@
       line-height: 1.08;
       max-width: 13ch;
       margin-bottom: 16px;
-      text-shadow: 0 2px 16px rgba(0,0,0,0.18);
     }
 
     .subheadline {
@@ -329,7 +460,6 @@
       line-height: 1.55;
       color: rgba(255,255,255,0.94);
       margin-bottom: 20px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.15);
     }
 
     .pills {
@@ -374,10 +504,6 @@
       margin-bottom: 14px;
     }
 
-    .copy-text:last-child {
-      margin-bottom: 0;
-    }
-
     .card-bottom {
       margin-top: 32px;
       padding-top: 20px;
@@ -388,15 +514,8 @@
       align-items: flex-end;
     }
 
-    .dealer-meta {
-      max-width: 60ch;
-    }
-
-    .dealer-name {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+    .dealer-meta { max-width: 60ch; }
+    .dealer-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
 
     .dealer-contact,
     .rating-info,
@@ -440,10 +559,6 @@
       display: block;
       border-radius: 8px;
     }
-
-    .hidden {
-      display: none !important;
-    }
   </style>
 </head>
 <body>
@@ -457,7 +572,7 @@
       <section class="panel">
         <div class="panel-body">
           <h2>Create Daikin creative</h2>
-          <p class="subtext">This frontend is aligned with the latest backend payload shape and uses one multi-select Offers field with separate Installation and Product dropdowns.[file:327][file:386]</p>
+          <p class="subtext">This version uses a user-friendly chip-based multi-select for offers and is aligned to the latest backend payload shape.[web:390]</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -523,7 +638,7 @@
               </select>
             </div>
 
-            <div class="field full" id="seasonal-wrap">
+            <div class="field full hidden" id="seasonal-wrap">
               <label for="seasonal-name">Season</label>
               <select id="seasonal-name">
                 <option>Summer</option>
@@ -533,20 +648,22 @@
             </div>
 
             <div class="field full">
-              <label for="offers">Offers</label>
-              <select id="offers" multiple>
-                <option>Green Exchange Offer Upto Rs 8000</option>
-                <option>Green Exchange Offer Upto Rs 6000</option>
-                <option>Green Exchange Offer Upto Rs 4500</option>
-                <option>5% Cashback</option>
-                <option>10% Cashback</option>
-                <option>Cashback Upto Rs 2500</option>
-                <option>Cashback Upto Rs 4000</option>
-                <option>No Cost EMI</option>
-                <option>Attractive Finance Offers</option>
-                <option>5 Year Comprehensive Warranty</option>
-              </select>
-              <div class="hint">Hold Ctrl on Windows or Cmd on Mac to select multiple offers.</div>
+              <label>Offers</label>
+              <div class="multi-select" id="offers-multi">
+                <div class="ms-trigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+                  <span class="ms-placeholder">Select one or more offers</span>
+                  <span class="ms-caret">▼</span>
+                </div>
+                <div class="ms-dropdown">
+                  <div class="ms-toolbar">
+                    <input class="ms-search" type="text" placeholder="Search offers" />
+                    <button class="ms-mini-btn" type="button" data-action="select-all">All</button>
+                    <button class="ms-mini-btn" type="button" data-action="clear-all">Clear</button>
+                  </div>
+                  <div class="ms-options" role="listbox" aria-multiselectable="true"></div>
+                </div>
+              </div>
+              <div class="ms-count" id="offers-count">0 selected</div>
             </div>
 
             <div class="field">
@@ -631,7 +748,7 @@
                   <div class="dealer-contact" id="dealer-contact">City · Contact</div>
                   <a id="gmb-link" href="#" target="_blank" rel="noopener noreferrer">View location &amp; rate us</a>
                   <div class="rating-info" id="rating-info"></div>
-                  <div class="compliance" id="compliance-pill">✔ Brand Compliance: Approved</div>
+                  <div class="compliance" id="compliance-pill">✔ Brand Compliance: Pending</div>
                 </div>
 
                 <div class="qr-box">
@@ -649,6 +766,21 @@
   <script>
     const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzoxmTf06hGKdJJBI6bLJ7PVOBJqP9ZTzC1UsiwXWlLn-h56WullBWQVKrZC7mPn6g/exec';
 
+    const OFFER_OPTIONS = [
+      'Green Exchange Offer Upto Rs 8000',
+      'Green Exchange Offer Upto Rs 6000',
+      'Green Exchange Offer Upto Rs 4500',
+      '5% Cashback',
+      '10% Cashback',
+      'Cashback Upto Rs 2500',
+      'Cashback Upto Rs 4000',
+      'No Cost EMI',
+      'Attractive Finance Offers',
+      '5 Year Comprehensive Warranty'
+    ];
+
+    const selectedOffers = new Set();
+
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
     const localityInput = document.getElementById('locality-input');
@@ -658,7 +790,6 @@
     const festivalNameEl = document.getElementById('festival-name');
     const seasonalWrap = document.getElementById('seasonal-wrap');
     const seasonalNameEl = document.getElementById('seasonal-name');
-    const offersEl = document.getElementById('offers');
 
     const headlineEl = document.getElementById('headline');
     const subheadlineEl = document.getElementById('subheadline');
@@ -691,48 +822,6 @@
       }
       debugEl.style.display = 'block';
       debugEl.textContent = Array.isArray(debug) ? debug.join('\n') : String(debug);
-    }
-
-    function getSelectedOffers() {
-      return Array.from(offersEl.selectedOptions).map(o => o.value);
-    }
-
-    function updateCampaignVisibility() {
-      const campaignType = campaignTypeEl.value;
-      const isFestival = campaignType === 'Festival Campaign';
-      const isSeasonal = campaignType === 'Seasonal Campaign';
-
-      festivalWrap.classList.toggle('hidden', !isFestival);
-      seasonalWrap.classList.toggle('hidden', !isSeasonal);
-
-      updateCampaignMeta();
-    }
-
-    function resolveCampaignName() {
-      const campaignType = campaignTypeEl.value;
-
-      if (campaignType === 'Festival Campaign') {
-        return festivalNameEl.value;
-      }
-
-      if (campaignType === 'Seasonal Campaign') {
-        return seasonalNameEl.value;
-      }
-
-      return campaignType;
-    }
-
-    function updateCampaignMeta() {
-      const campaignType = campaignTypeEl.value;
-      const campaignName = resolveCampaignName();
-
-      if (campaignType === 'Festival Campaign' || campaignType === 'Seasonal Campaign') {
-        campaignMetaEl.textContent = `${campaignType} · ${campaignName}`;
-      } else {
-        campaignMetaEl.textContent = campaignType;
-      }
-
-      return campaignName;
     }
 
     function updateQr(url) {
@@ -791,26 +880,48 @@
           dspSelect.appendChild(opt);
         });
 
-        if (dspSelect.options.length) {
-          populateDealerFieldsFromOption();
-        }
-
+        if (dspSelect.options.length) populateDealerFieldsFromOption();
         setStatus('Dealer master loaded.');
       } catch (err) {
         setStatus('Load error: ' + err, true);
       }
     }
 
-    function getPayload() {
-      const campaignName = updateCampaignMeta();
+    function updateCampaignVisibility() {
+      const campaignType = campaignTypeEl.value;
+      festivalWrap.classList.toggle('hidden', campaignType !== 'Festival Campaign');
+      seasonalWrap.classList.toggle('hidden', campaignType !== 'Seasonal Campaign');
+      updateCampaignMeta();
+    }
 
+    function resolveCampaignName() {
+      if (campaignTypeEl.value === 'Festival Campaign') return festivalNameEl.value;
+      if (campaignTypeEl.value === 'Seasonal Campaign') return seasonalNameEl.value;
+      return campaignTypeEl.value;
+    }
+
+    function updateCampaignMeta() {
+      const campaignType = campaignTypeEl.value;
+      const campaignName = resolveCampaignName();
+      campaignMetaEl.textContent =
+        (campaignType === 'Festival Campaign' || campaignType === 'Seasonal Campaign')
+          ? `${campaignType} · ${campaignName}`
+          : campaignType;
+      return campaignName;
+    }
+
+    function getSelectedOffers() {
+      return [...selectedOffers];
+    }
+
+    function getPayload() {
       return {
         dspCode: dspSelect.value,
         dealer: dealerInput.value.trim(),
         locality: localityInput.value.trim(),
         phone: phoneInput.value.trim(),
         campaignType: campaignTypeEl.value,
-        campaign: campaignName,
+        campaign: resolveCampaignName(),
         festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
         offers: getSelectedOffers(),
         installation: document.getElementById('installation').value,
@@ -822,7 +933,6 @@
 
     function renderPills(payload) {
       pillsEl.innerHTML = '';
-
       const items = [
         payload.campaignType === 'Festival Campaign' ? payload.festivalName : '',
         payload.campaignType === 'Seasonal Campaign' ? payload.campaign : '',
@@ -848,13 +958,7 @@
       dealerNameEl.textContent = copy.dealer || payload.dealer || 'Dealer Name';
       dealerContactEl.textContent = `${copy.locality || payload.locality || ''} · ${copy.phone || payload.phone || ''}`;
 
-      const campaignName = resolveCampaignName();
-      if (payload.campaignType === 'Festival Campaign' || payload.campaignType === 'Seasonal Campaign') {
-        campaignMetaEl.textContent = `${payload.campaignType} · ${campaignName}`;
-      } else {
-        campaignMetaEl.textContent = payload.campaignType;
-      }
-
+      updateCampaignMeta();
       updateQr(copy.gmbUrl || '');
       updateRating(copy.currentRating || '', copy.reviewsCount || '');
       renderPills(payload);
@@ -870,6 +974,95 @@
       }
     }
 
+    function initOffersMultiSelect() {
+      const root = document.getElementById('offers-multi');
+      const trigger = root.querySelector('.ms-trigger');
+      const dropdown = root.querySelector('.ms-dropdown');
+      const optionsWrap = root.querySelector('.ms-options');
+      const search = root.querySelector('.ms-search');
+      const count = document.getElementById('offers-count');
+
+      function renderTrigger() {
+        const caret = '<span class="ms-caret">▼</span>';
+        if (!selectedOffers.size) {
+          trigger.innerHTML = `<span class="ms-placeholder">Select one or more offers</span>${caret}`;
+        } else {
+          const tags = [...selectedOffers].map(v =>
+            `<span class="ms-tag">${v}<button type="button" data-remove="${encodeURIComponent(v)}">×</button></span>`
+          ).join('');
+          trigger.innerHTML = `${tags}${caret}`;
+        }
+        count.textContent = `${selectedOffers.size} selected`;
+      }
+
+      function renderOptions(query = '') {
+        const q = query.trim().toLowerCase();
+        optionsWrap.innerHTML = OFFER_OPTIONS
+          .filter(opt => opt.toLowerCase().includes(q))
+          .map(opt => `
+            <div class="ms-option ${selectedOffers.has(opt) ? 'selected' : ''}" data-value="${encodeURIComponent(opt)}" role="option" aria-selected="${selectedOffers.has(opt)}">
+              <div class="ms-check"></div>
+              <div>${opt}</div>
+            </div>
+          `).join('');
+      }
+
+      function toggleValue(value) {
+        if (selectedOffers.has(value)) selectedOffers.delete(value);
+        else selectedOffers.add(value);
+        renderTrigger();
+        renderOptions(search.value);
+      }
+
+      trigger.addEventListener('click', () => {
+        root.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', root.classList.contains('open') ? 'true' : 'false');
+        if (root.classList.contains('open')) search.focus();
+      });
+
+      trigger.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-remove]');
+        if (!btn) return;
+        e.stopPropagation();
+        const value = decodeURIComponent(btn.getAttribute('data-remove'));
+        selectedOffers.delete(value);
+        renderTrigger();
+        renderOptions(search.value);
+      });
+
+      optionsWrap.addEventListener('click', (e) => {
+        const row = e.target.closest('.ms-option');
+        if (!row) return;
+        const value = decodeURIComponent(row.getAttribute('data-value'));
+        toggleValue(value);
+      });
+
+      search.addEventListener('input', () => renderOptions(search.value));
+
+      root.querySelector('[data-action="select-all"]').addEventListener('click', () => {
+        OFFER_OPTIONS.forEach(v => selectedOffers.add(v));
+        renderTrigger();
+        renderOptions(search.value);
+      });
+
+      root.querySelector('[data-action="clear-all"]').addEventListener('click', () => {
+        selectedOffers.clear();
+        search.value = '';
+        renderTrigger();
+        renderOptions('');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!root.contains(e.target)) {
+          root.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      renderTrigger();
+      renderOptions();
+    }
+
     dspSelect.addEventListener('change', populateDealerFieldsFromOption);
     campaignTypeEl.addEventListener('change', updateCampaignVisibility);
     festivalNameEl.addEventListener('change', updateCampaignMeta);
@@ -883,9 +1076,7 @@
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
 
@@ -910,7 +1101,6 @@
     document.getElementById('submit-btn').addEventListener('click', async () => {
       try {
         setStatus('Capturing preview for review...');
-
         textLayer.setAttribute('data-html2canvas-ignore', 'true');
         dealerLayer.setAttribute('data-html2canvas-ignore', 'true');
 
@@ -942,9 +1132,7 @@
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
 
@@ -965,6 +1153,7 @@
       }
     });
 
+    initOffersMultiSelect();
     updateCampaignVisibility();
     loadDealers();
   </script>
