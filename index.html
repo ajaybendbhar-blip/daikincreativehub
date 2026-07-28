@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,35 +11,32 @@
 
   <style>
     :root {
-      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.4rem);
-      --text-xl: clamp(1.35rem, 1.15rem + 1vw, 2rem);
-
       --bg: #f5f7fb;
       --surface: #ffffff;
+      --surface-2: #f8fafc;
       --text: #0f172a;
       --muted: #64748b;
       --border: #dbe3ee;
       --primary: #005bac;
       --primary-2: #0b76d1;
       --danger: #b42318;
+      --success: #0f9d58;
       --radius: 18px;
+      --radius-sm: 12px;
       --shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
+
     body {
+      margin: 0;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(180deg, #eef4fb 0%, #f7f9fc 100%);
       color: var(--text);
-      min-height: 100vh;
     }
 
     .page {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 24px;
     }
@@ -67,31 +64,34 @@
 
     .layout {
       display: grid;
-      grid-template-columns: 430px 1fr;
+      grid-template-columns: 460px 1fr;
       gap: 24px;
       align-items: start;
     }
 
-    @media (max-width: 980px) {
-      .layout { grid-template-columns: 1fr; }
+    @media (max-width: 1040px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
     }
 
     .panel {
-      background: rgba(255,255,255,0.94);
+      background: rgba(255,255,255,0.96);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .panel-body, .preview-wrap {
+    .panel-body,
+    .preview-wrap {
       padding: 20px;
     }
 
     h2 {
       margin: 0 0 8px;
       font-size: 1.7rem;
-      line-height: 1.1;
+      line-height: 1.15;
     }
 
     .subtext {
@@ -107,10 +107,14 @@
       gap: 16px;
     }
 
-    .full { grid-column: 1 / -1; }
+    .full {
+      grid-column: 1 / -1;
+    }
 
     @media (max-width: 640px) {
-      .form-grid { grid-template-columns: 1fr; }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .field label {
@@ -134,11 +138,31 @@
       color: var(--text);
       font-size: 14px;
       outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 91, 172, 0.12);
+    }
+
+    .field select[multiple] {
+      min-height: 196px;
+      padding: 10px;
     }
 
     .field textarea {
-      min-height: 82px;
+      min-height: 92px;
       resize: vertical;
+    }
+
+    .hint {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
     }
 
     .btn-row {
@@ -152,10 +176,19 @@
       border: 0;
       border-radius: 999px;
       padding: 12px 18px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
       min-height: 44px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 160ms ease, opacity 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
     }
 
     .btn-primary {
@@ -173,10 +206,11 @@
       margin-top: 16px;
       padding: 12px 14px;
       border-radius: 12px;
-      background: #f8fafc;
+      background: var(--surface-2);
       border: 1px solid var(--border);
       font-size: 14px;
       white-space: pre-wrap;
+      line-height: 1.45;
     }
 
     .status.error {
@@ -195,19 +229,18 @@
       line-height: 1.45;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
-      max-height: 240px;
+      max-height: 260px;
       overflow: auto;
       display: none;
     }
 
     .preview-shell {
       position: relative;
-      min-height: 760px;
+      min-height: 780px;
       border-radius: 24px;
       overflow: hidden;
       background: #0f172a;
       box-shadow: 0 20px 40px rgba(15, 23, 42, 0.28);
-      isolation: isolate;
     }
 
     #bg-img {
@@ -216,8 +249,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      background: radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 30%), linear-gradient(180deg, #20324f, #0f172a);
-      filter: brightness(0.58) saturate(1.02);
+      background: linear-gradient(180deg, #20324f, #0f172a);
+      filter: brightness(0.62) saturate(1.04);
       z-index: 0;
     }
 
@@ -225,7 +258,7 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(8,15,28,0.20) 0%, rgba(8,15,28,0.45) 100%),
+        linear-gradient(180deg, rgba(8,15,28,0.16) 0%, rgba(8,15,28,0.46) 100%),
         radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 30%);
       z-index: 1;
     }
@@ -233,7 +266,7 @@
     .creative-card {
       position: relative;
       z-index: 2;
-      min-height: 760px;
+      min-height: 780px;
       padding: 24px;
       color: #fff;
       display: flex;
@@ -244,8 +277,9 @@
     .card-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+      gap: 12px;
     }
 
     .daikin-badge {
@@ -254,7 +288,7 @@
       justify-content: center;
       padding: 8px 14px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.97);
       color: var(--primary);
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -262,29 +296,13 @@
     }
 
     .brand-zone {
-      color: rgba(255,255,255,0.80);
+      color: rgba(255,255,255,0.92);
       font-size: 12px;
       text-align: right;
-      max-width: 180px;
-      line-height: 1.3;
+      max-width: 210px;
+      line-height: 1.35;
       font-weight: 700;
-    }
-
-    .headline {
-      font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.7rem);
-      font-weight: 800;
-      line-height: 1.1;
-      max-width: 14ch;
-      margin-bottom: 16px;
-      text-shadow: 0 2px 18px rgba(0,0,0,0.16);
-    }
-
-    .subheadline {
-      max-width: 54ch;
-      font-size: 1rem;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.92);
-      margin-bottom: 20px;
+      text-transform: uppercase;
     }
 
     .meta-line {
@@ -294,6 +312,24 @@
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+    }
+
+    .headline {
+      font-size: clamp(1.9rem, 1.4rem + 1.9vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.08;
+      max-width: 13ch;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    }
+
+    .subheadline {
+      max-width: 56ch;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.94);
+      margin-bottom: 20px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.15);
     }
 
     .pills {
@@ -317,7 +353,7 @@
 
     .copy-block {
       max-width: 58ch;
-      background: rgba(8, 15, 28, 0.20);
+      background: rgba(8, 15, 28, 0.22);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 18px;
       padding: 18px;
@@ -336,6 +372,10 @@
       line-height: 1.55;
       color: rgba(255,255,255,0.92);
       margin-bottom: 14px;
+    }
+
+    .copy-text:last-child {
+      margin-bottom: 0;
     }
 
     .card-bottom {
@@ -361,7 +401,7 @@
     .dealer-contact,
     .rating-info,
     .dealer-meta a {
-      color: rgba(255,255,255,0.86);
+      color: rgba(255,255,255,0.88);
       font-size: 14px;
       line-height: 1.5;
     }
@@ -395,13 +435,15 @@
     }
 
     .qr-box img {
-      width: 86px;
-      height: 86px;
+      width: 88px;
+      height: 88px;
       display: block;
       border-radius: 8px;
     }
 
-    .hidden { display: none !important; }
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -415,7 +457,7 @@
       <section class="panel">
         <div class="panel-body">
           <h2>Create Daikin creative</h2>
-          <p class="subtext">This version uses your updated Apps Script URL and expands campaign and festival options based on the Daikin master prompt structure.[file:370]</p>
+          <p class="subtext">This frontend is aligned with the latest backend payload shape and uses one multi-select Offers field with separate Installation and Product dropdowns.[file:327][file:386]</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -481,49 +523,49 @@
               </select>
             </div>
 
-            <div class="field">
-              <label for="scheme">Scheme</label>
-              <select id="scheme">
-                <option>Green Exchange Offer</option>
-                <option>Festival Offer</option>
-                <option>Cashback</option>
-                <option>Easy EMI</option>
-                <option>Times Prime</option>
-                <option>5 Years Comprehensive Warranty</option>
+            <div class="field full" id="seasonal-wrap">
+              <label for="seasonal-name">Season</label>
+              <select id="seasonal-name">
+                <option>Summer</option>
+                <option>Monsoon</option>
+                <option>Winter</option>
               </select>
             </div>
 
-            <div class="field">
-              <label for="benefit">Benefit</label>
-              <select id="benefit">
-                <option>Up to ₹8000</option>
-                <option>Up to ₹4000</option>
-                <option>Free Installation</option>
-                <option>Installation ₹699</option>
+            <div class="field full">
+              <label for="offers">Offers</label>
+              <select id="offers" multiple>
+                <option>Green Exchange Offer Upto Rs 8000</option>
+                <option>Green Exchange Offer Upto Rs 6000</option>
+                <option>Green Exchange Offer Upto Rs 4500</option>
                 <option>5% Cashback</option>
-                <option>No Cashback</option>
+                <option>10% Cashback</option>
+                <option>Cashback Upto Rs 2500</option>
+                <option>Cashback Upto Rs 4000</option>
+                <option>No Cost EMI</option>
+                <option>Attractive Finance Offers</option>
+                <option>5 Year Comprehensive Warranty</option>
               </select>
+              <div class="hint">Hold Ctrl on Windows or Cmd on Mac to select multiple offers.</div>
             </div>
 
             <div class="field">
               <label for="installation">Installation</label>
               <select id="installation">
-                <option>Subsidized Installation</option>
-                <option>Standard Installation</option>
                 <option>Free Installation</option>
+                <option>Installation @ Rs 699</option>
+                <option>Installation @ Rs 899</option>
+                <option>Installation @ Rs 1099</option>
               </select>
             </div>
 
             <div class="field">
               <label for="product">Product</label>
               <select id="product">
-                <option>1.5 Ton Inverter Split</option>
-                <option>1 Ton Inverter Split</option>
-                <option>3 Star Split AC</option>
-                <option>Premium IAQ Series</option>
-                <option>Streamer Technology AC</option>
-                <option>PM2.5 Filter AC</option>
-                <option>WiFi Enabled Split AC</option>
+                <option>Wifi Enabled Split AC</option>
+                <option>Heavy Duty Split AC</option>
+                <option>Premium 5 Star Inverter Split AC</option>
+                <option>1.5T/1T Star Inverter AC</option>
               </select>
             </div>
 
@@ -556,7 +598,7 @@
       <section class="panel">
         <div class="preview-wrap">
           <div class="preview-shell" id="preview-shell">
-            <img id="bg-img" alt="Generated creative background" />
+            <img id="bg-img" alt="Generated creative background" crossorigin="anonymous" />
             <div class="overlay"></div>
 
             <div class="creative-card">
@@ -605,7 +647,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzj5widQMBvQtHDg7QKQS7RpkcxE0k6fSyRyYfayfZQ6SVc9J8CtW5kfUgHF8cs4Z-1/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzoxmTf06hGKdJJBI6bLJ7PVOBJqP9ZTzC1UsiwXWlLn-h56WullBWQVKrZC7mPn6g/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
@@ -614,6 +656,9 @@
     const campaignTypeEl = document.getElementById('campaign-type');
     const festivalWrap = document.getElementById('festival-wrap');
     const festivalNameEl = document.getElementById('festival-name');
+    const seasonalWrap = document.getElementById('seasonal-wrap');
+    const seasonalNameEl = document.getElementById('seasonal-name');
+    const offersEl = document.getElementById('offers');
 
     const headlineEl = document.getElementById('headline');
     const subheadlineEl = document.getElementById('subheadline');
@@ -645,22 +690,48 @@
         return;
       }
       debugEl.style.display = 'block';
-      debugEl.textContent = Array.isArray(debug) ? debug.join('\\n') : String(debug);
+      debugEl.textContent = Array.isArray(debug) ? debug.join('\n') : String(debug);
     }
 
-    function toggleFestivalField() {
-      const isFestival = campaignTypeEl.value === 'Festival Campaign';
+    function getSelectedOffers() {
+      return Array.from(offersEl.selectedOptions).map(o => o.value);
+    }
+
+    function updateCampaignVisibility() {
+      const campaignType = campaignTypeEl.value;
+      const isFestival = campaignType === 'Festival Campaign';
+      const isSeasonal = campaignType === 'Seasonal Campaign';
+
       festivalWrap.classList.toggle('hidden', !isFestival);
+      seasonalWrap.classList.toggle('hidden', !isSeasonal);
+
       updateCampaignMeta();
+    }
+
+    function resolveCampaignName() {
+      const campaignType = campaignTypeEl.value;
+
+      if (campaignType === 'Festival Campaign') {
+        return festivalNameEl.value;
+      }
+
+      if (campaignType === 'Seasonal Campaign') {
+        return seasonalNameEl.value;
+      }
+
+      return campaignType;
     }
 
     function updateCampaignMeta() {
       const campaignType = campaignTypeEl.value;
-      const festival = festivalNameEl.value;
-      const campaignName = campaignType === 'Festival Campaign' ? festival : campaignType;
-      campaignMetaEl.textContent = campaignType === 'Festival Campaign'
-        ? `${campaignType} · ${festival}`
-        : campaignType;
+      const campaignName = resolveCampaignName();
+
+      if (campaignType === 'Festival Campaign' || campaignType === 'Seasonal Campaign') {
+        campaignMetaEl.textContent = `${campaignType} · ${campaignName}`;
+      } else {
+        campaignMetaEl.textContent = campaignType;
+      }
+
       return campaignName;
     }
 
@@ -720,19 +791,19 @@
           dspSelect.appendChild(opt);
         });
 
-        if (dspSelect.options.length) populateDealerFieldsFromOption();
+        if (dspSelect.options.length) {
+          populateDealerFieldsFromOption();
+        }
+
         setStatus('Dealer master loaded.');
       } catch (err) {
         setStatus('Load error: ' + err, true);
       }
     }
 
-    dspSelect.addEventListener('change', populateDealerFieldsFromOption);
-    campaignTypeEl.addEventListener('change', toggleFestivalField);
-    festivalNameEl.addEventListener('change', updateCampaignMeta);
-
     function getPayload() {
       const campaignName = updateCampaignMeta();
+
       return {
         dspCode: dspSelect.value,
         dealer: dealerInput.value.trim(),
@@ -741,8 +812,7 @@
         campaignType: campaignTypeEl.value,
         campaign: campaignName,
         festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
-        scheme: document.getElementById('scheme').value,
-        benefit: document.getElementById('benefit').value,
+        offers: getSelectedOffers(),
         installation: document.getElementById('installation').value,
         product: document.getElementById('product').value,
         language: document.getElementById('language').value,
@@ -752,12 +822,16 @@
 
     function renderPills(payload) {
       pillsEl.innerHTML = '';
-      [
-        payload.campaignType,
-        payload.scheme,
-        payload.benefit,
-        payload.installation
-      ].filter(Boolean).forEach(text => {
+
+      const items = [
+        payload.campaignType === 'Festival Campaign' ? payload.festivalName : '',
+        payload.campaignType === 'Seasonal Campaign' ? payload.campaign : '',
+        ...payload.offers,
+        payload.installation,
+        payload.product
+      ].filter(Boolean);
+
+      items.forEach(text => {
         const pill = document.createElement('div');
         pill.className = 'pill';
         pill.textContent = text;
@@ -774,9 +848,12 @@
       dealerNameEl.textContent = copy.dealer || payload.dealer || 'Dealer Name';
       dealerContactEl.textContent = `${copy.locality || payload.locality || ''} · ${copy.phone || payload.phone || ''}`;
 
-      campaignMetaEl.textContent = payload.campaignType === 'Festival Campaign'
-        ? `${payload.campaignType} · ${payload.festivalName}`
-        : payload.campaignType;
+      const campaignName = resolveCampaignName();
+      if (payload.campaignType === 'Festival Campaign' || payload.campaignType === 'Seasonal Campaign') {
+        campaignMetaEl.textContent = `${payload.campaignType} · ${campaignName}`;
+      } else {
+        campaignMetaEl.textContent = payload.campaignType;
+      }
 
       updateQr(copy.gmbUrl || '');
       updateRating(copy.currentRating || '', copy.reviewsCount || '');
@@ -786,12 +863,17 @@
         ? '✔ Brand Compliance: Approved'
         : '✔ Brand Compliance: Pending';
 
-      if (copy.bgImageDataUrl && copy.bgImageDataUrl.startsWith('data:image/')) {
-        bgImg.src = copy.bgImageDataUrl;
+      if (copy.bgImageUrl) {
+        bgImg.src = copy.bgImageUrl;
       } else {
         bgImg.removeAttribute('src');
       }
     }
+
+    dspSelect.addEventListener('change', populateDealerFieldsFromOption);
+    campaignTypeEl.addEventListener('change', updateCampaignVisibility);
+    festivalNameEl.addEventListener('change', updateCampaignMeta);
+    seasonalNameEl.addEventListener('change', updateCampaignMeta);
 
     document.getElementById('generate-btn').addEventListener('click', async () => {
       try {
@@ -817,9 +899,9 @@
 
         renderCreative(data.data || {}, payload);
         showDebug(data.debug || null);
-        setStatus((data.data && data.data.bgImageDataUrl)
+        setStatus(data.data && data.data.bgImageUrl
           ? 'Creative generated successfully with image.'
-          : 'Creative generated, but no image was returned.');
+          : 'Creative generated, but image URL was not returned.');
       } catch (err) {
         setStatus('Network/server error: ' + err, true);
       }
@@ -846,9 +928,10 @@
           dealerCode: dspSelect.value,
           dealerName: dealerNameEl.textContent,
           campaignType: campaignTypeEl.value,
-          campaign: updateCampaignMeta(),
+          campaign: resolveCampaignName(),
           festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
-          scheme: document.getElementById('scheme').value,
+          offers: getSelectedOffers(),
+          installation: document.getElementById('installation').value,
           product: document.getElementById('product').value,
           language: document.getElementById('language').value,
           headline_en: headlineEl.textContent,
@@ -882,7 +965,7 @@
       }
     });
 
-    toggleFestivalField();
+    updateCampaignVisibility();
     loadDealers();
   </script>
 </body>
