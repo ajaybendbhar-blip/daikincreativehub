@@ -1,182 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Daikin Solution Plaza Creative Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daikin Creative Studio</title>
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 16px; background:#f3f4f6; }
-    .shell { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1.2fr; gap: 16px; }
-    @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } }
-    .panel { background:#fff; border-radius: 12px; padding:16px; box-shadow:0 8px 24px rgba(15,23,42,0.15); }
-    h1 { margin:0 0 8px; font-size:1.4rem; }
-    label { display:block; font-size:0.8rem; margin-bottom:4px; color:#6b7280; text-transform:uppercase; letter-spacing:0.08em; }
-    input, select, textarea { width:100%; padding:6px 8px; font-size:0.9rem; border-radius:8px; border:1px solid #d1d5db; }
-    textarea { min-height:60px; resize:vertical; }
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px 12px; }
-    .full { grid-column:1/3; }
-    button { padding:8px 16px; border-radius:999px; border:none; background:#005bac; color:#fff; font-size:0.9rem; font-weight:600; cursor:pointer; }
-    .status { margin-top:8px; font-size:0.8rem; color:#6b7280; }
-    .status.error { color:#b91c1c; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
 
-    .preview-wrapper { position:relative; border-radius:16px; overflow:hidden; box-shadow:0 16px 40px rgba(15,23,42,0.45); }
-    #bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.45); }
-    .card { position:relative; background:rgba(15,23,42,0.9); color:#e5e7eb; border-radius:16px; padding:14px; }
-    .preview-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-    .logo { width:80px; height:26px; background:#fff; color:#005bac; display:flex; align-items:center; justify-content:center; font-size:0.9rem; font-weight:700; border-radius:4px; letter-spacing:0.12em; }
-    .headline { font-size:1rem; font-weight:600; margin-bottom:4px; }
-    .sub { font-size:0.85rem; color:#cbd5f5; margin-bottom:6px; }
-    .pill-row span { display:inline-block; font-size:0.75rem; padding:3px 8px; border-radius:999px; border:1px solid rgba(122,201,67,0.7); background:rgba(122,201,67,0.16); margin-right:4px; margin-bottom:4px; }
-    .copy { font-size:0.8rem; margin-top:6px; }
-    .dealer { margin-top:8px; font-size:0.8rem; border-top:1px dashed rgba(148,163,184,0.8); padding-top:6px; display:flex; justify-content:space-between; }
-    .compliance { margin-top:6px; font-size:0.75rem; padding:4px 8px; border-radius:999px; display:inline-flex; align-items:center; gap:4px; background:rgba(22,163,74,0.18); color:#bbf7d0; }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+      padding: 16px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    p.note {
+      margin-top: 0;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    button {
+      background: #005bac;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    button.secondary {
+      background: #374151;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #374151;
+      white-space: pre-wrap;
+    }
+
+    .status.error {
+      color: #b91c1c;
+    }
+
+    .preview-shell {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 760px;
+      background: #111827;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    #bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      padding: 16px;
+      color: #f9fafb;
+      background: rgba(17, 24, 39, 0.88);
+      min-height: 760px;
+      backdrop-filter: blur(2px);
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .logo {
+      background: #fff;
+      color: #005bac;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 6px;
+      letter-spacing: 0.08em;
+      display: inline-block;
+    }
+
+    .brand-lock {
+      color: #d1d5db;
+      font-size: 0.85rem;
+    }
+
+    .headline {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .body {
+      font-size: 1rem;
+      line-height: 1.45;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 14px;
+    }
+
+    .chip {
+      border: 1px solid rgba(167, 243, 208, 0.45);
+      color: #d1fae5;
+      background: rgba(34, 197, 94, 0.14);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+
+    .section-title {
+      font-weight: 700;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .local-copy, .english-copy {
+      color: #e5e7eb;
+      font-size: 0.96rem;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .dealer-area {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(209, 213, 219, 0.5);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .dealer-meta {
+      font-size: 0.92rem;
+      color: #e5e7eb;
+    }
+
+    .dealer-meta a {
+      color: #93c5fd;
+      text-decoration: underline;
+    }
+
+    .compliance {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      background: rgba(34, 197, 94, 0.16);
+      color: #bbf7d0;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+
+    .debug-box {
+      margin-top: 12px;
+      border-radius: 12px;
+      background: #111827;
+      color: #d1d5db;
+      padding: 12px;
+      font-size: 0.82rem;
+      white-space: pre-wrap;
+      border: 1px solid #374151;
+    }
+
+    .qr {
+      width: 72px;
+      height: 72px;
+      background: #fff;
+      border-radius: 6px;
+      object-fit: cover;
+      flex: 0 0 auto;
+    }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <!-- LEFT: form -->
+  <div class="wrap">
     <div class="panel">
-      <h1>Daikin Solution Plaza Creative Studio</h1>
-      <p style="font-size:0.85rem;color:#6b7280;margin-top:0;">
-        Restricted to authorised Daikin Solution Plaza dealers. Fill approved fields and generate compliant copy.
-      </p>
-      <form id="creative-form" class="grid">
+      <h1>Daikin Creative Studio</h1>
+      <p class="note">Generate approved festival creatives with image background and text copy.</p>
+
+      <div class="grid">
         <div class="full">
-          <label>Dealer (from master)</label>
-          <select id="dsp-select" name="dspCode"></select>
+          <label>Dealer</label>
+          <select id="dsp-select"></select>
         </div>
+
         <div class="full">
           <label>Dealership Name</label>
-          <input name="dealer" id="dealer-input" placeholder="Dealership Name" required>
+          <input id="dealer-input" placeholder="Dealership name" />
         </div>
+
         <div>
           <label>Locality / City</label>
-          <input name="locality" placeholder="City / Area" required>
+          <input id="locality-input" placeholder="City / locality" />
         </div>
+
         <div>
           <label>Contact Number</label>
-          <input name="phone" placeholder="Dealer contact" required>
+          <input id="phone-input" placeholder="Phone number" />
         </div>
+
         <div>
           <label>Campaign</label>
-          <select name="campaign">
+          <select id="campaign">
             <option>Ganesh Chaturthi</option>
             <option>Diwali</option>
-            <option>Independence Day</option>
             <option>Summer</option>
             <option>Monsoon</option>
           </select>
         </div>
+
         <div>
-          <label>Approved Scheme</label>
-          <select name="scheme">
+          <label>Scheme</label>
+          <select id="scheme">
             <option>Green Exchange</option>
             <option>Festive Cashback</option>
             <option>Zero Cost EMI</option>
             <option>Extended Warranty</option>
           </select>
         </div>
+
         <div>
           <label>Benefit</label>
-          <select name="benefit">
+          <select id="benefit">
             <option>5% Cashback</option>
             <option>Exchange Bonus</option>
             <option>No Cashback</option>
           </select>
         </div>
+
         <div>
           <label>Installation</label>
-          <select name="installation">
+          <select id="installation">
             <option>Subsidized Installation</option>
             <option>Standard Installation</option>
             <option>Free Installation</option>
           </select>
         </div>
+
         <div>
           <label>Product</label>
-          <select name="product">
+          <select id="product">
             <option>1.5 Ton Inverter Split</option>
             <option>1 Ton Inverter Split</option>
             <option>3 Star Split AC</option>
             <option>Premium IAQ Series</option>
           </select>
         </div>
+
         <div>
           <label>Language</label>
-          <select name="language">
+          <select id="language">
             <option>Marathi + English</option>
             <option>Hindi + English</option>
             <option>Gujarati + English</option>
             <option>English Only</option>
           </select>
         </div>
-        <div class="full">
-          <label>Internal Notes (optional)</label>
-          <textarea name="notes" placeholder="E.g. focus on family comfort, highlight energy savings."></textarea>
-        </div>
-      </form>
-      <button id="generate-btn">Generate Creative Copy</button>
-      <div id="status" class="status"></div>
-    </div>
 
-    <!-- RIGHT: festival background + text card + submit -->
-    <div class="panel">
-      <div class="preview-wrapper" id="preview-wrapper">
-        <img id="bg-img" alt="Festival background">
-        <div class="card">
-          <div class="preview-header">
-            <div class="logo">DAIKIN</div>
-            <div style="font-size:0.8rem;color:#9ca3af;">Brand Zone – Locked</div>
-          </div>
-          <div class="headline" id="headline">Headline will appear here.</div>
-          <div class="sub" id="subheadline">Supporting copy will appear here.</div>
-          <div class="pill-row" id="pills"></div>
-          <div class="copy">
-            <strong>Local language:</strong>
-            <div id="body-local">Local language copy will appear here.</div>
-            <strong style="display:block;margin-top:4px;">English:</strong>
-            <div id="body-en">English copy will appear here.</div>
-          </div>
-          <div class="dealer">
-            <div>
-              <div id="dealer-name">Dealer Name</div>
-              <div style="font-size:0.75rem;color:#9ca3af;" id="dealer-contact">City · Phone</div>
-              <a id="gmb-link" href="#" target="_blank" style="font-size:0.75rem;color:#93c5fd;">
-                View location & rate us
-              </a>
-              <div style="font-size:0.75rem;color:#9ca3af;" id="rating-info"></div>
-            </div>
-            <div id="qr-container">
-              <img id="qr-img" alt="Rate us QR" style="width:64px;height:64px;border-radius:4px;">
-            </div>
-          </div>
-          <div class="compliance" id="compliance-pill">
-            <span>✔</span> <span>Brand Compliance: Pending</span>
-          </div>
+        <div class="full">
+          <label>Notes</label>
+          <textarea id="notes" placeholder="Optional notes"></textarea>
         </div>
       </div>
 
-      <button id="submit-btn" style="margin-top:8px;">Submit Creative for Review</button>
+      <button id="generate-btn">Generate Creative Copy</button>
+      <button class="secondary" id="submit-btn">Submit Creative for Review</button>
+
+      <div id="status" class="status"></div>
+      <div id="debug" class="debug-box" style="display:none;"></div>
+    </div>
+
+    <div class="panel">
+      <div class="preview-shell" id="preview-shell">
+        <img id="bg-img" alt="Generated background" />
+        <div class="card">
+          <div class="topline">
+            <div class="logo">DAIKIN</div>
+            <div class="brand-lock">Brand Zone – Locked</div>
+          </div>
+
+          <div class="headline" id="headline">Headline will appear here.</div>
+          <div class="body" id="body-en">English body will appear here.</div>
+
+          <div class="chips" id="chips"></div>
+
+          <div class="section-title">Local language</div>
+          <div class="local-copy" id="body-local">Local language copy will appear here.</div>
+
+          <div class="section-title">English</div>
+          <div class="english-copy" id="english-copy">English copy will appear here.</div>
+
+          <div class="dealer-area">
+            <div class="dealer-meta">
+              <div id="dealer-name">Dealer Name</div>
+              <div id="dealer-contact">City · Phone</div>
+              <div style="margin-top:4px;">
+                <a id="gmb-link" href="#" target="_blank">View location &amp; rate us</a>
+              </div>
+              <div id="rating-info" style="font-size:0.8rem;color:#cbd5e1;margin-top:4px;"></div>
+              <div class="compliance" id="compliance-pill">✔ Brand Compliance: Pending</div>
+            </div>
+            <img id="qr-img" class="qr" alt="QR code" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygMW17oHIIIXOA7RjVIT1YC-7MwkbbwAYKtR5OAU_PbMfdx9MwaONgjXyb3VnYWUXR/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxh1Q8PN8jsdRLBgiiVTQ61vsciTmq-nAELbErQA12JUl-sibbOgcYwXEhkAIe_8Qca/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
-    const localityInput = document.querySelector('input[name="locality"]');
-    const phoneInput = document.querySelector('input[name="phone"]');
+    const localityInput = document.getElementById('locality-input');
+    const phoneInput = document.getElementById('phone-input');
     const bgImg = document.getElementById('bg-img');
+    const statusEl = document.getElementById('status');
+    const debugEl = document.getElementById('debug');
+
+    function setStatus(msg, isError = false) {
+      statusEl.textContent = msg;
+      statusEl.className = isError ? 'status error' : 'status';
+    }
+
+    function showDebug(data) {
+      if (!data) {
+        debugEl.style.display = 'none';
+        debugEl.textContent = '';
+        return;
+      }
+      debugEl.style.display = 'block';
+      debugEl.textContent = Array.isArray(data) ? data.join('\n') : String(data);
+    }
 
     async function loadDsps() {
       try {
         const res = await fetch(APP_SCRIPT_URL);
         const data = await res.json();
         if (!data.ok) {
-          console.error('Error loading DSPs', data.error);
+          setStatus(data.error || 'Failed to load DSP list', true);
           return;
         }
+
         dspSelect.innerHTML = '';
         data.dsps.forEach(d => {
           const opt = document.createElement('option');
@@ -189,152 +432,139 @@
           opt.dataset.reviews = d.reviewsCount;
           dspSelect.appendChild(opt);
         });
-        const firstOpt = dspSelect.options[0];
-        if (firstOpt) {
-          dspSelect.value = firstOpt.value;
-          dealerInput.value = firstOpt.textContent.split(' - ')[1];
-          localityInput.value = firstOpt.dataset.city;
-          phoneInput.value = firstOpt.dataset.contact;
-          updateRatingInfo(firstOpt.dataset.rating, firstOpt.dataset.reviews);
-          updateQr(firstOpt.dataset.gmbUrl);
+
+        if (dspSelect.options.length) {
+          fillFromSelected();
         }
       } catch (err) {
-        console.error('Error loading DSPs', err);
+        setStatus('Load error: ' + err, true);
       }
     }
 
-    dspSelect.addEventListener('change', () => {
-      const opt = dspSelect.selectedOptions[0];
-      if (!opt) return;
-      dealerInput.value = opt.textContent.split(' - ')[1];
-      localityInput.value = opt.dataset.city;
-      phoneInput.value = opt.dataset.contact;
-      updateRatingInfo(opt.dataset.rating, opt.dataset.reviews);
-      updateQr(opt.dataset.gmbUrl);
-    });
+    function updateQr(url) {
+      const qr = document.getElementById('qr-img');
+      const gmbLink = document.getElementById('gmb-link');
+      if (!url) {
+        qr.removeAttribute('src');
+        gmbLink.href = '#';
+        return;
+      }
+      qr.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(url)}`;
+      gmbLink.href = url;
+    }
 
     function updateRatingInfo(rating, reviews) {
-      const el = document.getElementById('rating-info');
-      if (rating || reviews) {
-        el.textContent = `Current rating: ${rating || '-'} · Reviews: ${reviews || '-'}`;
-      } else {
-        el.textContent = '';
-      }
+      document.getElementById('rating-info').textContent =
+        (rating || reviews) ? `Current rating: ${rating || '-'} · Reviews: ${reviews || '-'}` : '';
     }
 
-    function updateQr(gmbUrl) {
-      if (!gmbUrl) return;
-      const encoded = encodeURIComponent(gmbUrl);
-      const qrImg = document.getElementById('qr-img');
-      qrImg.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encoded}`;
-      const gmbLink = document.getElementById('gmb-link');
-      gmbLink.href = gmbUrl;
+    function fillFromSelected() {
+      const opt = dspSelect.selectedOptions[0];
+      if (!opt) return;
+      const dealerName = opt.textContent.split(' - ')[1] || opt.textContent;
+      dealerInput.value = dealerName;
+      localityInput.value = opt.dataset.city || '';
+      phoneInput.value = opt.dataset.contact || '';
+      updateQr(opt.dataset.gmbUrl || '');
+      updateRatingInfo(opt.dataset.rating || '', opt.dataset.reviews || '');
+      document.getElementById('dealer-name').textContent = dealerName;
+      document.getElementById('dealer-contact').textContent = `${opt.dataset.city || ''} · ${opt.dataset.contact || ''}`;
+    }
+
+    dspSelect.addEventListener('change', fillFromSelected);
+
+    function payloadFromForm() {
+      return {
+        dspCode: dspSelect.value,
+        dealer: dealerInput.value,
+        locality: localityInput.value,
+        phone: phoneInput.value,
+        campaign: document.getElementById('campaign').value,
+        scheme: document.getElementById('scheme').value,
+        benefit: document.getElementById('benefit').value,
+        installation: document.getElementById('installation').value,
+        product: document.getElementById('product').value,
+        language: document.getElementById('language').value,
+        notes: document.getElementById('notes').value
+      };
     }
 
     document.getElementById('generate-btn').addEventListener('click', async () => {
-      const form = document.getElementById('creative-form');
-      const status = document.getElementById('status');
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
-
-      const opt = dspSelect.selectedOptions[0];
-      if (opt) {
-        payload.dspCode = opt.value;
-        payload.dealer = dealerInput.value;
-      }
-
-      status.textContent = 'Generating copy & artwork...';
-      status.className = 'status';
-
       try {
+        setStatus('Generating copy and image...');
+        showDebug(null);
+
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payloadFromForm())
         });
 
         const data = await res.json();
+
         if (!data.ok) {
-          status.textContent = data.error || 'Error generating copy.';
-          status.className = 'status error';
+          setStatus(data.error || 'Generation failed', true);
+          showDebug(data.debug || null);
           return;
         }
-        const copy = data.data;
 
-        document.getElementById('headline').textContent = copy.headline_en || 'Generated headline';
-        document.getElementById('subheadline').textContent = copy.body_en || '';
+        const copy = data.data || {};
+        document.getElementById('headline').textContent = copy.headline_en || 'Headline will appear here.';
         document.getElementById('body-en').textContent = copy.body_en || '';
+        document.getElementById('english-copy').textContent = copy.body_en || '';
         document.getElementById('body-local').textContent = copy.body_local || '';
+        document.getElementById('dealer-name').textContent = copy.dealer || '';
+        document.getElementById('dealer-contact').textContent = `${copy.locality || ''} · ${copy.phone || ''}`;
 
-        document.getElementById('dealer-name').textContent = copy.dealer;
-        document.getElementById('dealer-contact').textContent = `${copy.locality} · ${copy.phone}`;
-
-        const pills = document.getElementById('pills');
-        pills.innerHTML = '';
-        [payload.scheme, payload.benefit, payload.installation].forEach(t => {
-          if (!t) return;
-          const span = document.createElement('span');
+        const chips = document.getElementById('chips');
+        chips.innerHTML = '';
+        [copy.scheme, copy.benefit, copy.installation].filter(Boolean).forEach(t => {
+          const span = document.createElement('div');
+          span.className = 'chip';
           span.textContent = t;
-          pills.appendChild(span);
+          chips.appendChild(span);
         });
 
-        updateQr(copy.gmbUrl);
-        updateRatingInfo(copy.currentRating, copy.reviewsCount);
+        updateQr(copy.gmbUrl || '');
+        updateRatingInfo(copy.currentRating || '', copy.reviewsCount || '');
 
         const compliance = document.getElementById('compliance-pill');
-        if (copy.compliance === 'approved') {
-          compliance.innerHTML = '<span>✔</span> <span>Brand Compliance: Approved</span>';
-        } else {
-          compliance.innerHTML = '<span>!</span> <span>Brand Compliance: Needs Review</span>';
-        }
+        compliance.textContent = copy.compliance === 'approved'
+          ? '✔ Brand Compliance: Approved'
+          : 'Brand Compliance: Pending';
 
-        // Use GPT image data URL as background
         if (copy.bgImageDataUrl) {
           bgImg.src = copy.bgImageDataUrl;
         } else {
           bgImg.removeAttribute('src');
         }
 
-        status.textContent = 'Copy & artwork generated successfully.';
-        status.className = 'status';
+        setStatus('Creative generated successfully.');
+        showDebug(data.debug || null);
       } catch (err) {
-        status.textContent = 'Network/server error: ' + err;
-        status.className = 'status error';
+        setStatus('Network/server error: ' + err, true);
       }
     });
 
-    // SUBMIT FOR REVIEW: capture full preview (background + card)
     document.getElementById('submit-btn').addEventListener('click', async () => {
-      const status = document.getElementById('status');
-      const wrapper = document.getElementById('preview-wrapper');
-      if (!wrapper) return;
-
-      status.textContent = 'Preparing image for review...';
-      status.className = 'status';
-
       try {
-        const canvas = await html2canvas(wrapper, {
-          scale: 2,
-          useCORS: true
-        });
-        const dataUrl = canvas.toDataURL('image/png');
+        setStatus('Capturing preview...');
+        const shell = document.getElementById('preview-shell');
+        const canvas = await html2canvas(shell, { scale: 2, useCORS: true });
+        const imageDataUrl = canvas.toDataURL('image/png');
 
         const payload = {
           action: 'submit_for_review',
           dealerCode: dspSelect.value,
           dealerName: document.getElementById('dealer-name').textContent,
-          locality: document.getElementById('dealer-contact').textContent,
+          campaign: document.getElementById('campaign').value,
+          scheme: document.getElementById('scheme').value,
+          product: document.getElementById('product').value,
+          language: document.getElementById('language').value,
           headline_en: document.getElementById('headline').textContent,
           body_en: document.getElementById('body-en').textContent,
           body_local: document.getElementById('body-local').textContent,
-          scheme: document.querySelector('select[name="scheme"]').value,
-          benefit: document.querySelector('select[name="benefit"]').value,
-          installation: document.querySelector('select[name="installation"]').value,
-          campaign: document.querySelector('select[name="campaign"]').value,
-          product: document.querySelector('select[name="product"]').value,
-          language: document.querySelector('select[name="language"]').value,
-          notes: document.querySelector('textarea[name="notes"]').value,
-          imageDataUrl: dataUrl
+          imageDataUrl
         };
 
         const res = await fetch(APP_SCRIPT_URL, {
@@ -342,27 +572,22 @@
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
-        const data = await res.json();
 
+        const data = await res.json();
         if (!data.ok) {
-          status.textContent = data.error || 'Error submitting for review.';
-          status.className = 'status error';
+          setStatus(data.error || 'Review submission failed', true);
+          showDebug(data.debug || null);
           return;
         }
 
-        status.textContent = 'Creative submitted for review. URL: ' + data.reviewUrl;
-        status.className = 'status';
+        setStatus('Submitted for review: ' + data.reviewUrl);
+        showDebug(data.debug || null);
       } catch (err) {
-        status.textContent = 'Error creating/submitting image: ' + err;
-        status.className = 'status error';
+        setStatus('Submit error: ' + err, true);
       }
     });
 
-    // Initial load
     loadDsps();
   </script>
-
-  <!-- html2canvas for capturing card + background as PNG -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
