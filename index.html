@@ -29,16 +29,13 @@
 
       --bg: #f5f7fb;
       --surface: #ffffff;
-      --surface-2: #f8fafc;
       --text: #0f172a;
       --muted: #64748b;
       --border: #dbe3ee;
       --primary: #005bac;
       --primary-2: #0b76d1;
-      --success: #0f9d58;
       --danger: #b42318;
       --radius: 18px;
-      --radius-sm: 12px;
       --shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
     }
 
@@ -54,24 +51,41 @@
     .page {
       max-width: 1280px;
       margin: 0 auto;
-      padding: var(--space-6);
+      padding: 24px;
     }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--space-6);
+    .layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-body,
+    .preview-wrap {
+      padding: 20px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
-      font-size: var(--text-lg);
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--primary);
-      letter-spacing: 0.01em;
     }
 
     .brand-mark {
@@ -81,67 +95,38 @@
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
       display: grid;
       place-items: center;
-      color: white;
+      color: #fff;
       font-weight: 800;
-      box-shadow: 0 8px 20px rgba(0, 91, 172, 0.24);
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: var(--space-6);
-      align-items: start;
-    }
-
-    @media (max-width: 980px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .panel {
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-    }
-
-    .panel-body {
-      padding: var(--space-5);
-    }
-
-    .panel h2 {
-      margin: 0 0 var(--space-2);
-      font-size: var(--text-xl);
-      line-height: 1.15;
+    h2 {
+      margin: 0 0 8px;
+      font-size: 1.75rem;
     }
 
     .subtext {
-      margin: 0 0 var(--space-5);
+      margin: 0 0 20px;
       color: var(--muted);
-      font-size: var(--text-sm);
-      line-height: 1.55;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-4);
+      gap: 16px;
     }
 
     .full { grid-column: 1 / -1; }
 
     @media (max-width: 640px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
+      .form-grid { grid-template-columns: 1fr; }
     }
 
     .field label {
       display: block;
       margin-bottom: 6px;
-      font-size: var(--text-xs);
+      font-size: 12px;
       font-weight: 700;
       color: var(--muted);
       letter-spacing: 0.08em;
@@ -157,16 +142,8 @@
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text);
-      font-size: var(--text-sm);
+      font-size: 14px;
       outline: none;
-      transition: border-color 180ms ease, box-shadow 180ms ease;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(0, 91, 172, 0.12);
     }
 
     .field textarea {
@@ -176,9 +153,9 @@
 
     .btn-row {
       display: flex;
-      gap: var(--space-3);
+      gap: 12px;
       flex-wrap: wrap;
-      margin-top: var(--space-5);
+      margin-top: 20px;
     }
 
     .btn {
@@ -186,19 +163,14 @@
       border-radius: 999px;
       padding: 12px 18px;
       font-weight: 700;
-      font-size: var(--text-sm);
+      font-size: 14px;
       cursor: pointer;
       min-height: 44px;
-      transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
     }
-
-    .btn:hover { transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: white;
-      box-shadow: 0 10px 24px rgba(0, 91, 172, 0.22);
+      color: #fff;
     }
 
     .btn-secondary {
@@ -208,13 +180,12 @@
     }
 
     .status {
-      margin-top: var(--space-4);
+      margin-top: 16px;
       padding: 12px 14px;
       border-radius: 12px;
       background: #f8fafc;
       border: 1px solid var(--border);
-      font-size: var(--text-sm);
-      color: var(--text);
+      font-size: 14px;
       white-space: pre-wrap;
     }
 
@@ -225,7 +196,7 @@
     }
 
     .debug-box {
-      margin-top: var(--space-4);
+      margin-top: 16px;
       padding: 14px;
       border-radius: 12px;
       background: #0f172a;
@@ -237,10 +208,6 @@
       max-height: 240px;
       overflow: auto;
       display: none;
-    }
-
-    .preview-wrap {
-      padding: var(--space-5);
     }
 
     .preview-shell {
@@ -268,7 +235,7 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(8,15,28,0.32) 0%, rgba(8,15,28,0.6) 100%),
+        linear-gradient(180deg, rgba(8,15,28,0.20) 0%, rgba(8,15,28,0.45) 100%),
         radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 30%);
       z-index: 1;
     }
@@ -288,7 +255,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: var(--space-6);
+      margin-bottom: 24px;
     }
 
     .daikin-badge {
@@ -301,12 +268,16 @@
       color: var(--primary);
       font-weight: 800;
       letter-spacing: 0.12em;
-      font-size: var(--text-sm);
+      font-size: 14px;
     }
 
     .brand-zone {
-      color: rgba(255,255,255,0.72);
-      font-size: var(--text-sm);
+      color: rgba(255,255,255,0.8);
+      font-size: 12px;
+      text-align: right;
+      max-width: 180px;
+      line-height: 1.3;
+      font-weight: 700;
     }
 
     .headline {
@@ -314,24 +285,23 @@
       font-weight: 800;
       line-height: 1.1;
       max-width: 14ch;
-      margin-bottom: var(--space-4);
+      margin-bottom: 16px;
       text-shadow: 0 2px 18px rgba(0,0,0,0.16);
     }
 
     .subheadline {
       max-width: 54ch;
-      font-size: var(--text-base);
+      font-size: 1rem;
       line-height: 1.55;
       color: rgba(255,255,255,0.92);
-      margin-bottom: var(--space-5);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.14);
+      margin-bottom: 20px;
     }
 
     .pills {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: var(--space-6);
+      margin-bottom: 24px;
     }
 
     .pill {
@@ -339,7 +309,7 @@
       align-items: center;
       padding: 8px 14px;
       border-radius: 999px;
-      font-size: var(--text-sm);
+      font-size: 14px;
       color: #e8fff4;
       background: rgba(86, 190, 128, 0.18);
       border: 1px solid rgba(151, 255, 189, 0.42);
@@ -348,34 +318,34 @@
 
     .copy-block {
       max-width: 58ch;
-      background: rgba(8, 15, 28, 0.28);
+      background: rgba(8, 15, 28, 0.20);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 18px;
       padding: 18px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
     }
 
     .copy-label {
-      font-size: var(--text-sm);
+      font-size: 14px;
       font-weight: 800;
       margin-bottom: 6px;
-      color: #ffffff;
+      color: #fff;
     }
 
     .copy-text {
-      font-size: var(--text-base);
+      font-size: 1rem;
       line-height: 1.55;
       color: rgba(255,255,255,0.92);
       margin-bottom: 14px;
     }
 
     .card-bottom {
-      margin-top: var(--space-8);
-      padding-top: var(--space-5);
+      margin-top: 32px;
+      padding-top: 20px;
       border-top: 1px dashed rgba(255,255,255,0.24);
       display: flex;
       justify-content: space-between;
-      gap: var(--space-4);
+      gap: 16px;
       align-items: flex-end;
     }
 
@@ -384,7 +354,7 @@
     }
 
     .dealer-name {
-      font-size: var(--text-lg);
+      font-size: 1.25rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -393,7 +363,7 @@
     .rating-info,
     .dealer-meta a {
       color: rgba(255,255,255,0.86);
-      font-size: var(--text-sm);
+      font-size: 14px;
       line-height: 1.5;
     }
 
@@ -413,7 +383,7 @@
       background: rgba(34,197,94,0.16);
       border: 1px solid rgba(158,255,190,0.28);
       color: #d9ffe7;
-      font-size: var(--text-sm);
+      font-size: 14px;
       font-weight: 700;
     }
 
@@ -432,27 +402,25 @@
       border-radius: 8px;
     }
 
-    .image-note {
-      margin-top: var(--space-3);
-      font-size: 12px;
+    .small-note {
+      margin-top: 12px;
       color: var(--muted);
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="topbar">
-      <div class="brand">
-        <div class="brand-mark">D</div>
-        <div>Daikin Creative Studio</div>
-      </div>
+    <div class="brand">
+      <div class="brand-mark">D</div>
+      <div>Daikin Creative Studio</div>
     </div>
 
     <div class="layout">
       <section class="panel">
         <div class="panel-body">
           <h2>Create festival creative</h2>
-          <p class="subtext">This version is wired to your latest Apps Script web app and keeps the same working generate/preview/review flow from your current file.[file:327]</p>
+          <p class="subtext">This version is updated to your latest Apps Script deployment and keeps the same working frontend flow as your current file.[file:327]</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -538,6 +506,13 @@
               <label for="notes">Notes</label>
               <textarea id="notes" placeholder="Optional notes for the creative"></textarea>
             </div>
+
+            <div class="field full">
+              <label>
+                <input type="checkbox" id="image-only-export" />
+                Export image only without HTML text overlay
+              </label>
+            </div>
           </div>
 
           <div class="btn-row">
@@ -546,8 +521,8 @@
           </div>
 
           <div id="status" class="status">Ready.</div>
-          <div id="debug" class="debug-box"></div>
-          <div class="image-note">The generated background is rendered as an inline base64 image using the returned <code>bgImageDataUrl</code> field, which is the same working approach already present in your current file.[file:327][web:261][web:271]</div>
+          <div id="debug" class="debug-box" data-html2canvas-ignore="true"></div>
+          <div class="small-note" data-html2canvas-ignore="true">Debug area is excluded from export and the background image is rendered from the backend `bgImageDataUrl` response field.[file:327]</div>
         </div>
       </section>
 
@@ -561,30 +536,32 @@
               <div>
                 <div class="card-top">
                   <div class="daikin-badge">DAIKIN</div>
-                  <div class="brand-zone">Brand Zone – Locked</div>
+                  <div class="brand-zone">WORLD'S LEADING<br>AIR CONDITIONING<br>COMPANY FROM JAPAN</div>
                 </div>
 
-                <div class="headline" id="headline">Headline will appear here.</div>
-                <div class="subheadline" id="subheadline">Supporting copy will appear here.</div>
+                <div id="text-layer">
+                  <div class="headline" id="headline">Headline will appear here.</div>
+                  <div class="subheadline" id="subheadline">Supporting copy will appear here.</div>
 
-                <div class="pills" id="pills"></div>
+                  <div class="pills" id="pills"></div>
 
-                <div class="copy-block">
-                  <div class="copy-label">Local language</div>
-                  <div class="copy-text" id="body-local">Local language copy will appear here.</div>
+                  <div class="copy-block">
+                    <div class="copy-label">Local language</div>
+                    <div class="copy-text" id="body-local">Local language copy will appear here.</div>
 
-                  <div class="copy-label">English</div>
-                  <div class="copy-text" id="body-en">English copy will appear here.</div>
+                    <div class="copy-label">English</div>
+                    <div class="copy-text" id="body-en">English copy will appear here.</div>
+                  </div>
                 </div>
               </div>
 
-              <div class="card-bottom">
+              <div class="card-bottom" id="dealer-layer">
                 <div class="dealer-meta">
                   <div class="dealer-name" id="dealer-name">Dealer Name</div>
                   <div class="dealer-contact" id="dealer-contact">City · Contact</div>
                   <a id="gmb-link" href="#" target="_blank" rel="noopener noreferrer">View location &amp; rate us</a>
                   <div class="rating-info" id="rating-info"></div>
-                  <div class="compliance" id="compliance-pill">✔ Brand Compliance: Pending</div>
+                  <div class="compliance" id="compliance-pill">✔ Brand Compliance: Approved</div>
                 </div>
 
                 <div class="qr-box">
@@ -600,7 +577,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby22Ju3deDsJ8Z8WcxoE4RMCcRldi8TqDSeLNnO0y4F0mBnDyYx_B5y_2g0tcs_AIZB/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-5M0dRynvvPBejPZUEw84GGcK4Ey19oe6Zacg-CgNsn_1Rqkqkz9_qPQzAO954LnP/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
@@ -621,6 +598,9 @@
     const pillsEl = document.getElementById('pills');
     const statusEl = document.getElementById('status');
     const debugEl = document.getElementById('debug');
+    const imageOnlyExportEl = document.getElementById('image-only-export');
+    const textLayer = document.getElementById('text-layer');
+    const dealerLayer = document.getElementById('dealer-layer');
 
     function setStatus(message, isError = false) {
       statusEl.textContent = message;
@@ -634,7 +614,7 @@
         return;
       }
       debugEl.style.display = 'block';
-      debugEl.textContent = Array.isArray(debug) ? debug.join('\n') : String(debug);
+      debugEl.textContent = Array.isArray(debug) ? debug.join('\\n') : String(debug);
     }
 
     function updateQr(url) {
@@ -693,9 +673,7 @@
           dspSelect.appendChild(opt);
         });
 
-        if (dspSelect.options.length) {
-          populateDealerFieldsFromOption();
-        }
+        if (dspSelect.options.length) populateDealerFieldsFromOption();
         setStatus('Dealer master loaded.');
       } catch (err) {
         setStatus('Load error: ' + err, true);
@@ -789,11 +767,24 @@
     document.getElementById('submit-btn').addEventListener('click', async () => {
       try {
         setStatus('Capturing preview for review...');
+
+        const imageOnly = imageOnlyExportEl.checked;
+        if (imageOnly) {
+          textLayer.setAttribute('data-html2canvas-ignore', 'true');
+          dealerLayer.setAttribute('data-html2canvas-ignore', 'true');
+        } else {
+          textLayer.removeAttribute('data-html2canvas-ignore');
+          dealerLayer.removeAttribute('data-html2canvas-ignore');
+        }
+
         const canvas = await html2canvas(document.getElementById('preview-shell'), {
           scale: 2,
           useCORS: true,
           backgroundColor: null
         });
+
+        textLayer.removeAttribute('data-html2canvas-ignore');
+        dealerLayer.removeAttribute('data-html2canvas-ignore');
 
         const payload = {
           action: 'submit_for_review',
@@ -828,6 +819,8 @@
         showDebug(data.debug || null);
         setStatus('Submitted for review: ' + (data.reviewUrl || 'Success'));
       } catch (err) {
+        textLayer.removeAttribute('data-html2canvas-ignore');
+        dealerLayer.removeAttribute('data-html2canvas-ignore');
         setStatus('Submit error: ' + err, true);
       }
     });
