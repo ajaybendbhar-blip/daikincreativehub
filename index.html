@@ -17,16 +17,6 @@
       --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.4rem);
       --text-xl: clamp(1.35rem, 1.15rem + 1vw, 2rem);
 
-      --space-1: 0.25rem;
-      --space-2: 0.5rem;
-      --space-3: 0.75rem;
-      --space-4: 1rem;
-      --space-5: 1.25rem;
-      --space-6: 1.5rem;
-      --space-8: 2rem;
-      --space-10: 2.5rem;
-      --space-12: 3rem;
-
       --bg: #f5f7fb;
       --surface: #ffffff;
       --text: #0f172a;
@@ -54,30 +44,6 @@
       padding: 24px;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    @media (max-width: 980px) {
-      .layout { grid-template-columns: 1fr; }
-    }
-
-    .panel {
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .panel-body,
-    .preview-wrap {
-      padding: 20px;
-    }
-
     .brand {
       display: flex;
       align-items: center;
@@ -99,9 +65,33 @@
       font-weight: 800;
     }
 
+    .layout {
+      display: grid;
+      grid-template-columns: 430px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.94);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-body, .preview-wrap {
+      padding: 20px;
+    }
+
     h2 {
       margin: 0 0 8px;
-      font-size: 1.75rem;
+      font-size: 1.7rem;
+      line-height: 1.1;
     }
 
     .subtext {
@@ -272,7 +262,7 @@
     }
 
     .brand-zone {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.80);
       font-size: 12px;
       text-align: right;
       max-width: 180px;
@@ -295,6 +285,15 @@
       line-height: 1.55;
       color: rgba(255,255,255,0.92);
       margin-bottom: 20px;
+    }
+
+    .meta-line {
+      margin-bottom: 18px;
+      color: rgba(255,255,255,0.92);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .pills {
@@ -402,11 +401,7 @@
       border-radius: 8px;
     }
 
-    .small-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 12px;
-    }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
@@ -419,8 +414,8 @@
     <div class="layout">
       <section class="panel">
         <div class="panel-body">
-          <h2>Create festival creative</h2>
-          <p class="subtext">Generate a clean Daikin visual plate, then place exact text and dealer details in HTML for better brand control.[web:291]</p>
+          <h2>Create Daikin creative</h2>
+          <p class="subtext">This version uses your updated Apps Script URL and expands campaign and festival options based on the Daikin master prompt structure.[file:370]</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -443,32 +438,69 @@
               <input id="phone-input" type="text" placeholder="Contact number" />
             </div>
 
-            <div class="field">
-              <label for="campaign">Campaign</label>
-              <select id="campaign">
-                <option>Ganesh Chaturthi</option>
+            <div class="field full">
+              <label for="campaign-type">Campaign Type</label>
+              <select id="campaign-type">
+                <option>Festival Campaign</option>
+                <option>Seasonal Campaign</option>
+                <option>Promotional Campaign</option>
+                <option>Lifestyle Campaign</option>
+                <option>National Event Campaign</option>
+                <option>Dealer Promotion</option>
+                <option>Corporate Brand Campaign</option>
+                <option>Factory Visit</option>
+                <option>Customer Awareness Campaign</option>
+                <option>Technician Campaign</option>
+                <option>Exchange Campaign</option>
+                <option>Energy Saving Campaign</option>
+              </select>
+            </div>
+
+            <div class="field full" id="festival-wrap">
+              <label for="festival-name">Festival Name</label>
+              <select id="festival-name">
                 <option>Diwali</option>
-                <option>Summer</option>
-                <option>Monsoon</option>
+                <option>Navratri</option>
+                <option>Dussehra</option>
+                <option>Ganesh Chaturthi</option>
+                <option>Raksha Bandhan</option>
+                <option>Janmashtami</option>
+                <option>Gudi Padwa</option>
+                <option>Akshaya Tritiya</option>
+                <option>Christmas</option>
+                <option>New Year</option>
+                <option>Makar Sankranti</option>
+                <option>Republic Day</option>
                 <option>Independence Day</option>
+                <option>Women's Day</option>
+                <option>Mother's Day</option>
+                <option>Father's Day</option>
+                <option>Teacher's Day</option>
+                <option>Children's Day</option>
+                <option>Eid</option>
               </select>
             </div>
 
             <div class="field">
               <label for="scheme">Scheme</label>
               <select id="scheme">
-                <option>Green Exchange</option>
-                <option>Festive Cashback</option>
-                <option>Zero Cost EMI</option>
-                <option>Extended Warranty</option>
+                <option>Green Exchange Offer</option>
+                <option>Festival Offer</option>
+                <option>Cashback</option>
+                <option>Easy EMI</option>
+                <option>Times Prime</option>
+                <option>5 Years Comprehensive Warranty</option>
               </select>
             </div>
 
             <div class="field">
               <label for="benefit">Benefit</label>
               <select id="benefit">
+                <option>Up to ₹8000</option>
+                <option>Up to ₹4000</option>
+                <option>Free Installation</option>
+                <option>Installation ₹699</option>
                 <option>5% Cashback</option>
-                <option>Exchange Bonus</option>
                 <option>No Cashback</option>
               </select>
             </div>
@@ -489,6 +521,9 @@
                 <option>1 Ton Inverter Split</option>
                 <option>3 Star Split AC</option>
                 <option>Premium IAQ Series</option>
+                <option>Streamer Technology AC</option>
+                <option>PM2.5 Filter AC</option>
+                <option>WiFi Enabled Split AC</option>
               </select>
             </div>
 
@@ -506,13 +541,6 @@
               <label for="notes">Notes</label>
               <textarea id="notes" placeholder="Optional notes for the creative"></textarea>
             </div>
-
-            <div class="field full">
-              <label>
-                <input type="checkbox" id="image-only-export" />
-                Export image only without HTML text overlay
-              </label>
-            </div>
           </div>
 
           <div class="btn-row">
@@ -522,7 +550,6 @@
 
           <div id="status" class="status">Ready.</div>
           <div id="debug" class="debug-box" data-html2canvas-ignore="true"></div>
-          <div class="small-note" data-html2canvas-ignore="true">Debug panel is excluded from exported images using html2canvas ignore attributes.[web:337]</div>
         </div>
       </section>
 
@@ -540,6 +567,7 @@
                 </div>
 
                 <div id="text-layer">
+                  <div class="meta-line" id="campaign-meta">Festival Campaign · Diwali</div>
                   <div class="headline" id="headline">Headline will appear here.</div>
                   <div class="subheadline" id="subheadline">Supporting copy will appear here.</div>
 
@@ -577,12 +605,15 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQjekiTOhims3g2o8qZlKWVJrXC2b5NTQEW5SOJ5oDswGUn00PSI7A89dCSZCJDYUj/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzj5widQMBvQtHDg7QKQS7RpkcxE0k6fSyRyYfayfZQ6SVc9J8CtW5kfUgHF8cs4Z-1/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
     const localityInput = document.getElementById('locality-input');
     const phoneInput = document.getElementById('phone-input');
+    const campaignTypeEl = document.getElementById('campaign-type');
+    const festivalWrap = document.getElementById('festival-wrap');
+    const festivalNameEl = document.getElementById('festival-name');
 
     const headlineEl = document.getElementById('headline');
     const subheadlineEl = document.getElementById('subheadline');
@@ -598,9 +629,9 @@
     const pillsEl = document.getElementById('pills');
     const statusEl = document.getElementById('status');
     const debugEl = document.getElementById('debug');
-    const imageOnlyExportEl = document.getElementById('image-only-export');
     const textLayer = document.getElementById('text-layer');
     const dealerLayer = document.getElementById('dealer-layer');
+    const campaignMetaEl = document.getElementById('campaign-meta');
 
     function setStatus(message, isError = false) {
       statusEl.textContent = message;
@@ -614,7 +645,23 @@
         return;
       }
       debugEl.style.display = 'block';
-      debugEl.textContent = Array.isArray(debug) ? debug.join('\n') : String(debug);
+      debugEl.textContent = Array.isArray(debug) ? debug.join('\\n') : String(debug);
+    }
+
+    function toggleFestivalField() {
+      const isFestival = campaignTypeEl.value === 'Festival Campaign';
+      festivalWrap.classList.toggle('hidden', !isFestival);
+      updateCampaignMeta();
+    }
+
+    function updateCampaignMeta() {
+      const campaignType = campaignTypeEl.value;
+      const festival = festivalNameEl.value;
+      const campaignName = campaignType === 'Festival Campaign' ? festival : campaignType;
+      campaignMetaEl.textContent = campaignType === 'Festival Campaign'
+        ? `${campaignType} · ${festival}`
+        : campaignType;
+      return campaignName;
     }
 
     function updateQr(url) {
@@ -681,14 +728,19 @@
     }
 
     dspSelect.addEventListener('change', populateDealerFieldsFromOption);
+    campaignTypeEl.addEventListener('change', toggleFestivalField);
+    festivalNameEl.addEventListener('change', updateCampaignMeta);
 
     function getPayload() {
+      const campaignName = updateCampaignMeta();
       return {
         dspCode: dspSelect.value,
         dealer: dealerInput.value.trim(),
         locality: localityInput.value.trim(),
         phone: phoneInput.value.trim(),
-        campaign: document.getElementById('campaign').value,
+        campaignType: campaignTypeEl.value,
+        campaign: campaignName,
+        festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
         scheme: document.getElementById('scheme').value,
         benefit: document.getElementById('benefit').value,
         installation: document.getElementById('installation').value,
@@ -700,7 +752,12 @@
 
     function renderPills(payload) {
       pillsEl.innerHTML = '';
-      [payload.scheme, payload.benefit, payload.installation].filter(Boolean).forEach(text => {
+      [
+        payload.campaignType,
+        payload.scheme,
+        payload.benefit,
+        payload.installation
+      ].filter(Boolean).forEach(text => {
         const pill = document.createElement('div');
         pill.className = 'pill';
         pill.textContent = text;
@@ -716,6 +773,10 @@
 
       dealerNameEl.textContent = copy.dealer || payload.dealer || 'Dealer Name';
       dealerContactEl.textContent = `${copy.locality || payload.locality || ''} · ${copy.phone || payload.phone || ''}`;
+
+      campaignMetaEl.textContent = payload.campaignType === 'Festival Campaign'
+        ? `${payload.campaignType} · ${payload.festivalName}`
+        : payload.campaignType;
 
       updateQr(copy.gmbUrl || '');
       updateRating(copy.currentRating || '', copy.reviewsCount || '');
@@ -768,14 +829,8 @@
       try {
         setStatus('Capturing preview for review...');
 
-        const imageOnly = imageOnlyExportEl.checked;
-        if (imageOnly) {
-          textLayer.setAttribute('data-html2canvas-ignore', 'true');
-          dealerLayer.setAttribute('data-html2canvas-ignore', 'true');
-        } else {
-          textLayer.removeAttribute('data-html2canvas-ignore');
-          dealerLayer.removeAttribute('data-html2canvas-ignore');
-        }
+        textLayer.setAttribute('data-html2canvas-ignore', 'true');
+        dealerLayer.setAttribute('data-html2canvas-ignore', 'true');
 
         const canvas = await html2canvas(document.getElementById('preview-shell'), {
           scale: 2,
@@ -790,7 +845,9 @@
           action: 'submit_for_review',
           dealerCode: dspSelect.value,
           dealerName: dealerNameEl.textContent,
-          campaign: document.getElementById('campaign').value,
+          campaignType: campaignTypeEl.value,
+          campaign: updateCampaignMeta(),
+          festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
           scheme: document.getElementById('scheme').value,
           product: document.getElementById('product').value,
           language: document.getElementById('language').value,
@@ -825,6 +882,7 @@
       }
     });
 
+    toggleFestivalField();
     loadDealers();
   </script>
 </body>
