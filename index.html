@@ -452,7 +452,7 @@
       <section class="panel">
         <div class="panel-body">
           <h2>Create festival creative</h2>
-          <p class="subtext">This version is wired to your updated Apps Script endpoint and shows backend debug directly on the page for faster troubleshooting.[web:272]</p>
+          <p class="subtext">This version is wired to your latest Apps Script web app and keeps the same working generate/preview/review flow from your current file.[file:327]</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -547,7 +547,7 @@
 
           <div id="status" class="status">Ready.</div>
           <div id="debug" class="debug-box"></div>
-          <div class="image-note">The generated background is rendered as an inline base64 image using a data URL in the preview image `src`.[web:261][web:271]</div>
+          <div class="image-note">The generated background is rendered as an inline base64 image using the returned <code>bgImageDataUrl</code> field, which is the same working approach already present in your current file.[file:327][web:261][web:271]</div>
         </div>
       </section>
 
@@ -600,7 +600,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxh1Q8PN8jsdRLBgiiVTQ61vsciTmq-nAELbErQA12JUl-sibbOgcYwXEhkAIe_8Qca/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby22Ju3deDsJ8Z8WcxoE4RMCcRldi8TqDSeLNnO0y4F0mBnDyYx_B5y_2g0tcs_AIZB/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
@@ -720,7 +720,7 @@
       };
     }
 
-    function renderPills(payload, copy) {
+    function renderPills(payload) {
       pillsEl.innerHTML = '';
       [payload.scheme, payload.benefit, payload.installation].filter(Boolean).forEach(text => {
         const pill = document.createElement('div');
@@ -741,7 +741,7 @@
 
       updateQr(copy.gmbUrl || '');
       updateRating(copy.currentRating || '', copy.reviewsCount || '');
-      renderPills(payload, copy);
+      renderPills(payload);
 
       complianceEl.textContent = copy.compliance === 'approved'
         ? '✔ Brand Compliance: Approved'
