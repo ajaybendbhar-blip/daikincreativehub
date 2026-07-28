@@ -569,7 +569,7 @@
       <section class="panel">
         <div class="panel-body">
           <h2>Create Daikin creative</h2>
-          <p class="subtext">Campaign-aware image generation with a user-friendly multi-select and lighter preview treatment.[file:327][web:390]</p>
+          <p class="subtext">GitHub Pages frontend connected to your updated Apps Script web app URL for dealer lookup, creative generation, and review submission.[web:413][web:408]</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -645,7 +645,7 @@
             </div>
 
             <div class="field full">
-              <label>Offers</label>
+              <label>Offers / Scheme</label>
               <div class="multi-select" id="offers-multi">
                 <div class="ms-trigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
                   <span class="ms-placeholder">Select one or more offers</span>
@@ -761,7 +761,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxh1Q8PN8jsdRLBgiiVTQ61vsciTmq-nAELbErQA12JUl-sibbOgcYwXEhkAIe_8Qca/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzffAVsfoipr-upaeZi1i_toel0NBZrQggfeRW6H-T73af8VC-UyTTub8AZJ2XUs4m/exec';
 
     const OFFER_OPTIONS = [
       'Green Exchange Offer Upto Rs 8000',
@@ -912,6 +912,7 @@
     }
 
     function getPayload() {
+      const offers = getSelectedOffers();
       return {
         dspCode: dspSelect.value,
         dealer: dealerInput.value.trim(),
@@ -920,7 +921,8 @@
         campaignType: campaignTypeEl.value,
         campaign: resolveCampaignName(),
         festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
-        offers: getSelectedOffers(),
+        offers,
+        scheme: offers.join(' | '),
         installation: document.getElementById('installation').value,
         product: document.getElementById('product').value,
         language: document.getElementById('language').value,
@@ -977,6 +979,7 @@
         bgImg.src = copy.bgImageUrl + '&t=' + Date.now();
       } else {
         bgImg.removeAttribute('src');
+        setStatus('Creative generated, but image URL was not returned.', true);
       }
     }
 
@@ -1094,10 +1097,6 @@
 
         renderCreative(data.data || {}, payload);
         showDebug(data.debug || null);
-
-        if (!(data.data && data.data.bgImageUrl)) {
-          setStatus('Creative generated, but image URL was not returned.', true);
-        }
       } catch (err) {
         setStatus('Network/server error: ' + err, true);
       }
@@ -1118,6 +1117,7 @@
         textLayer.removeAttribute('data-html2canvas-ignore');
         dealerLayer.removeAttribute('data-html2canvas-ignore');
 
+        const offers = getSelectedOffers();
         const payload = {
           action: 'submit_for_review',
           dealerCode: dspSelect.value,
@@ -1125,7 +1125,8 @@
           campaignType: campaignTypeEl.value,
           campaign: resolveCampaignName(),
           festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
-          offers: getSelectedOffers(),
+          offers,
+          scheme: offers.join(' | '),
           installation: document.getElementById('installation').value,
           product: document.getElementById('product').value,
           language: document.getElementById('language').value,
