@@ -36,55 +36,18 @@
       min-height:100vh;
     }
 
-    .page{
-      max-width:1440px;
-      margin:0 auto;
-      padding:24px;
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:22px;
-    }
-
+    .page{max-width:1440px;margin:0 auto;padding:24px}
+    .topbar{display:flex;align-items:center;gap:14px;margin-bottom:22px}
     .brand-mark{
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg,var(--brand-dark),var(--brand));
-      color:#fff;
-      font-weight:900;
+      width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--brand-dark),var(--brand));color:#fff;font-weight:900;
       box-shadow:0 12px 24px rgba(0,132,209,.22);
     }
+    .topbar h1{margin:0;font-size:30px;line-height:1.1;color:var(--brand);font-weight:900}
+    .topbar p{margin:4px 0 0;color:var(--muted);font-size:14px}
 
-    .topbar h1{
-      margin:0;
-      font-size:30px;
-      line-height:1.1;
-      color:var(--brand);
-      font-weight:900;
-    }
-
-    .topbar p{
-      margin:4px 0 0;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns:440px 1fr;
-      gap:24px;
-      align-items:start;
-    }
-
-    @media (max-width:1100px){
-      .layout{grid-template-columns:1fr}
-    }
+    .layout{display:grid;grid-template-columns:460px 1fr;gap:24px;align-items:start}
+    @media (max-width:1100px){.layout{grid-template-columns:1fr}}
 
     .panel{
       background:rgba(255,255,255,.96);
@@ -93,544 +56,181 @@
       box-shadow:var(--shadow);
       overflow:hidden;
     }
+    .panel-body{padding:22px}
+    .panel h2{margin:0 0 8px;font-size:26px;line-height:1.15}
+    .subtext{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.6}
 
-    .panel-body{
-      padding:22px;
-    }
-
-    .panel h2{
-      margin:0 0 8px;
-      font-size:26px;
-      line-height:1.15;
-    }
-
-    .subtext{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .full{grid-column:1/-1}
-
-    @media (max-width:640px){
-      .form-grid{grid-template-columns:1fr}
-    }
+    @media (max-width:640px){.form-grid{grid-template-columns:1fr}}
 
     .field label{
-      display:block;
-      margin-bottom:7px;
-      font-size:12px;
-      font-weight:800;
-      color:var(--muted);
-      letter-spacing:.08em;
-      text-transform:uppercase;
+      display:block;margin-bottom:7px;font-size:12px;font-weight:800;color:var(--muted);
+      letter-spacing:.08em;text-transform:uppercase;
     }
-
-    .field input,
-    .field select,
-    .field textarea{
-      width:100%;
-      padding:12px 14px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:#fff;
-      color:var(--text);
-      font-size:14px;
-      outline:none;
+    .field input,.field select,.field textarea{
+      width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;
+      background:#fff;color:var(--text);font-size:14px;outline:none;
       transition:border-color .18s ease, box-shadow .18s ease;
     }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus{
-      border-color:var(--brand);
-      box-shadow:0 0 0 4px rgba(0,132,209,.12);
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:var(--brand);box-shadow:0 0 0 4px rgba(0,132,209,.12);
     }
+    .field textarea{min-height:82px;resize:vertical}
 
-    .field textarea{
-      min-height:82px;
-      resize:vertical;
-    }
-
-    .offer-box{
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      padding:12px;
-    }
-
+    .offer-box{border:1px solid var(--border);border-radius:14px;background:#fff;padding:12px}
     .offer-toolbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:700;
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      margin-bottom:10px;color:var(--muted);font-size:13px;font-weight:700;
     }
-
-    .offer-actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
+    .offer-actions{display:flex;gap:8px;flex-wrap:wrap}
     .mini-btn{
-      border:1px solid #cfe1f2;
-      background:#edf6fc;
-      color:#0b5c96;
-      font-size:12px;
-      font-weight:800;
-      border-radius:999px;
-      padding:7px 10px;
-      cursor:pointer;
+      border:1px solid #cfe1f2;background:#edf6fc;color:#0b5c96;font-size:12px;font-weight:800;
+      border-radius:999px;padding:7px 10px;cursor:pointer;
     }
-
-    .offer-list{
-      display:grid;
-      gap:9px;
-      max-height:220px;
-      overflow:auto;
-      padding-right:4px;
-    }
-
+    .offer-list{display:grid;gap:9px;max-height:220px;overflow:auto;padding-right:4px}
     .offer-item{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:14px;
-      padding:8px 10px;
-      border-radius:10px;
-      background:#f9fbfd;
-      border:1px solid #edf2f7;
+      display:flex;align-items:center;gap:10px;font-size:14px;padding:8px 10px;
+      border-radius:10px;background:#f9fbfd;border:1px solid #edf2f7;
     }
+    .offer-item input{width:16px;height:16px;margin:0;accent-color:var(--brand)}
 
-    .offer-item input{
-      width:16px;
-      height:16px;
-      margin:0;
-      accent-color:var(--brand);
-    }
-
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:12px;
-    }
-
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      background:#eaf5fc;
-      color:#0b5c96;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:800;
-      border:1px solid #cfe1f2;
+      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:#eaf5fc;
+      color:#0b5c96;border-radius:999px;font-size:13px;font-weight:800;border:1px solid #cfe1f2;
     }
+    .chip button{border:0;background:none;color:#0b5c96;font-size:16px;line-height:1;cursor:pointer;padding:0}
 
-    .chip button{
-      border:0;
-      background:none;
-      color:#0b5c96;
-      font-size:16px;
-      line-height:1;
-      cursor:pointer;
-      padding:0;
-    }
-
-    .btn-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:18px;
-    }
-
+    .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
     .btn{
-      border:0;
-      min-height:46px;
-      border-radius:999px;
-      padding:12px 18px;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      transition:transform .16s ease, opacity .16s ease, box-shadow .16s ease;
+      border:0;min-height:46px;border-radius:999px;padding:12px 18px;font-size:14px;font-weight:800;
+      cursor:pointer;transition:transform .16s ease, opacity .16s ease, box-shadow .16s ease;
     }
-
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(0)}
-
     .btn-primary{
-      background:linear-gradient(135deg,var(--brand-dark),var(--brand));
-      color:#fff;
+      background:linear-gradient(135deg,var(--brand-dark),var(--brand));color:#fff;
       box-shadow:0 12px 26px rgba(0,132,209,.22);
     }
-
-    .btn-secondary{
-      background:#eef5fb;
-      color:var(--brand-dark);
-      border:1px solid #cfe1f2;
-    }
-
-    .btn-dark{
-      background:#0f172a;
-      color:#fff;
-    }
+    .btn-secondary{background:#eef5fb;color:var(--brand-dark);border:1px solid #cfe1f2}
+    .btn-dark{background:#0f172a;color:#fff}
 
     .status{
-      margin-top:16px;
-      padding:12px 14px;
-      border-radius:12px;
-      background:var(--panel-2);
-      border:1px solid var(--border);
-      font-size:14px;
-      color:var(--text);
-      white-space:pre-wrap;
+      margin-top:16px;padding:12px 14px;border-radius:12px;background:var(--panel-2);
+      border:1px solid var(--border);font-size:14px;color:var(--text);white-space:pre-wrap;
     }
-
-    .status.error{
-      background:#fff4f2;
-      border-color:#efc2bb;
-      color:#b42318;
-    }
-
+    .status.error{background:#fff4f2;border-color:#efc2bb;color:#b42318}
     .debug{
-      display:none;
-      margin-top:14px;
-      padding:14px;
-      border-radius:12px;
-      background:#0f172a;
-      color:#dbeafe;
-      font-size:12px;
-      line-height:1.45;
-      white-space:pre-wrap;
-      max-height:240px;
-      overflow:auto;
+      display:none;margin-top:14px;padding:14px;border-radius:12px;background:#0f172a;color:#dbeafe;
+      font-size:12px;line-height:1.45;white-space:pre-wrap;max-height:240px;overflow:auto;
     }
 
-    .poster-wrap{
-      padding:20px;
-    }
-
+    .poster-wrap{padding:20px}
     .poster{
-      width:100%;
-      max-width:860px;
-      margin:0 auto;
-      background:#fff;
-      border-radius:24px;
-      overflow:hidden;
+      width:100%;max-width:860px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;
       box-shadow:0 26px 56px rgba(15,23,42,.22);
     }
 
     .poster-header{
-      background:#fff;
-      border-bottom:2px solid #edf2f7;
-      min-height:94px;
-      padding:14px 22px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:18px;
+      background:#fff;border-bottom:2px solid #edf2f7;min-height:94px;padding:14px 22px;
+      display:flex;justify-content:space-between;align-items:center;gap:18px;
     }
-
-    .header-left{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .daikin-logo-img{
-      width:160px;
-      max-width:42vw;
-      height:auto;
-      object-fit:contain;
-      display:block;
-    }
-
+    .header-left{display:flex;align-items:center;gap:14px;min-width:0}
+    .daikin-logo-img{width:160px;max-width:42vw;height:auto;object-fit:contain;display:block}
     .header-sub{
-      font-size:12px;
-      color:#334155;
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      line-height:1.4;
+      font-size:12px;color:#334155;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.4;
     }
-
     .header-line{
-      text-align:right;
-      max-width:320px;
-      font-size:11px;
-      line-height:1.45;
-      font-weight:900;
-      color:#111827;
-      letter-spacing:.08em;
-      text-transform:uppercase;
+      text-align:right;max-width:320px;font-size:11px;line-height:1.45;font-weight:900;color:#111827;
+      letter-spacing:.08em;text-transform:uppercase;
     }
 
-    .hero{
-      position:relative;
-      min-height:790px;
-      background:#0f172a;
-      overflow:hidden;
-    }
-
+    .hero{position:relative;min-height:790px;background:#0f172a;overflow:hidden}
     #bg-img{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      filter:brightness(.68) saturate(1.05);
-      z-index:0;
-      background:
-        radial-gradient(circle at top right, rgba(255,255,255,.14), transparent 30%),
-        linear-gradient(180deg,#1a3155,#0f172a);
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.68) saturate(1.05);
+      z-index:0;background:radial-gradient(circle at top right, rgba(255,255,255,.14), transparent 30%), linear-gradient(180deg,#1a3155,#0f172a);
     }
-
     .hero-overlay{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg,rgba(7,15,28,.08),rgba(7,15,28,.38) 34%,rgba(7,15,28,.76)),
-        linear-gradient(90deg,rgba(7,15,28,.48),rgba(7,15,28,.10) 58%,rgba(7,15,28,.26));
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(7,15,28,.08),rgba(7,15,28,.38) 34%,rgba(7,15,28,.76)),
+      linear-gradient(90deg,rgba(7,15,28,.48),rgba(7,15,28,.10) 58%,rgba(7,15,28,.26));
       z-index:1;
     }
 
     .ac-packshot{
-      position:absolute;
-      right:20px;
-      bottom:156px;
-      width:min(35%,250px);
-      object-fit:contain;
-      z-index:2;
+      position:absolute;right:20px;bottom:156px;width:min(35%,250px);object-fit:contain;z-index:2;
       filter:drop-shadow(0 18px 32px rgba(0,0,0,.22));
     }
 
     .hero-content{
-      position:relative;
-      z-index:3;
-      min-height:790px;
-      padding:28px 28px 22px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      color:#fff;
+      position:relative;z-index:3;min-height:790px;padding:28px 28px 22px;
+      display:flex;flex-direction:column;justify-content:space-between;color:#fff;
     }
 
-    .top-copy{
-      max-width:60%;
-    }
-
+    .top-copy{max-width:60%}
     .festival-tag{
-      display:inline-flex;
-      align-items:center;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.22);
-      backdrop-filter:blur(10px);
-      font-size:13px;
-      font-weight:800;
-      margin-bottom:16px;
+      display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);font-size:13px;font-weight:800;margin-bottom:16px;
     }
-
     .headline{
-      margin:0 0 12px;
-      font-size:clamp(34px,4vw,56px);
-      line-height:1.04;
-      font-weight:900;
-      max-width:12ch;
+      margin:0 0 12px;font-size:clamp(34px,4vw,56px);line-height:1.04;font-weight:900;max-width:12ch;
       text-shadow:0 4px 18px rgba(0,0,0,.18);
     }
-
-    .brandline{
-      margin:0 0 14px;
-      font-size:16px;
-      line-height:1.3;
-      font-weight:800;
-      color:#bde6ff;
-    }
-
+    .brandline{margin:0 0 14px;font-size:16px;line-height:1.3;font-weight:800;color:#bde6ff}
     .subheadline{
-      margin:0;
-      font-size:16px;
-      line-height:1.65;
-      max-width:56ch;
-      color:rgba(255,255,255,.96);
+      margin:0;font-size:16px;line-height:1.65;max-width:56ch;color:rgba(255,255,255,.96);
       text-shadow:0 2px 12px rgba(0,0,0,.14);
     }
 
-    .offer-stickers{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:22px;
-      max-width:72%;
-    }
-
+    .offer-stickers{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;max-width:72%}
     .offer-stickers img{
-      height:72px;
-      max-width:168px;
-      object-fit:contain;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:14px;
-      padding:8px;
-      backdrop-filter:blur(10px);
+      height:72px;max-width:168px;object-fit:contain;background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:8px;backdrop-filter:blur(10px);
       box-shadow:0 10px 20px rgba(0,0,0,.08);
     }
 
     .copy-card,.feature-card{
-      background:rgba(10,18,32,.38);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter:blur(10px);
-      border-radius:18px;
-      box-shadow:0 14px 28px rgba(0,0,0,.12);
+      background:rgba(10,18,32,.38);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);
+      border-radius:18px;box-shadow:0 14px 28px rgba(0,0,0,.12);
     }
-
-    .copy-card{
-      padding:18px;
-      max-width:58%;
-      margin-top:22px;
-    }
-
+    .copy-card{padding:18px;max-width:58%;margin-top:22px}
     .copy-title{
-      font-size:13px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#dbeafe;
-      margin-bottom:8px;
+      font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#dbeafe;margin-bottom:8px;
     }
-
-    .copy-text{
-      font-size:15px;
-      line-height:1.62;
-      color:rgba(255,255,255,.95);
-    }
-
-    .footer-zone{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:18px;
-      align-items:end;
-      margin-top:22px;
-    }
-
-    .feature-card{
-      padding:14px 16px;
-      max-width:58%;
-    }
-
+    .copy-text{font-size:15px;line-height:1.62;color:rgba(255,255,255,.95)}
+    .footer-zone{display:grid;grid-template-columns:1fr;gap:18px;align-items:end;margin-top:22px}
+    .feature-card{padding:14px 16px;max-width:58%}
     .feature-title{
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#dbeafe;
-      margin-bottom:10px;
+      font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#dbeafe;margin-bottom:10px;
     }
-
-    .feature-strip{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-    }
-
+    .feature-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
     .feature{
-      text-align:center;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:12px;
-      padding:10px 8px;
+      text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;padding:10px 8px;
     }
-
-    .feature .icon{
-      font-size:18px;
-      margin-bottom:6px;
-    }
-
-    .feature .label{
-      font-size:12px;
-      line-height:1.35;
-      color:rgba(255,255,255,.95);
-      font-weight:800;
-    }
+    .feature .icon{font-size:18px;margin-bottom:6px}
+    .feature .label{font-size:12px;line-height:1.35;color:rgba(255,255,255,.95);font-weight:800}
 
     .dealer-strip{
-      background:#fff;
-      padding:16px 22px;
-      border-top:3px solid #edf2f7;
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:20px;
-      align-items:center;
+      background:#fff;padding:16px 22px;border-top:3px solid #edf2f7;
+      display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
     }
-
     .dealer-kicker{
-      font-size:11px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#64748b;
-      font-weight:900;
-      margin-bottom:6px;
+      font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#64748b;font-weight:900;margin-bottom:6px;
     }
-
-    .dealer-name{
-      font-size:24px;
-      line-height:1.15;
-      font-weight:900;
-      color:#0f172a;
-      margin-bottom:8px;
+    .dealer-name{font-size:24px;line-height:1.15;font-weight:900;color:#0f172a;margin-bottom:8px}
+    .dealer-meta,.dealer-address,.dealer-rating,.dealer-link a{
+      font-size:14px;line-height:1.55;color:#334155;
     }
-
-    .dealer-meta,
-    .dealer-address,
-    .dealer-rating,
-    .dealer-link a{
-      font-size:14px;
-      line-height:1.55;
-      color:#334155;
-    }
-
-    .dealer-link a{
-      color:var(--brand);
-      font-weight:800;
-      text-decoration:none;
-    }
-
+    .dealer-link a{color:var(--brand);font-weight:800;text-decoration:none}
     .approval-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border-radius:999px;
-      padding:10px 14px;
-      background:var(--success-bg);
-      border:1px solid var(--success-br);
-      color:var(--success);
-      font-size:13px;
-      font-weight:900;
+      display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 14px;
+      background:var(--success-bg);border:1px solid var(--success-br);color:var(--success);
+      font-size:13px;font-weight:900;
     }
-
     .disclaimer{
-      border-top:1px solid #edf2f7;
-      background:#f9fbfd;
-      padding:10px 22px 14px;
-      color:#64748b;
-      font-size:11px;
-      line-height:1.55;
+      border-top:1px solid #edf2f7;background:#f9fbfd;padding:10px 22px 14px;color:#64748b;font-size:11px;line-height:1.55;
     }
 
     @media (max-width:760px){
@@ -638,14 +238,7 @@
       .header-line{text-align:left;max-width:none}
       .top-copy,.copy-card,.feature-card,.offer-stickers{max-width:100%}
       .dealer-strip{grid-template-columns:1fr}
-      .ac-packshot{
-        position:relative;
-        right:auto;
-        bottom:auto;
-        width:220px;
-        margin:18px auto 0;
-        display:block;
-      }
+      .ac-packshot{position:relative;right:auto;bottom:auto;width:220px;margin:18px auto 0;display:block}
       .feature-strip{grid-template-columns:repeat(2,1fr)}
     }
   </style>
@@ -678,18 +271,28 @@
             </div>
 
             <div class="field full">
-              <label for="address-input">Dealer Address</label>
+              <label for="address-input">DSP Address</label>
               <input id="address-input" type="text" placeholder="Dealer address" />
             </div>
 
             <div class="field">
-              <label for="locality-input">Locality / City</label>
-              <input id="locality-input" type="text" placeholder="City / locality" />
+              <label for="locality-input">City</label>
+              <input id="locality-input" type="text" placeholder="City" />
             </div>
 
             <div class="field">
-              <label for="phone-input">Contact Number</label>
-              <input id="phone-input" type="text" placeholder="Contact number" />
+              <label for="state-input">State</label>
+              <input id="state-input" type="text" placeholder="State" />
+            </div>
+
+            <div class="field">
+              <label for="phone-input">Owner No</label>
+              <input id="phone-input" type="text" placeholder="Owner number" />
+            </div>
+
+            <div class="field">
+              <label for="alternate-no-input">Alternate No</label>
+              <input id="alternate-no-input" type="text" placeholder="Alternate number" />
             </div>
 
             <div class="field">
@@ -774,22 +377,10 @@
                   <div class="feature-card">
                     <div class="feature-title">Daikin advantages</div>
                     <div class="feature-strip">
-                      <div class="feature">
-                        <div class="icon">❄</div>
-                        <div class="label">Powerful Cooling</div>
-                      </div>
-                      <div class="feature">
-                        <div class="icon">⚡</div>
-                        <div class="label">Energy Efficiency</div>
-                      </div>
-                      <div class="feature">
-                        <div class="icon">🌿</div>
-                        <div class="label">Cleaner Air</div>
-                      </div>
-                      <div class="feature">
-                        <div class="icon">🛡</div>
-                        <div class="label">Trusted Reliability</div>
-                      </div>
+                      <div class="feature"><div class="icon">❄</div><div class="label">Powerful Cooling</div></div>
+                      <div class="feature"><div class="icon">⚡</div><div class="label">Energy Efficiency</div></div>
+                      <div class="feature"><div class="icon">🌿</div><div class="label">Cleaner Air</div></div>
+                      <div class="feature"><div class="icon">🛡</div><div class="label">Trusted Reliability</div></div>
                     </div>
                   </div>
                 </div>
@@ -800,8 +391,8 @@
               <div>
                 <div class="dealer-kicker">Authorized Dealer</div>
                 <div class="dealer-name" id="dealer-name">Dealer Name</div>
-                <div class="dealer-meta" id="dealer-contact">City · Contact Number</div>
-                <div class="dealer-address" id="dealer-address">Dealer address will appear here.</div>
+                <div class="dealer-address" id="dealer-address">Dealer address, city, state</div>
+                <div class="dealer-meta" id="dealer-contact">Owner No / Alternate No</div>
                 <div class="dealer-rating" id="rating-info"></div>
                 <div class="dealer-link"><a id="gmb-link" href="#" target="_blank" rel="noopener noreferrer">View location & rate us</a></div>
               </div>
@@ -838,7 +429,9 @@
       dealerInput: document.getElementById('dealer-input'),
       addressInput: document.getElementById('address-input'),
       localityInput: document.getElementById('locality-input'),
+      stateInput: document.getElementById('state-input'),
       phoneInput: document.getElementById('phone-input'),
+      alternateNoInput: document.getElementById('alternate-no-input'),
       campaign: document.getElementById('campaign'),
       product: document.getElementById('product'),
       notes: document.getElementById('notes'),
@@ -877,7 +470,7 @@
         return;
       }
       els.debug.style.display = 'block';
-      els.debug.textContent = Array.isArray(debug) ? debug.join('\\n') : String(debug);
+      els.debug.textContent = Array.isArray(debug) ? debug.join('\n') : String(debug);
     }
 
     function populateCampaigns() {
@@ -899,7 +492,9 @@
         opt.dataset.name = d.dspName || '';
         opt.dataset.address = d.address || '';
         opt.dataset.city = d.city || '';
+        opt.dataset.state = d.state || '';
         opt.dataset.contact = d.ownerContact || '';
+        opt.dataset.alternate = d.alternateNo || '';
         opt.dataset.gmb = d.gmbUrl || '';
         opt.dataset.rating = d.currentRating || '';
         opt.dataset.reviews = d.reviewsCount || '';
@@ -918,7 +513,9 @@
       els.dealerInput.value = opt.dataset.name || '';
       els.addressInput.value = opt.dataset.address || '';
       els.localityInput.value = opt.dataset.city || '';
+      els.stateInput.value = opt.dataset.state || '';
       els.phoneInput.value = opt.dataset.contact || '';
+      els.alternateNoInput.value = opt.dataset.alternate || '';
 
       syncDealerPreview();
       updateRating(opt.dataset.rating || '', opt.dataset.reviews || '');
@@ -927,13 +524,15 @@
 
     function syncDealerPreview() {
       const dealer = els.dealerInput.value.trim() || 'Dealer Name';
+      const address = els.addressInput.value.trim();
       const locality = els.localityInput.value.trim();
+      const stateName = els.stateInput.value.trim();
       const phone = els.phoneInput.value.trim();
-      const address = els.addressInput.value.trim() || 'Dealer address will appear here.';
+      const alternateNo = els.alternateNoInput.value.trim();
 
       els.dealerName.textContent = dealer;
-      els.dealerContact.textContent = [locality, phone].filter(Boolean).join(' · ') || 'City · Contact Number';
-      els.dealerAddress.textContent = address;
+      els.dealerAddress.textContent = [address, locality, stateName].filter(Boolean).join(', ') || 'Dealer address, city, state';
+      els.dealerContact.textContent = [phone, alternateNo].filter(Boolean).join(' / ') || 'Owner No / Alternate No';
       els.festivalTag.textContent = (els.campaign.value || 'Campaign') + ' Offer';
       els.brandline.textContent = 'Daikin The Air Specialist';
       els.disclaimerText.textContent = 'Offer valid as per Daikin terms and conditions. Please check eligibility, installation scope and offer applicability with your authorised Daikin dealer.';
@@ -946,12 +545,8 @@
     }
 
     function applyAssets() {
-      if (state.assets.daikinLogo) {
-        els.daikinLogoImg.src = state.assets.daikinLogo;
-      }
-      if (state.assets.acPackshot) {
-        els.acPackshot.src = state.assets.acPackshot;
-      }
+      if (state.assets.daikinLogo) els.daikinLogoImg.src = state.assets.daikinLogo;
+      if (state.assets.acPackshot) els.acPackshot.src = state.assets.acPackshot;
       renderOfferStickers();
     }
 
@@ -982,7 +577,6 @@
 
     function renderOfferChips() {
       els.offerChips.innerHTML = '';
-
       state.selectedOffers.forEach(key => {
         const offer = state.offersCatalog[key];
         if (!offer) return;
@@ -1006,7 +600,6 @@
 
     function renderOfferStickers() {
       els.offerStickers.innerHTML = '';
-
       state.selectedOffers.forEach(key => {
         const offer = state.offersCatalog[key];
         if (!offer || !offer.imageUrl) return;
@@ -1044,7 +637,9 @@
         dealer: els.dealerInput.value.trim(),
         address: els.addressInput.value.trim(),
         locality: els.localityInput.value.trim(),
+        state: els.stateInput.value.trim(),
         phone: els.phoneInput.value.trim(),
+        alternateNo: els.alternateNoInput.value.trim(),
         campaign: els.campaign.value,
         product: els.product.value,
         language: 'English',
@@ -1060,20 +655,13 @@
       els.subheadline.textContent = data.body_en || 'Upgrade your home comfort with Daikin’s advanced cooling technology and premium festive benefits.';
       els.bodyEn.textContent = data.body_en || '';
       els.dealerName.textContent = data.dealer || 'Dealer Name';
-      els.dealerContact.textContent = [data.locality || '', data.phone || ''].filter(Boolean).join(' · ') || 'City · Contact Number';
-      els.dealerAddress.textContent = data.address || 'Dealer address will appear here.';
+      els.dealerAddress.textContent = [data.address || '', data.locality || '', data.state || ''].filter(Boolean).join(', ') || 'Dealer address, city, state';
+      els.dealerContact.textContent = [data.phone || '', data.alternateNo || ''].filter(Boolean).join(' / ') || 'Owner No / Alternate No';
       els.festivalTag.textContent = (data.campaign || els.campaign.value || 'Campaign') + ' Offer';
       els.disclaimerText.textContent = data.disclaimers_en || 'Offer valid as per Daikin terms and conditions. Please check eligibility, installation scope and offer applicability with your authorised Daikin dealer.';
-      els.approvalPill.textContent = data.compliance === 'approved'
-        ? '✔ Brand Compliance Approved'
-        : '✔ Brand Compliance Pending';
+      els.approvalPill.textContent = data.compliance === 'approved' ? '✔ Brand Compliance Approved' : '✔ Brand Compliance Pending';
 
-      if (data.gmbUrl) {
-        els.gmbLink.href = data.gmbUrl;
-      } else {
-        els.gmbLink.href = '#';
-      }
-
+      els.gmbLink.href = data.gmbUrl || '#';
       updateRating(data.currentRating || '', data.reviewsCount || '');
 
       if (data.bgImageDataUrl) {
@@ -1123,9 +711,7 @@
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(getGeneratePayload())
         });
 
@@ -1155,7 +741,6 @@
     async function downloadPoster() {
       try {
         setStatus('Preparing download...');
-
         const canvas = await html2canvas(els.poster, {
           scale: 2,
           useCORS: true,
@@ -1172,14 +757,13 @@
 
         setStatus('Poster downloaded.');
       } catch (err) {
-        setStatus('Download error: ' + err + '. If images are blocked by CORS, some external logos may need different hosting.', true);
+        setStatus('Download error: ' + err + '. Some external asset hosts may block canvas export.', true);
       }
     }
 
     async function submitForReview() {
       try {
         setStatus('Capturing poster for review...');
-
         const canvas = await html2canvas(els.poster, {
           scale: 2,
           useCORS: true,
@@ -1201,9 +785,7 @@
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
 
@@ -1232,7 +814,9 @@
     els.dealerInput.addEventListener('input', syncDealerPreview);
     els.addressInput.addEventListener('input', syncDealerPreview);
     els.localityInput.addEventListener('input', syncDealerPreview);
+    els.stateInput.addEventListener('input', syncDealerPreview);
     els.phoneInput.addEventListener('input', syncDealerPreview);
+    els.alternateNoInput.addEventListener('input', syncDealerPreview);
     els.campaign.addEventListener('change', syncDealerPreview);
 
     loadInitialData();
