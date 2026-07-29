@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daikin Creative Studio</title>
+  <title>Daikin Poster Generator</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,24 +11,24 @@
 
   <style>
     :root {
-      --bg: #f5f7fb;
+      --bg: #f4f7fb;
       --surface: #ffffff;
       --surface-2: #f8fafc;
       --text: #0f172a;
       --muted: #64748b;
-      --border: #dbe3ee;
+      --border: #d7e1ee;
       --primary: #005bac;
       --primary-2: #0b76d1;
-      --danger: #b42318;
       --success: #0f9d58;
-      --radius: 18px;
-      --shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+      --danger: #b42318;
+      --shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --radius: 20px;
+      --radius-sm: 12px;
     }
 
     * { box-sizing: border-box; }
-
+    html, body { margin: 0; padding: 0; }
     body {
-      margin: 0;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(180deg, #eef4fb 0%, #f7f9fc 100%);
       color: var(--text);
@@ -40,74 +40,70 @@
       padding: 24px;
     }
 
-    .brand {
+    .topbar {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 24px;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--primary);
     }
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
+    .mark {
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
       display: grid;
       place-items: center;
       color: #fff;
       font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 20px rgba(0, 91, 172, 0.2);
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
     }
 
     .layout {
       display: grid;
-      grid-template-columns: 470px 1fr;
+      grid-template-columns: 400px 1fr;
       gap: 24px;
       align-items: start;
     }
 
-    @media (max-width: 1040px) {
+    @media (max-width: 1000px) {
       .layout { grid-template-columns: 1fr; }
     }
 
     .panel {
-      background: rgba(255,255,255,0.97);
+      background: rgba(255,255,255,0.94);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: hidden;
     }
 
-    .panel-body,
-    .preview-wrap {
+    .panel-body {
       padding: 20px;
     }
 
     h2 {
       margin: 0 0 8px;
-      font-size: 1.7rem;
+      font-size: 28px;
       line-height: 1.15;
     }
 
     .subtext {
       margin: 0 0 20px;
       color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.55;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .full { grid-column: 1 / -1; }
-
-    @media (max-width: 640px) {
-      .form-grid { grid-template-columns: 1fr; }
+      grid-template-columns: 1fr;
+      gap: 14px;
     }
 
     .field label {
@@ -116,35 +112,33 @@
       font-size: 12px;
       font-weight: 700;
       color: var(--muted);
-      letter-spacing: 0.08em;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .field input,
     .field select,
     .field textarea {
       width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
       border: 1px solid var(--border);
+      border-radius: 12px;
       background: var(--surface);
       color: var(--text);
+      padding: 12px 14px;
       font-size: 14px;
       outline: none;
-      transition: border-color 160ms ease, box-shadow 160ms ease;
+      transition: border-color .18s ease, box-shadow .18s ease;
     }
 
     .field input:focus,
     .field select:focus,
-    .field textarea:focus,
-    .ms-trigger:focus-within,
-    .ms-search:focus {
+    .field textarea:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 4px rgba(0, 91, 172, 0.12);
     }
 
     .field textarea {
-      min-height: 92px;
+      min-height: 88px;
       resize: vertical;
     }
 
@@ -152,27 +146,32 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .btn {
+      min-height: 44px;
+      padding: 12px 18px;
       border: 0;
       border-radius: 999px;
-      padding: 12px 18px;
-      min-height: 44px;
+      cursor: pointer;
       font-size: 14px;
       font-weight: 700;
-      cursor: pointer;
+      transition: transform .16s ease, opacity .16s ease;
     }
 
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
       color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 22px rgba(0, 91, 172, 0.24);
     }
 
     .btn-secondary {
-      background: #eaf2fb;
       color: var(--primary);
+      background: #eaf2fb;
       border: 1px solid #cfe1f4;
     }
 
@@ -180,21 +179,21 @@
       margin-top: 16px;
       padding: 12px 14px;
       border-radius: 12px;
-      background: var(--surface-2);
       border: 1px solid var(--border);
+      background: var(--surface-2);
       font-size: 14px;
       white-space: pre-wrap;
-      line-height: 1.45;
     }
 
     .status.error {
       background: #fff4f2;
-      border-color: #f3c4bd;
       color: var(--danger);
+      border-color: #f1c1ba;
     }
 
-    .debug-box {
-      margin-top: 16px;
+    .debug {
+      display: none;
+      margin-top: 14px;
       padding: 14px;
       border-radius: 12px;
       background: #0f172a;
@@ -202,382 +201,91 @@
       font-size: 12px;
       line-height: 1.45;
       white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      max-height: 260px;
       overflow: auto;
-      display: none;
+      max-height: 260px;
     }
 
-    .hidden { display: none !important; }
+    .poster-wrap {
+      padding: 20px;
+    }
 
-    .multi-select { position: relative; }
-
-    .ms-trigger {
-      min-height: 48px;
+    .poster-stage {
+      min-height: 720px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #dfe8f5;
       border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface);
-      padding: 8px 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      cursor: pointer;
+      box-shadow: 0 20px 42px rgba(15, 23, 42, 0.16);
+      display: grid;
+      place-items: center;
+      position: relative;
     }
 
-    .ms-placeholder {
+    .poster-stage.empty::before {
+      content: "Generated final poster will appear here";
       color: var(--muted);
-      font-size: 14px;
-    }
-
-    .ms-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      padding: 7px 10px;
-      background: #eaf2fb;
-      color: var(--primary);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
     }
 
-    .ms-tag button {
-      border: 0;
-      background: transparent;
-      color: var(--primary);
-      cursor: pointer;
-      font-size: 14px;
-      line-height: 1;
-      padding: 0;
-    }
-
-    .ms-caret {
-      margin-left: auto;
-      color: var(--muted);
-      font-size: 12px;
-      padding-right: 4px;
-    }
-
-    .ms-dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      right: 0;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.16);
-      padding: 10px;
-      z-index: 20;
+    #poster-img {
       display: none;
-    }
-
-    .multi-select.open .ms-dropdown { display: block; }
-
-    .ms-toolbar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .ms-search {
-      flex: 1;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .ms-mini-btn {
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text);
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .ms-options {
-      max-height: 240px;
-      overflow: auto;
-      display: grid;
-      gap: 6px;
-    }
-
-    .ms-option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      background: #fff;
-    }
-
-    .ms-option:hover { background: #f8fbff; }
-
-    .ms-check {
-      width: 18px;
-      height: 18px;
-      border-radius: 6px;
-      border: 1px solid #b8c8dc;
-      background: #fff;
-      position: relative;
-      flex: 0 0 auto;
-    }
-
-    .ms-option.selected .ms-check {
-      background: var(--primary);
-      border-color: var(--primary);
-    }
-
-    .ms-option.selected .ms-check::after {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 2px;
-      width: 5px;
-      height: 9px;
-      border-right: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-      transform: rotate(40deg);
-    }
-
-    .ms-count {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .preview-shell {
-      position: relative;
-      min-height: 780px;
-      border-radius: 24px;
-      overflow: hidden;
-      background: #eef4fb;
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
-    }
-
-    #bg-img {
-      position: absolute;
-      inset: 0;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: #f5f7fb;
-      filter: none;
-      z-index: 0;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      background: #fff;
     }
 
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(15,23,42,0.10));
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .creative-card {
-      position: relative;
-      z-index: 2;
-      min-height: 780px;
-      padding: 24px;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .daikin-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 14px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.97);
-      color: var(--primary);
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      font-size: 14px;
-    }
-
-    .brand-zone {
-      color: rgba(255,255,255,0.98);
-      font-size: 12px;
-      text-align: right;
-      max-width: 220px;
-      line-height: 1.35;
-      font-weight: 700;
-      text-transform: uppercase;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.16);
-    }
-
-    .meta-line {
-      margin-bottom: 18px;
-      color: rgba(255,255,255,0.96);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.16);
-    }
-
-    .headline {
-      font-size: clamp(1.9rem, 1.4rem + 1.9vw, 2.9rem);
-      font-weight: 800;
-      line-height: 1.08;
-      max-width: 13ch;
-      margin-bottom: 16px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.20);
-    }
-
-    .subheadline {
-      max-width: 56ch;
-      font-size: 1rem;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.96);
-      margin-bottom: 20px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.18);
-    }
-
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 14px;
-      color: #ffffff;
-      background: rgba(0, 91, 172, 0.68);
-      border: 1px solid rgba(255,255,255,0.38);
-      backdrop-filter: blur(4px);
-    }
-
-    .copy-block {
-      max-width: 58ch;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.28);
-      border-radius: 18px;
-      padding: 18px;
-      backdrop-filter: blur(6px);
-    }
-
-    .copy-label {
-      font-size: 14px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      color: #fff;
-    }
-
-    .copy-text {
-      font-size: 1rem;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.96);
-      margin-bottom: 14px;
-    }
-
-    .card-bottom {
-      margin-top: 32px;
-      padding-top: 20px;
-      border-top: 1px dashed rgba(255,255,255,0.35);
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: flex-end;
-    }
-
-    .dealer-meta { max-width: 60ch; }
-
-    .dealer-name {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
-    }
-
-    .dealer-contact,
-    .rating-info,
-    .dealer-meta a {
-      color: rgba(255,255,255,0.96);
-      font-size: 14px;
-      line-height: 1.5;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.16);
-    }
-
-    .dealer-meta a {
-      display: inline-block;
-      margin-top: 6px;
-      text-decoration: underline;
-    }
-
-    .compliance {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .meta {
       margin-top: 14px;
-      border-radius: 999px;
-      padding: 9px 14px;
-      background: rgba(34,197,94,0.18);
-      border: 1px solid rgba(255,255,255,0.34);
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
     }
 
-    .qr-box {
-      flex: 0 0 auto;
-      background: rgba(255,255,255,0.96);
-      padding: 8px;
+    .quick-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 14px;
+      border: 1px solid var(--border);
       border-radius: 14px;
-      box-shadow: 0 12px 26px rgba(0,0,0,0.12);
+      background: #fbfdff;
     }
 
-    .qr-box img {
-      width: 88px;
-      height: 88px;
-      display: block;
-      border-radius: 8px;
+    .quick-meta div {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .quick-meta span {
+      color: var(--muted);
+      font-weight: 600;
+      margin-right: 6px;
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="brand">
-      <div class="brand-mark">D</div>
-      <div>Daikin Creative Studio</div>
+    <div class="topbar">
+      <div class="mark">D</div>
+      <div class="title">Daikin Poster Generator</div>
     </div>
 
     <div class="layout">
       <section class="panel">
         <div class="panel-body">
-          <h2>Create Daikin creative</h2>
-          <p class="subtext">GitHub Pages frontend connected to your latest Apps Script web app endpoint for dealer fetch, creative generation, and review submission.[web:408]</p>
+          <h2>Single final poster flow</h2>
+          <p class="subtext">This version assumes the backend returns one completed poster image plus optional metadata, matching your final poster generation flow.[file:260][file:370]</p>
 
           <div class="form-grid">
-            <div class="field full">
+            <div class="field">
               <label for="dsp-select">Dealer</label>
               <select id="dsp-select"></select>
             </div>
 
-            <div class="field full">
+            <div class="field">
               <label for="dealer-input">Dealership Name</label>
               <input id="dealer-input" type="text" placeholder="Dealership name" />
             </div>
@@ -592,94 +300,53 @@
               <input id="phone-input" type="text" placeholder="Contact number" />
             </div>
 
-            <div class="field full">
-              <label for="campaign-type">Campaign Type</label>
-              <select id="campaign-type">
-                <option>Festival Campaign</option>
-                <option>Seasonal Campaign</option>
-                <option>Promotional Campaign</option>
-                <option>Lifestyle Campaign</option>
-                <option>National Event Campaign</option>
-                <option>Dealer Promotion</option>
-                <option>Corporate Brand Campaign</option>
-                <option>Factory Visit</option>
-                <option>Customer Awareness Campaign</option>
-                <option>Technician Campaign</option>
-                <option>Exchange Campaign</option>
-                <option>Energy Saving Campaign</option>
-              </select>
-            </div>
-
-            <div class="field full" id="festival-wrap">
-              <label for="festival-name">Festival Name</label>
-              <select id="festival-name">
-                <option>Diwali</option>
-                <option>Navratri</option>
-                <option>Dussehra</option>
+            <div class="field">
+              <label for="campaign">Campaign</label>
+              <select id="campaign">
                 <option>Ganesh Chaturthi</option>
-                <option>Raksha Bandhan</option>
-                <option>Janmashtami</option>
-                <option>Gudi Padwa</option>
-                <option>Akshaya Tritiya</option>
-                <option>Christmas</option>
-                <option>New Year</option>
-                <option>Makar Sankranti</option>
-                <option>Republic Day</option>
-                <option>Independence Day</option>
-                <option>Women's Day</option>
-                <option>Mother's Day</option>
-                <option>Father's Day</option>
-                <option>Teacher's Day</option>
-                <option>Children's Day</option>
-                <option>Eid</option>
-              </select>
-            </div>
-
-            <div class="field full hidden" id="seasonal-wrap">
-              <label for="seasonal-name">Season</label>
-              <select id="seasonal-name">
+                <option>Diwali</option>
                 <option>Summer</option>
                 <option>Monsoon</option>
-                <option>Winter</option>
+                <option>Independence Day</option>
+                <option>Green Exchange</option>
               </select>
             </div>
 
-            <div class="field full">
-              <label>Offers / Scheme</label>
-              <div class="multi-select" id="offers-multi">
-                <div class="ms-trigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
-                  <span class="ms-placeholder">Select one or more offers</span>
-                  <span class="ms-caret">▼</span>
-                </div>
-                <div class="ms-dropdown">
-                  <div class="ms-toolbar">
-                    <input class="ms-search" type="text" placeholder="Search offers" />
-                    <button class="ms-mini-btn" type="button" data-action="select-all">All</button>
-                    <button class="ms-mini-btn" type="button" data-action="clear-all">Clear</button>
-                  </div>
-                  <div class="ms-options" role="listbox" aria-multiselectable="true"></div>
-                </div>
-              </div>
-              <div class="ms-count" id="offers-count">0 selected</div>
+            <div class="field">
+              <label for="scheme">Scheme</label>
+              <select id="scheme">
+                <option>Green Exchange</option>
+                <option>Festive Cashback</option>
+                <option>Zero Cost EMI</option>
+                <option>Extended Warranty</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="benefit">Benefit</label>
+              <select id="benefit">
+                <option>5% Cashback</option>
+                <option>Exchange Bonus</option>
+                <option>No Cashback</option>
+              </select>
             </div>
 
             <div class="field">
               <label for="installation">Installation</label>
               <select id="installation">
+                <option>Subsidized Installation</option>
+                <option>Standard Installation</option>
                 <option>Free Installation</option>
-                <option>Installation @ Rs 699</option>
-                <option>Installation @ Rs 899</option>
-                <option>Installation @ Rs 1099</option>
               </select>
             </div>
 
             <div class="field">
               <label for="product">Product</label>
               <select id="product">
-                <option>Wifi Enabled Split AC</option>
-                <option>Heavy Duty Split AC</option>
-                <option>Premium 5 Star Inverter Split AC</option>
-                <option>1.5T/1T Star Inverter AC</option>
+                <option>1.5 Ton Inverter Split</option>
+                <option>1 Ton Inverter Split</option>
+                <option>3 Star Split AC</option>
+                <option>Premium IAQ Series</option>
               </select>
             </div>
 
@@ -693,118 +360,58 @@
               </select>
             </div>
 
-            <div class="field full">
+            <div class="field">
               <label for="notes">Notes</label>
-              <textarea id="notes" placeholder="Optional notes for the creative"></textarea>
+              <textarea id="notes" placeholder="Optional notes for the poster"></textarea>
             </div>
           </div>
 
           <div class="btn-row">
-            <button class="btn btn-primary" id="generate-btn">Generate Creative</button>
+            <button class="btn btn-primary" id="generate-btn">Generate Poster</button>
             <button class="btn btn-secondary" id="submit-btn">Submit for Review</button>
           </div>
 
           <div id="status" class="status">Ready.</div>
-          <div id="debug" class="debug-box" data-html2canvas-ignore="true"></div>
+          <div id="debug" class="debug"></div>
+
+          <div class="quick-meta">
+            <div><span>Dealer:</span><strong id="meta-dealer">-</strong></div>
+            <div><span>Campaign:</span><strong id="meta-campaign">-</strong></div>
+            <div><span>Status:</span><strong id="meta-state">Not generated</strong></div>
+          </div>
         </div>
       </section>
 
       <section class="panel">
-        <div class="preview-wrap">
-          <div class="preview-shell" id="preview-shell">
-            <img id="bg-img" alt="Generated creative background" crossorigin="anonymous" />
-            <div class="overlay"></div>
-
-            <div class="creative-card">
-              <div>
-                <div class="card-top">
-                  <div class="daikin-badge">DAIKIN</div>
-                  <div class="brand-zone">WORLD'S LEADING AIR CONDITIONING COMPANY FROM JAPAN</div>
-                </div>
-
-                <div id="text-layer">
-                  <div class="meta-line" id="campaign-meta">Festival Campaign · Diwali</div>
-                  <div class="headline" id="headline">Headline will appear here.</div>
-                  <div class="subheadline" id="subheadline">Supporting copy will appear here.</div>
-
-                  <div class="pills" id="pills"></div>
-
-                  <div class="copy-block">
-                    <div class="copy-label">Local language</div>
-                    <div class="copy-text" id="body-local">Local language copy will appear here.</div>
-
-                    <div class="copy-label">English</div>
-                    <div class="copy-text" id="body-en">English copy will appear here.</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card-bottom" id="dealer-layer">
-                <div class="dealer-meta">
-                  <div class="dealer-name" id="dealer-name">Dealer Name</div>
-                  <div class="dealer-contact" id="dealer-contact">City · Contact</div>
-                  <a id="gmb-link" href="#" target="_blank" rel="noopener noreferrer">View location &amp; rate us</a>
-                  <div class="rating-info" id="rating-info"></div>
-                  <div class="compliance" id="compliance-pill">✔ Brand Compliance: Pending</div>
-                </div>
-
-                <div class="qr-box">
-                  <img id="qr-img" alt="QR code for Google business link" />
-                </div>
-              </div>
-            </div>
+        <div class="poster-wrap">
+          <div class="poster-stage empty" id="poster-stage">
+            <img id="poster-img" alt="Generated final Daikin poster" />
           </div>
+          <div class="meta">The backend can return the finished image as a base64 data URL, which the page displays directly as the poster output.[file:260]</div>
         </div>
       </section>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNej30K3SJP80mt6SwwwteikG0zFEuEsWjfZQtc36an_AsKi2xWRLu4Si9kAM8fAVa/exec';
-
-    const OFFER_OPTIONS = [
-      'Green Exchange Offer Upto Rs 8000',
-      'Green Exchange Offer Upto Rs 6000',
-      'Green Exchange Offer Upto Rs 4500',
-      '5% Cashback',
-      '10% Cashback',
-      'Cashback Upto Rs 2500',
-      'Cashback Upto Rs 4000',
-      'No Cost EMI',
-      'Attractive Finance Offers',
-      '5 Year Comprehensive Warranty'
-    ];
-
-    const selectedOffers = new Set();
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxh1Q8PN8jsdRLBgiiVTQ61vsciTmq-nAELbErQA12JUl-sibbOgcYwXEhkAIe_8Qca/exec';
 
     const dspSelect = document.getElementById('dsp-select');
     const dealerInput = document.getElementById('dealer-input');
     const localityInput = document.getElementById('locality-input');
     const phoneInput = document.getElementById('phone-input');
-    const campaignTypeEl = document.getElementById('campaign-type');
-    const festivalWrap = document.getElementById('festival-wrap');
-    const festivalNameEl = document.getElementById('festival-name');
-    const seasonalWrap = document.getElementById('seasonal-wrap');
-    const seasonalNameEl = document.getElementById('seasonal-name');
 
-    const headlineEl = document.getElementById('headline');
-    const subheadlineEl = document.getElementById('subheadline');
-    const bodyEnEl = document.getElementById('body-en');
-    const bodyLocalEl = document.getElementById('body-local');
-    const dealerNameEl = document.getElementById('dealer-name');
-    const dealerContactEl = document.getElementById('dealer-contact');
-    const ratingInfoEl = document.getElementById('rating-info');
-    const gmbLinkEl = document.getElementById('gmb-link');
-    const complianceEl = document.getElementById('compliance-pill');
-    const bgImg = document.getElementById('bg-img');
-    const qrImg = document.getElementById('qr-img');
-    const pillsEl = document.getElementById('pills');
+    const posterStage = document.getElementById('poster-stage');
+    const posterImg = document.getElementById('poster-img');
     const statusEl = document.getElementById('status');
     const debugEl = document.getElementById('debug');
-    const textLayer = document.getElementById('text-layer');
-    const dealerLayer = document.getElementById('dealer-layer');
-    const campaignMetaEl = document.getElementById('campaign-meta');
+
+    const metaDealer = document.getElementById('meta-dealer');
+    const metaCampaign = document.getElementById('meta-campaign');
+    const metaState = document.getElementById('meta-state');
+
+    let lastPosterDataUrl = '';
+    let lastResponseData = null;
 
     function setStatus(message, isError = false) {
       statusEl.textContent = message;
@@ -812,7 +419,7 @@
     }
 
     function showDebug(debug) {
-      if (!debug || (Array.isArray(debug) && !debug.length)) {
+      if (!debug || (Array.isArray(debug) && debug.length === 0)) {
         debugEl.style.display = 'none';
         debugEl.textContent = '';
         return;
@@ -821,35 +428,30 @@
       debugEl.textContent = Array.isArray(debug) ? debug.join('\n') : String(debug);
     }
 
-    function updateQr(url) {
-      if (!url) {
-        qrImg.removeAttribute('src');
-        gmbLinkEl.href = '#';
-        return;
+    function setPoster(src) {
+      if (src && src.startsWith('data:image/')) {
+        posterImg.src = src;
+        posterImg.style.display = 'block';
+        posterStage.classList.remove('empty');
+        lastPosterDataUrl = src;
+        metaState.textContent = 'Poster generated';
+      } else {
+        posterImg.removeAttribute('src');
+        posterImg.style.display = 'none';
+        posterStage.classList.add('empty');
+        lastPosterDataUrl = '';
+        metaState.textContent = 'No poster image returned';
       }
-      qrImg.src = 'https://chart.googleapis.com/chart?cht=qr&chs=240x240&chl=' + encodeURIComponent(url);
-      gmbLinkEl.href = url;
-    }
-
-    function updateRating(rating, reviews) {
-      ratingInfoEl.textContent = (rating || reviews)
-        ? `Current rating: ${rating || '-'} · Reviews: ${reviews || '-'}`
-        : '';
     }
 
     function populateDealerFieldsFromOption() {
       const opt = dspSelect.selectedOptions[0];
       if (!opt) return;
 
-      const dealerName = opt.dataset.name || '';
-      dealerInput.value = dealerName;
+      dealerInput.value = opt.dataset.name || '';
       localityInput.value = opt.dataset.city || '';
       phoneInput.value = opt.dataset.contact || '';
-
-      dealerNameEl.textContent = dealerName || 'Dealer Name';
-      dealerContactEl.textContent = `${opt.dataset.city || ''} · ${opt.dataset.contact || ''}`;
-      updateQr(opt.dataset.gmb || '');
-      updateRating(opt.dataset.rating || '', opt.dataset.reviews || '');
+      metaDealer.textContent = opt.dataset.name || '-';
     }
 
     async function loadDealers() {
@@ -871,9 +473,6 @@
           opt.dataset.name = d.dspName || '';
           opt.dataset.city = d.city || '';
           opt.dataset.contact = d.ownerContact || '';
-          opt.dataset.gmb = d.gmbUrl || '';
-          opt.dataset.rating = d.currentRating || '';
-          opt.dataset.reviews = d.reviewsCount || '';
           dspSelect.appendChild(opt);
         });
 
@@ -884,45 +483,17 @@
       }
     }
 
-    function updateCampaignVisibility() {
-      const campaignType = campaignTypeEl.value;
-      festivalWrap.classList.toggle('hidden', campaignType !== 'Festival Campaign');
-      seasonalWrap.classList.toggle('hidden', campaignType !== 'Seasonal Campaign');
-      updateCampaignMeta();
-    }
-
-    function resolveCampaignName() {
-      if (campaignTypeEl.value === 'Festival Campaign') return festivalNameEl.value;
-      if (campaignTypeEl.value === 'Seasonal Campaign') return seasonalNameEl.value;
-      return campaignTypeEl.value;
-    }
-
-    function updateCampaignMeta() {
-      const campaignType = campaignTypeEl.value;
-      const campaignName = resolveCampaignName();
-      campaignMetaEl.textContent =
-        (campaignType === 'Festival Campaign' || campaignType === 'Seasonal Campaign')
-          ? `${campaignType} · ${campaignName}`
-          : campaignType;
-      return campaignName;
-    }
-
-    function getSelectedOffers() {
-      return [...selectedOffers];
-    }
+    dspSelect.addEventListener('change', populateDealerFieldsFromOption);
 
     function getPayload() {
-      const offers = getSelectedOffers();
       return {
         dspCode: dspSelect.value,
         dealer: dealerInput.value.trim(),
         locality: localityInput.value.trim(),
         phone: phoneInput.value.trim(),
-        campaignType: campaignTypeEl.value,
-        campaign: resolveCampaignName(),
-        festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
-        offers,
-        scheme: offers.join(' | '),
+        campaign: document.getElementById('campaign').value,
+        scheme: document.getElementById('scheme').value,
+        benefit: document.getElementById('benefit').value,
         installation: document.getElementById('installation').value,
         product: document.getElementById('product').value,
         language: document.getElementById('language').value,
@@ -930,182 +501,54 @@
       };
     }
 
-    function renderPills(payload) {
-      pillsEl.innerHTML = '';
-      const items = [
-        payload.campaignType === 'Festival Campaign' ? payload.festivalName : '',
-        payload.campaignType === 'Seasonal Campaign' ? payload.campaign : '',
-        ...payload.offers,
-        payload.installation,
-        payload.product
-      ].filter(Boolean);
+    function extractPosterDataUrl(data) {
+      if (!data) return '';
 
-      items.forEach(text => {
-        const pill = document.createElement('div');
-        pill.className = 'pill';
-        pill.textContent = text;
-        pillsEl.appendChild(pill);
-      });
+      if (data.posterImageDataUrl) return data.posterImageDataUrl;
+      if (data.finalPosterDataUrl) return data.finalPosterDataUrl;
+      if (data.imageDataUrl) return data.imageDataUrl;
+      if (data.bgImageDataUrl) return data.bgImageDataUrl;
+      return '';
     }
-
-    function forceImageVisibility() {
-      bgImg.style.filter = 'none';
-      bgImg.style.opacity = '1';
-      bgImg.style.background = '#f5f7fb';
-    }
-
-    function renderCreative(copy, payload) {
-      headlineEl.textContent = copy.headline_en || 'Headline will appear here.';
-      subheadlineEl.textContent = copy.body_en || '';
-      bodyEnEl.textContent = copy.body_en || '';
-      bodyLocalEl.textContent = copy.body_local || '';
-
-      dealerNameEl.textContent = copy.dealer || payload.dealer || 'Dealer Name';
-      dealerContactEl.textContent = `${copy.locality || payload.locality || ''} · ${copy.phone || payload.phone || ''}`;
-
-      updateCampaignMeta();
-      updateQr(copy.gmbUrl || '');
-      updateRating(copy.currentRating || '', copy.reviewsCount || '');
-      renderPills(payload);
-
-      complianceEl.textContent = copy.compliance === 'approved'
-        ? '✔ Brand Compliance: Approved'
-        : '✔ Brand Compliance: Pending';
-
-      if (copy.bgImageUrl) {
-        forceImageVisibility();
-        bgImg.onload = () => setStatus('Creative generated successfully with image.');
-        bgImg.onerror = () => {
-          console.error('Image failed:', copy.bgImageUrl);
-          setStatus('Image URL returned, but preview load failed. Check debug URL.', true);
-          showDebug([
-            'preview image failed',
-            'bgImageUrl=' + (copy.bgImageUrl || ''),
-            'bgImageFileId=' + (copy.bgImageFileId || ''),
-            'Try opening this URL directly in a new tab'
-          ]);
-        };
-        bgImg.src = copy.bgImageUrl + '?t=' + Date.now();
-      } else {
-        bgImg.removeAttribute('src');
-        setStatus('Creative generated, but image URL was not returned.', true);
-      }
-    }
-
-    function initOffersMultiSelect() {
-      const root = document.getElementById('offers-multi');
-      const trigger = root.querySelector('.ms-trigger');
-      const optionsWrap = root.querySelector('.ms-options');
-      const search = root.querySelector('.ms-search');
-      const count = document.getElementById('offers-count');
-
-      function renderTrigger() {
-        const caret = '<span class="ms-caret">▼</span>';
-        if (!selectedOffers.size) {
-          trigger.innerHTML = `<span class="ms-placeholder">Select one or more offers</span>${caret}`;
-        } else {
-          const tags = [...selectedOffers].map(v =>
-            `<span class="ms-tag">${v}<button type="button" data-remove="${encodeURIComponent(v)}">×</button></span>`
-          ).join('');
-          trigger.innerHTML = `${tags}${caret}`;
-        }
-        count.textContent = `${selectedOffers.size} selected`;
-      }
-
-      function renderOptions(query = '') {
-        const q = query.trim().toLowerCase();
-        optionsWrap.innerHTML = OFFER_OPTIONS
-          .filter(opt => opt.toLowerCase().includes(q))
-          .map(opt => `
-            <div class="ms-option ${selectedOffers.has(opt) ? 'selected' : ''}" data-value="${encodeURIComponent(opt)}" role="option" aria-selected="${selectedOffers.has(opt)}">
-              <div class="ms-check"></div>
-              <div>${opt}</div>
-            </div>
-          `).join('');
-      }
-
-      function toggleValue(value) {
-        if (selectedOffers.has(value)) selectedOffers.delete(value);
-        else selectedOffers.add(value);
-        renderTrigger();
-        renderOptions(search.value);
-      }
-
-      trigger.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-remove]');
-        if (btn) {
-          e.stopPropagation();
-          const value = decodeURIComponent(btn.getAttribute('data-remove'));
-          selectedOffers.delete(value);
-          renderTrigger();
-          renderOptions(search.value);
-          return;
-        }
-        root.classList.toggle('open');
-        trigger.setAttribute('aria-expanded', root.classList.contains('open') ? 'true' : 'false');
-        if (root.classList.contains('open')) search.focus();
-      });
-
-      optionsWrap.addEventListener('click', (e) => {
-        const row = e.target.closest('.ms-option');
-        if (!row) return;
-        const value = decodeURIComponent(row.getAttribute('data-value'));
-        toggleValue(value);
-      });
-
-      search.addEventListener('input', () => renderOptions(search.value));
-
-      root.querySelector('[data-action="select-all"]').addEventListener('click', () => {
-        OFFER_OPTIONS.forEach(v => selectedOffers.add(v));
-        renderTrigger();
-        renderOptions(search.value);
-      });
-
-      root.querySelector('[data-action="clear-all"]').addEventListener('click', () => {
-        selectedOffers.clear();
-        search.value = '';
-        renderTrigger();
-        renderOptions('');
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!root.contains(e.target)) {
-          root.classList.remove('open');
-          trigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      renderTrigger();
-      renderOptions();
-    }
-
-    dspSelect.addEventListener('change', populateDealerFieldsFromOption);
-    campaignTypeEl.addEventListener('change', updateCampaignVisibility);
-    festivalNameEl.addEventListener('change', updateCampaignMeta);
-    seasonalNameEl.addEventListener('change', updateCampaignMeta);
 
     document.getElementById('generate-btn').addEventListener('click', async () => {
       try {
         const payload = getPayload();
-        setStatus('Generating creative...');
+        metaCampaign.textContent = payload.campaign || '-';
+        metaDealer.textContent = payload.dealer || '-';
+
+        setStatus('Generating final poster...');
         showDebug(null);
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
           body: JSON.stringify(payload)
         });
 
         const data = await res.json();
+        lastResponseData = data;
 
         if (!data.ok) {
-          setStatus(data.error || 'Creative generation failed.', true);
+          setStatus(data.error || 'Poster generation failed.', true);
           showDebug(data.debug || null);
+          setPoster('');
           return;
         }
 
-        renderCreative(data.data || {}, payload);
+        const output = data.data || {};
+        const posterDataUrl = extractPosterDataUrl(output);
+
+        setPoster(posterDataUrl);
         showDebug(data.debug || null);
+
+        if (posterDataUrl) {
+          setStatus('Final poster generated successfully.');
+        } else {
+          setStatus('Request succeeded, but no final poster image field was returned.', true);
+        }
       } catch (err) {
         setStatus('Network/server error: ' + err, true);
       }
@@ -1113,41 +556,35 @@
 
     document.getElementById('submit-btn').addEventListener('click', async () => {
       try {
-        setStatus('Capturing preview for review...');
-        textLayer.setAttribute('data-html2canvas-ignore', 'true');
-        dealerLayer.setAttribute('data-html2canvas-ignore', 'true');
+        if (!lastPosterDataUrl) {
+          setStatus('Generate the final poster first.', true);
+          return;
+        }
 
-        const canvas = await html2canvas(document.getElementById('preview-shell'), {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: '#ffffff'
-        });
+        const base = getPayload();
+        setStatus('Submitting final poster for review...');
 
-        textLayer.removeAttribute('data-html2canvas-ignore');
-        dealerLayer.removeAttribute('data-html2canvas-ignore');
-
-        const offers = getSelectedOffers();
         const payload = {
           action: 'submit_for_review',
-          dealerCode: dspSelect.value,
-          dealerName: dealerNameEl.textContent,
-          campaignType: campaignTypeEl.value,
-          campaign: resolveCampaignName(),
-          festivalName: campaignTypeEl.value === 'Festival Campaign' ? festivalNameEl.value : '',
-          offers,
-          scheme: offers.join(' | '),
-          installation: document.getElementById('installation').value,
-          product: document.getElementById('product').value,
-          language: document.getElementById('language').value,
-          headline_en: headlineEl.textContent,
-          body_en: bodyEnEl.textContent,
-          body_local: bodyLocalEl.textContent,
-          imageDataUrl: canvas.toDataURL('image/png')
+          dspCode: base.dspCode,
+          dealer: base.dealer,
+          locality: base.locality,
+          phone: base.phone,
+          campaign: base.campaign,
+          scheme: base.scheme,
+          benefit: base.benefit,
+          installation: base.installation,
+          product: base.product,
+          language: base.language,
+          notes: base.notes,
+          imageDataUrl: lastPosterDataUrl
         };
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
           body: JSON.stringify(payload)
         });
 
@@ -1160,16 +597,13 @@
         }
 
         showDebug(data.debug || null);
+        metaState.textContent = 'Submitted for review';
         setStatus('Submitted for review: ' + (data.reviewUrl || 'Success'));
       } catch (err) {
-        textLayer.removeAttribute('data-html2canvas-ignore');
-        dealerLayer.removeAttribute('data-html2canvas-ignore');
         setStatus('Submit error: ' + err, true);
       }
     });
 
-    initOffersMultiSelect();
-    updateCampaignVisibility();
     loadDealers();
   </script>
 </body>
