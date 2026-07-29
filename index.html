@@ -412,7 +412,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtnnSKAyebecbw1ytW7MfiKbevVmTWM7KdRkyojbG4CpyppL8pLSyXQoSP9CwLIESO/exec';
+    const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmo5TEljqsuJ0Zn2Qhoav6NifJuOmSuRFiBFLn-oHjQsTzZaYHYY4V2iCGyjItkFHc/exec';
 
     const state = {
       dsps: [],
@@ -660,7 +660,6 @@
       els.festivalTag.textContent = (data.campaign || els.campaign.value || 'Campaign') + ' Offer';
       els.disclaimerText.textContent = data.disclaimers_en || 'Offer valid as per Daikin terms and conditions. Please check eligibility, installation scope and offer applicability with your authorised Daikin dealer.';
       els.approvalPill.textContent = data.compliance === 'approved' ? '✔ Brand Compliance Approved' : '✔ Brand Compliance Pending';
-
       els.gmbLink.href = data.gmbUrl || '#';
       updateRating(data.currentRating || '', data.reviewsCount || '');
 
@@ -677,7 +676,7 @@
     async function loadInitialData() {
       try {
         setStatus('Loading master data...');
-        const res = await fetch(APP_SCRIPT_URL);
+        const res = await fetch(APP_SCRIPT_URL, { method: 'GET', redirect: 'follow' });
         const data = await res.json();
 
         if (!data.ok) {
@@ -711,6 +710,7 @@
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
+          redirect: 'follow',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(getGeneratePayload())
         });
@@ -785,6 +785,7 @@
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
+          redirect: 'follow',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
