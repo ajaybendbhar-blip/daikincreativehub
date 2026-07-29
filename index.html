@@ -24,7 +24,6 @@
       --success-br:#cfe8d7;
       --shadow:0 18px 48px rgba(15,23,42,.14);
       --radius:22px;
-      --radius-sm:14px;
     }
 
     *{box-sizing:border-box}
@@ -71,10 +70,6 @@
     .field input,.field select,.field textarea{
       width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;
       background:#fff;color:var(--text);font-size:14px;outline:none;
-      transition:border-color .18s ease, box-shadow .18s ease;
-    }
-    .field input:focus,.field select:focus,.field textarea:focus{
-      border-color:var(--brand);box-shadow:0 0 0 4px rgba(0,132,209,.12);
     }
     .field textarea{min-height:82px;resize:vertical}
 
@@ -105,10 +100,8 @@
     .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
     .btn{
       border:0;min-height:46px;border-radius:999px;padding:12px 18px;font-size:14px;font-weight:800;
-      cursor:pointer;transition:transform .16s ease, opacity .16s ease, box-shadow .16s ease;
+      cursor:pointer;
     }
-    .btn:hover{transform:translateY(-1px)}
-    .btn:active{transform:translateY(0)}
     .btn-primary{
       background:linear-gradient(135deg,var(--brand-dark),var(--brand));color:#fff;
       box-shadow:0 12px 26px rgba(0,132,209,.22);
@@ -133,88 +126,64 @@
     }
 
     .poster-header{
-      background:#fff;border-bottom:2px solid #edf2f7;min-height:94px;padding:14px 22px;
+      background:#fff;border-bottom:1px solid #edf2f7;min-height:84px;padding:12px 22px;
       display:flex;justify-content:space-between;align-items:center;gap:18px;
     }
     .header-left{display:flex;align-items:center;gap:14px;min-width:0}
     .daikin-logo-img{width:160px;max-width:42vw;height:auto;object-fit:contain;display:block}
-    .header-sub{
-      font-size:12px;color:#334155;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.4;
-    }
     .header-line{
-      text-align:right;max-width:320px;font-size:11px;line-height:1.45;font-weight:900;color:#111827;
+      text-align:right;max-width:310px;font-size:10px;line-height:1.35;font-weight:800;color:#1f2937;
       letter-spacing:.08em;text-transform:uppercase;
     }
 
-    .hero{position:relative;min-height:790px;background:#0f172a;overflow:hidden}
-    #bg-img{
-      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.68) saturate(1.05);
-      z-index:0;background:radial-gradient(circle at top right, rgba(255,255,255,.14), transparent 30%), linear-gradient(180deg,#1a3155,#0f172a);
+    .hero{
+      position:relative;
+      min-height:1180px;
+      background:#0f172a;
+      overflow:hidden;
     }
-    .hero-overlay{
-      position:absolute;inset:0;
-      background:linear-gradient(180deg,rgba(7,15,28,.08),rgba(7,15,28,.38) 34%,rgba(7,15,28,.76)),
-      linear-gradient(90deg,rgba(7,15,28,.48),rgba(7,15,28,.10) 58%,rgba(7,15,28,.26));
-      z-index:1;
+    #bg-img{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+      background:linear-gradient(180deg,#1a3155,#0f172a);
+    }
+
+    .hero-ui{
+      position:relative;
+      z-index:2;
+      min-height:1180px;
+      pointer-events:none;
     }
 
     .ac-packshot{
-      position:absolute;right:20px;bottom:156px;width:min(35%,250px);object-fit:contain;z-index:2;
+      position:absolute;right:28px;top:240px;width:min(34%,250px);object-fit:contain;z-index:3;
       filter:drop-shadow(0 18px 32px rgba(0,0,0,.22));
     }
 
-    .hero-content{
-      position:relative;z-index:3;min-height:790px;padding:28px 28px 22px;
-      display:flex;flex-direction:column;justify-content:space-between;color:#fff;
+    .offer-stickers{
+      position:absolute;
+      left:26px;
+      bottom:120px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      max-width:72%;
+      z-index:4;
     }
-
-    .top-copy{max-width:60%}
-    .festival-tag{
-      display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);font-size:13px;font-weight:800;margin-bottom:16px;
-    }
-    .headline{
-      margin:0 0 12px;font-size:clamp(34px,4vw,56px);line-height:1.04;font-weight:900;max-width:12ch;
-      text-shadow:0 4px 18px rgba(0,0,0,.18);
-    }
-    .brandline{margin:0 0 14px;font-size:16px;line-height:1.3;font-weight:800;color:#bde6ff}
-    .subheadline{
-      margin:0;font-size:16px;line-height:1.65;max-width:56ch;color:rgba(255,255,255,.96);
-      text-shadow:0 2px 12px rgba(0,0,0,.14);
-    }
-
-    .offer-stickers{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;max-width:72%}
     .offer-stickers img{
-      height:72px;max-width:168px;object-fit:contain;background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:8px;backdrop-filter:blur(10px);
-      box-shadow:0 10px 20px rgba(0,0,0,.08);
+      height:72px;
+      max-width:170px;
+      object-fit:contain;
+      display:block;
     }
-
-    .copy-card,.feature-card{
-      background:rgba(10,18,32,.38);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);
-      border-radius:18px;box-shadow:0 14px 28px rgba(0,0,0,.12);
-    }
-    .copy-card{padding:18px;max-width:58%;margin-top:22px}
-    .copy-title{
-      font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#dbeafe;margin-bottom:8px;
-    }
-    .copy-text{font-size:15px;line-height:1.62;color:rgba(255,255,255,.95)}
-    .footer-zone{display:grid;grid-template-columns:1fr;gap:18px;align-items:end;margin-top:22px}
-    .feature-card{padding:14px 16px;max-width:58%}
-    .feature-title{
-      font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#dbeafe;margin-bottom:10px;
-    }
-    .feature-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .feature{
-      text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
-      border-radius:12px;padding:10px 8px;
-    }
-    .feature .icon{font-size:18px;margin-bottom:6px}
-    .feature .label{font-size:12px;line-height:1.35;color:rgba(255,255,255,.95);font-weight:800}
 
     .dealer-strip{
-      background:#fff;padding:16px 22px;border-top:3px solid #edf2f7;
-      display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
+      background:#fff;
+      padding:16px 22px;
+      border-top:1px solid #e8edf3;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:20px;
+      align-items:center;
     }
     .dealer-kicker{
       font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#64748b;font-weight:900;margin-bottom:6px;
@@ -229,17 +198,15 @@
       background:var(--success-bg);border:1px solid var(--success-br);color:var(--success);
       font-size:13px;font-weight:900;
     }
-    .disclaimer{
-      border-top:1px solid #edf2f7;background:#f9fbfd;padding:10px 22px 14px;color:#64748b;font-size:11px;line-height:1.55;
-    }
 
     @media (max-width:760px){
-      .poster-header{flex-direction:column;align-items:flex-start}
-      .header-line{text-align:left;max-width:none}
-      .top-copy,.copy-card,.feature-card,.offer-stickers{max-width:100%}
+      .poster-header{padding:12px 16px}
+      .header-line{text-align:left;max-width:180px;font-size:9px}
       .dealer-strip{grid-template-columns:1fr}
-      .ac-packshot{position:relative;right:auto;bottom:auto;width:220px;margin:18px auto 0;display:block}
-      .feature-strip{grid-template-columns:repeat(2,1fr)}
+      .ac-packshot{right:18px;top:220px;width:180px}
+      .offer-stickers{left:16px;right:16px;bottom:90px;max-width:none}
+      .offer-stickers img{height:58px;max-width:140px}
+      .hero,.hero-ui{min-height:980px}
     }
   </style>
 </head>
@@ -249,7 +216,7 @@
       <div class="brand-mark">D</div>
       <div>
         <h1>Daikin Creative Studio</h1>
-        <p>English-only campaign poster generator with multi-offer selection.</p>
+        <p>Background image only, offer logos from Apps Script, dealer strip from HTML.</p>
       </div>
     </div>
 
@@ -257,7 +224,7 @@
       <section class="panel">
         <div class="panel-body">
           <h2>Create campaign poster</h2>
-          <p class="subtext">Select a dealer, campaign, product and one or more offers. The app generates the campaign artwork, overlays approved offer logos, and keeps the dealer strip editable.</p>
+          <p class="subtext">The generated background remains clean. Only the Daikin header, Apps Script offer logos, and dealer strip appear in the final poster.</p>
 
           <div class="form-grid">
             <div class="field full">
@@ -314,7 +281,7 @@
               <label>Offers</label>
               <div class="offer-box">
                 <div class="offer-toolbar">
-                  <span>Select one or more offers</span>
+                  <span>Select one or more offer logos</span>
                   <div class="offer-actions">
                     <button type="button" class="mini-btn" id="select-all-offers">Select all</button>
                     <button type="button" class="mini-btn" id="clear-all-offers">Clear all</button>
@@ -327,7 +294,7 @@
 
             <div class="field full">
               <label for="notes">Notes</label>
-              <textarea id="notes" placeholder="Optional campaign instructions"></textarea>
+              <textarea id="notes" placeholder="Optional campaign instructions for background generation only"></textarea>
             </div>
           </div>
 
@@ -348,42 +315,16 @@
             <div class="poster-header">
               <div class="header-left">
                 <img id="daikin-logo-img" class="daikin-logo-img" alt="Daikin logo" crossorigin="anonymous" />
-                <div class="header-sub">Official Brand Communication</div>
               </div>
               <div class="header-line">WORLD'S LEADING AIR CONDITIONING COMPANY FROM JAPAN</div>
             </div>
 
-            <div class="hero" id="poster-hero">
-              <img id="bg-img" alt="Campaign artwork" />
-              <div class="hero-overlay"></div>
+            <div class="hero">
+              <img id="bg-img" alt="Campaign background artwork" />
               <img id="ac-packshot" class="ac-packshot" alt="Daikin AC product" crossorigin="anonymous" />
 
-              <div class="hero-content">
-                <div class="top-copy">
-                  <div class="festival-tag" id="festival-tag">Campaign Offer</div>
-                  <h2 class="headline" id="headline">Celebrate Comfort with Daikin</h2>
-                  <div class="brandline" id="brandline">Daikin The Air Specialist</div>
-                  <p class="subheadline" id="subheadline">Upgrade your home comfort with Daikin’s advanced cooling technology and premium festive benefits.</p>
-
-                  <div class="offer-stickers" id="offer-stickers"></div>
-
-                  <div class="copy-card">
-                    <div class="copy-title">Campaign copy</div>
-                    <div class="copy-text" id="body-en">English campaign copy will appear here.</div>
-                  </div>
-                </div>
-
-                <div class="footer-zone">
-                  <div class="feature-card">
-                    <div class="feature-title">Daikin advantages</div>
-                    <div class="feature-strip">
-                      <div class="feature"><div class="icon">❄</div><div class="label">Powerful Cooling</div></div>
-                      <div class="feature"><div class="icon">⚡</div><div class="label">Energy Efficiency</div></div>
-                      <div class="feature"><div class="icon">🌿</div><div class="label">Cleaner Air</div></div>
-                      <div class="feature"><div class="icon">🛡</div><div class="label">Trusted Reliability</div></div>
-                    </div>
-                  </div>
-                </div>
+              <div class="hero-ui">
+                <div class="offer-stickers" id="offer-stickers"></div>
               </div>
             </div>
 
@@ -400,10 +341,6 @@
                 <div class="approval-pill" id="approval-pill">✔ Brand Compliance Approved</div>
               </div>
             </div>
-
-            <div class="disclaimer" id="disclaimer-text">
-              Offer valid as per Daikin terms and conditions. Please check eligibility, installation scope and offer applicability with your authorised Daikin dealer.
-            </div>
           </div>
         </div>
       </section>
@@ -419,9 +356,7 @@
       assets: {},
       offersCatalog: {},
       selectedOffers: [],
-      campaigns: [],
-      language: 'English',
-      lastGeneratedData: null
+      campaigns: []
     };
 
     const els = {
@@ -443,18 +378,12 @@
       daikinLogoImg: document.getElementById('daikin-logo-img'),
       acPackshot: document.getElementById('ac-packshot'),
       offerStickers: document.getElementById('offer-stickers'),
-      festivalTag: document.getElementById('festival-tag'),
-      headline: document.getElementById('headline'),
-      brandline: document.getElementById('brandline'),
-      subheadline: document.getElementById('subheadline'),
-      bodyEn: document.getElementById('body-en'),
       dealerName: document.getElementById('dealer-name'),
       dealerContact: document.getElementById('dealer-contact'),
       dealerAddress: document.getElementById('dealer-address'),
       ratingInfo: document.getElementById('rating-info'),
       gmbLink: document.getElementById('gmb-link'),
       approvalPill: document.getElementById('approval-pill'),
-      disclaimerText: document.getElementById('disclaimer-text'),
       poster: document.getElementById('poster')
     };
 
@@ -501,9 +430,7 @@
         els.dspSelect.appendChild(opt);
       });
 
-      if (els.dspSelect.options.length) {
-        populateDealerFieldsFromSelection();
-      }
+      if (els.dspSelect.options.length) populateDealerFieldsFromSelection();
     }
 
     function populateDealerFieldsFromSelection() {
@@ -533,9 +460,6 @@
       els.dealerName.textContent = dealer;
       els.dealerAddress.textContent = [address, locality, stateName].filter(Boolean).join(', ') || 'Dealer address, city, state';
       els.dealerContact.textContent = [phone, alternateNo].filter(Boolean).join(' / ') || 'Owner No / Alternate No';
-      els.festivalTag.textContent = (els.campaign.value || 'Campaign') + ' Offer';
-      els.brandline.textContent = 'Daikin The Air Specialist';
-      els.disclaimerText.textContent = 'Offer valid as per Daikin terms and conditions. Please check eligibility, installation scope and offer applicability with your authorised Daikin dealer.';
     }
 
     function updateRating(rating, reviews) {
@@ -603,7 +527,6 @@
       state.selectedOffers.forEach(key => {
         const offer = state.offersCatalog[key];
         if (!offer || !offer.imageUrl) return;
-
         const img = document.createElement('img');
         img.src = offer.imageUrl;
         img.alt = offer.label;
@@ -648,35 +571,10 @@
       };
     }
 
-    function renderGeneratedPoster(data) {
-      state.lastGeneratedData = data;
-
-      els.headline.textContent = data.headline_en || 'Celebrate Comfort with Daikin';
-      els.subheadline.textContent = data.body_en || 'Upgrade your home comfort with Daikin’s advanced cooling technology and premium festive benefits.';
-      els.bodyEn.textContent = data.body_en || '';
-      els.dealerName.textContent = data.dealer || 'Dealer Name';
-      els.dealerAddress.textContent = [data.address || '', data.locality || '', data.state || ''].filter(Boolean).join(', ') || 'Dealer address, city, state';
-      els.dealerContact.textContent = [data.phone || '', data.alternateNo || ''].filter(Boolean).join(' / ') || 'Owner No / Alternate No';
-      els.festivalTag.textContent = (data.campaign || els.campaign.value || 'Campaign') + ' Offer';
-      els.disclaimerText.textContent = data.disclaimers_en || 'Offer valid as per Daikin terms and conditions. Please check eligibility, installation scope and offer applicability with your authorised Daikin dealer.';
-      els.approvalPill.textContent = data.compliance === 'approved' ? '✔ Brand Compliance Approved' : '✔ Brand Compliance Pending';
-      els.gmbLink.href = data.gmbUrl || '#';
-      updateRating(data.currentRating || '', data.reviewsCount || '');
-
-      if (data.bgImageDataUrl) {
-        els.bgImg.src = data.bgImageDataUrl;
-      }
-
-      if (Array.isArray(data.selectedOffers)) {
-        state.selectedOffers = data.selectedOffers.map(o => o.key);
-        renderOffersControl();
-      }
-    }
-
     async function loadInitialData() {
       try {
         setStatus('Loading master data...');
-        const res = await fetch(APP_SCRIPT_URL, { method: 'GET', redirect: 'follow' });
+        const res = await fetch(APP_SCRIPT_URL);
         const data = await res.json();
 
         if (!data.ok) {
@@ -688,7 +586,6 @@
         state.assets = data.assets || {};
         state.offersCatalog = data.offersCatalog || {};
         state.campaigns = data.campaigns || [];
-        state.language = data.language || 'English';
 
         populateCampaigns();
         populateDealers();
@@ -705,12 +602,11 @@
     async function generatePoster() {
       try {
         syncDealerPreview();
-        setStatus('Generating campaign artwork...');
+        setStatus('Generating background image...');
         showDebug(null);
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          redirect: 'follow',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(getGeneratePayload())
         });
@@ -728,11 +624,20 @@
           applyAssets();
         }
 
-        renderGeneratedPoster(data.data || {});
+        if (data.data && data.data.bgImageDataUrl) {
+          els.bgImg.src = data.data.bgImageDataUrl;
+        }
+
+        if (data.data) {
+          els.dealerName.textContent = data.data.dealer || els.dealerInput.value || 'Dealer Name';
+          els.dealerAddress.textContent = [data.data.address || '', data.data.locality || '', data.data.state || ''].filter(Boolean).join(', ');
+          els.dealerContact.textContent = [data.data.phone || '', data.data.alternateNo || ''].filter(Boolean).join(' / ');
+          els.gmbLink.href = data.data.gmbUrl || '#';
+          updateRating(data.data.currentRating || '', data.data.reviewsCount || '');
+        }
+
         showDebug(data.debug || null);
-        setStatus((data.data && data.data.bgImageDataUrl)
-          ? 'Poster generated successfully.'
-          : 'Poster generated, but artwork image was not returned.');
+        setStatus('Poster generated successfully.');
       } catch (err) {
         setStatus('Generate error: ' + err, true);
       }
@@ -757,7 +662,7 @@
 
         setStatus('Poster downloaded.');
       } catch (err) {
-        setStatus('Download error: ' + err + '. Some external asset hosts may block canvas export.', true);
+        setStatus('Download error: ' + err, true);
       }
     }
 
@@ -778,14 +683,11 @@
           campaign: els.campaign.value,
           language: 'English',
           selectedOffers: state.selectedOffers,
-          headline_en: els.headline.textContent,
-          body_en: els.bodyEn.textContent,
           imageDataUrl: canvas.toDataURL('image/png')
         };
 
         const res = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          redirect: 'follow',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
@@ -818,7 +720,6 @@
     els.stateInput.addEventListener('input', syncDealerPreview);
     els.phoneInput.addEventListener('input', syncDealerPreview);
     els.alternateNoInput.addEventListener('input', syncDealerPreview);
-    els.campaign.addEventListener('change', syncDealerPreview);
 
     loadInitialData();
   </script>
