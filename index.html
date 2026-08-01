@@ -5,301 +5,276 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daikin Creative Studio</title>
   <style>
-    :root{
-      --bg:#f5f8fc;
-      --panel:#ffffff;
-      --ink:#132238;
-      --muted:#6b7a90;
-      --blue:#1177c8;
-      --blue2:#0d5ea6;
-      --line:#dbe4ef;
-      --shadow:0 12px 40px rgba(18,34,56,.10);
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f8fc;
+      color: #132238;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:var(--ink);
+    .header {
+      padding: 12px 18px;
+      background: #fff;
+      border-bottom: 1px solid #dbe4ef;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .app-header{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:12px 18px;
-      background:#fff;
-      border-bottom:1px solid var(--line);
-      position:sticky;
-      top:0;
-      z-index:10;
+    .brand {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #1177c8;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
     }
-    .logo{
-      width:28px;height:28px;border-radius:8px;
-      background:#1184c7;color:#fff;display:flex;align-items:center;justify-content:center;
-      font-weight:700;
-    }
-    .title-wrap h1{
-      margin:0;font-size:20px;line-height:1.1;
-    }
-    .title-wrap p{
-      margin:2px 0 0;font-size:12px;color:var(--muted);
-    }
-    .layout{
-      display:grid;
+    .layout {
+      display: grid;
       grid-template-columns: 360px 1fr;
-      gap:16px;
-      padding:16px;
-      align-items:start;
+      gap: 16px;
+      padding: 16px;
     }
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:16px;
-      box-shadow:var(--shadow);
+    .card {
+      background: #fff;
+      border: 1px solid #dbe4ef;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(18,34,56,.10);
     }
-    .form-card{padding:16px}
-    .form-card h2{
-      margin:0 0 12px;
-      font-size:22px;
+    .panel {
+      padding: 16px;
     }
-    .hint{
-      margin:0 0 16px;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.45;
+    .field { margin-bottom: 12px; }
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #5f7188;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
     }
-    .field{margin-bottom:12px}
-    label{
-      display:block;
-      font-size:11px;
-      letter-spacing:.04em;
-      font-weight:700;
-      color:#5f7188;
-      margin-bottom:6px;
+    select, input, textarea {
+      width: 100%;
+      border: 1px solid #d7dfeb;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      background: #fff;
     }
-    input, select, textarea{
-      width:100%;
-      border:1px solid #d7dfeb;
-      background:#fff;
-      border-radius:8px;
-      padding:10px 12px;
-      font-size:13px;
-      outline:none;
+    textarea {
+      min-height: 80px;
+      resize: vertical;
     }
-    textarea{min-height:78px;resize:vertical}
-    .row{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
+    .offers {
+      max-height: 180px;
+      overflow: auto;
+      border: 1px solid #d7dfeb;
+      border-radius: 10px;
+      padding: 8px;
+      background: #fafcff;
     }
-    button{
-      border:0;
-      border-radius:999px;
-      padding:11px 16px;
-      cursor:pointer;
-      font-weight:700;
-      color:#fff;
-      background:linear-gradient(180deg,var(--blue),var(--blue2));
+    .offer-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 4px;
+      font-size: 13px;
     }
-    button.secondary{
-      background:#1f2d44;
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
     }
-    button.ghost{
-      background:#eef5fb;
-      color:#1768a6;
-      border:1px solid #cfe3f4;
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(180deg, #1177c8, #0d5ea6);
     }
-    .status{
-      margin-top:12px;
-      font-size:12px;
-      padding:10px 12px;
-      background:#f6f9fc;
-      border:1px solid #dce5ef;
-      border-radius:10px;
-      color:#52647b;
-      white-space:pre-wrap;
+    button.secondary {
+      background: #1f2d44;
     }
-
-    .poster-wrap{
-      padding:14px;
+    .status {
+      margin-top: 12px;
+      font-size: 12px;
+      padding: 10px 12px;
+      background: #f6f9fc;
+      border: 1px solid #dce5ef;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      color: #52647b;
     }
-    .poster{
-      position:relative;
-      width:min(100%, 860px);
+    .poster-wrap {
+      padding: 14px;
+    }
+    .poster {
+      position: relative;
+      width: min(100%, 860px);
       aspect-ratio: 2 / 3;
-      margin:auto;
-      overflow:hidden;
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      background:#102745;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #102745;
     }
-    .poster-bg{
-      position:absolute;inset:0;
-      width:100%;height:100%;
-      object-fit:cover;
-      display:block;
+    .poster-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .dealer-strip{
-      position:absolute;
-      left:14px;
-      right:14px;
-      bottom:14px;
-      background:rgba(255,255,255,.96);
-      border-radius:16px;
-      padding:14px;
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      align-items:center;
-      border:1px solid rgba(255,255,255,.7);
+    .dealer-strip {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      background: rgba(255,255,255,.96);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.7);
       backdrop-filter: blur(8px);
     }
-    .dealer-info{
-      min-width:0;
-      flex:1;
+    .dealer-name {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 5px;
     }
-    .dealer-label{
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.08em;
-      color:#5b6d83;
-      text-transform:uppercase;
-      margin-bottom:4px;
+    .dealer-meta {
+      font-size: 12px;
+      color: #46586f;
+      line-height: 1.4;
     }
-    .dealer-name{
-      font-size:22px;
-      font-weight:800;
-      line-height:1.1;
-      margin-bottom:6px;
-      color:#12263d;
+    .qr-box {
+      width: 110px;
+      text-align: center;
     }
-    .dealer-meta{
-      font-size:12px;
-      line-height:1.4;
-      color:#46586f;
-      word-break:break-word;
+    .qr-box img {
+      width: 96px;
+      height: 96px;
+      background: #fff;
+      padding: 4px;
+      border: 1px solid #d7e3ef;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto 6px;
     }
-    .qr-box{
-      width:102px;
-      min-width:102px;
-      text-align:center;
+    .qr-text {
+      font-size: 10px;
+      color: #5b6d83;
+      font-weight: 700;
     }
-    .qr-box img{
-      width:96px;
-      height:96px;
-      display:block;
-      margin:0 auto 6px;
-      border-radius:10px;
-      background:#fff;
-      padding:4px;
-      border:1px solid #d7e3ef;
-    }
-    .qr-box .qr-text{
-      font-size:10px;
-      color:#5b6d83;
-      font-weight:700;
-    }
-
-    @media (max-width: 1080px){
-      .layout{grid-template-columns:1fr}
-      .poster{width:100%;max-width:860px}
+    @media (max-width: 1080px) {
+      .layout { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="app-header">
-    <div class="logo">D</div>
-    <div class="title-wrap">
-      <h1>Daikin Creative Studio</h1>
-      <p>Background image only, dealer strip and QR from HTML.</p>
+  <div class="header">
+    <div class="brand">D</div>
+    <div>
+      <div style="font-weight:700;">Daikin Creative Studio</div>
+      <div style="font-size:12px;color:#6b7a90;">Simple AI campaign creator</div>
     </div>
   </div>
 
   <div class="layout">
-    <div class="card form-card">
-      <h2>Create campaign poster</h2>
-      <p class="hint">
-        The generated background stays clean. The poster overlay handles only dealer strip and QR.
-      </p>
-
+    <div class="card panel">
       <div class="field">
-        <label for="dspCode">Dealer</label>
+        <label>Dealer</label>
         <select id="dspCode"></select>
       </div>
 
       <div class="field">
-        <label for="dealerName">Dealership name</label>
+        <label>Campaign Theme</label>
+        <select id="campaign"></select>
+      </div>
+
+      <div class="field">
+        <label>Selected Offers</label>
+        <div id="offersBox" class="offers"></div>
+      </div>
+
+      <div class="field">
+        <label>Dealer Name</label>
         <input id="dealerName" type="text" />
       </div>
 
       <div class="field">
-        <label for="address">DSP address</label>
+        <label>Address</label>
         <input id="address" type="text" />
       </div>
 
       <div class="row">
         <div class="field">
-          <label for="city">City</label>
+          <label>City</label>
           <input id="city" type="text" />
         </div>
         <div class="field">
-          <label for="state">State</label>
+          <label>State</label>
           <input id="state" type="text" />
         </div>
       </div>
 
       <div class="row">
         <div class="field">
-          <label for="phone">Owner no</label>
+          <label>Phone</label>
           <input id="phone" type="text" />
         </div>
         <div class="field">
-          <label for="alternateNo">Alternate no</label>
+          <label>Alternate No</label>
           <input id="alternateNo" type="text" />
         </div>
       </div>
 
       <div class="field">
-        <label for="campaign">Campaign</label>
-        <select id="campaign"></select>
+        <label>GMB URL</label>
+        <input id="gmbUrl" type="text" />
       </div>
 
       <div class="field">
-        <label for="gmbUrl">GMB URL</label>
-        <input id="gmbUrl" type="text" placeholder="Auto-loaded from master sheet" />
-      </div>
-
-      <div class="field">
-        <label for="notes">Notes</label>
-        <textarea id="notes" placeholder="Optional campaign instructions for background generation only"></textarea>
+        <label>Notes</label>
+        <textarea id="notes" placeholder="Optional creative notes"></textarea>
       </div>
 
       <div class="actions">
-        <button id="generateBtn" type="button">Generate Poster</button>
-        <button id="downloadBtn" class="secondary" type="button">Download Poster</button>
-        <button id="reviewBtn" class="ghost" type="button">Submit for Review</button>
+        <button id="generateBtn">Generate Poster</button>
+        <button id="downloadBtn" class="secondary">Download</button>
+        <button id="saveBtn" class="secondary">Save to Sheet</button>
       </div>
 
-      <div id="status" class="status">Loaded successfully.</div>
+      <div id="status" class="status">Loading...</div>
     </div>
 
     <div class="card poster-wrap">
       <div class="poster" id="poster">
-        <img id="bgImage" class="poster-bg" alt="Generated campaign background" />
+        <img id="bgImage" class="poster-bg" alt="Generated creative background" />
         <div class="dealer-strip">
-          <div class="dealer-info">
-            <div class="dealer-label">Authorized Dealer</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:800;letter-spacing:.08em;color:#5b6d83;text-transform:uppercase;margin-bottom:4px;">Authorized Dealer</div>
             <div id="dealerNamePreview" class="dealer-name">Dealer Name</div>
             <div id="dealerMetaPreview" class="dealer-meta"></div>
           </div>
           <div class="qr-box">
-            <img id="qrCode" alt="Dealer GMB QR code" />
+            <img id="qrCode" alt="QR" />
             <div class="qr-text">Scan for Google listing</div>
           </div>
         </div>
@@ -309,38 +284,58 @@
 
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbzrAGJwzeSwwYLjOv3vrCQsuTK3aCKEMVS9Zzkhry2QYoRr6We9nI4go8p1qcj7Tbj-/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwBU0-XjfAiScYeIdZt81OX5qP1QJt97LQVVwE1pDbvn9MADCcRpjFcvHNzVmPaYcLO/exec';
 
     const els = {
       dspCode: document.getElementById('dspCode'),
+      campaign: document.getElementById('campaign'),
+      offersBox: document.getElementById('offersBox'),
       dealerName: document.getElementById('dealerName'),
       address: document.getElementById('address'),
       city: document.getElementById('city'),
       state: document.getElementById('state'),
       phone: document.getElementById('phone'),
       alternateNo: document.getElementById('alternateNo'),
-      campaign: document.getElementById('campaign'),
       gmbUrl: document.getElementById('gmbUrl'),
       notes: document.getElementById('notes'),
       status: document.getElementById('status'),
       bgImage: document.getElementById('bgImage'),
       dealerNamePreview: document.getElementById('dealerNamePreview'),
       dealerMetaPreview: document.getElementById('dealerMetaPreview'),
-      qrCode: document.getElementById('qrCode'),
-      generateBtn: document.getElementById('generateBtn'),
-      downloadBtn: document.getElementById('downloadBtn'),
-      reviewBtn: document.getElementById('reviewBtn')
+      qrCode: document.getElementById('qrCode')
     };
 
     let dsps = [];
+    let offers = [];
 
     function setStatus(msg) {
       els.status.textContent = msg;
     }
 
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function makeQrUrl(url) {
-      if (!url) return '';
-      return 'https://chart.googleapis.com/chart?cht=qr&chs=180x180&chld=M|0&chl=' + encodeURIComponent(url);
+      return url ? 'https://chart.googleapis.com/chart?cht=qr&chs=180x180&chld=M|0&chl=' + encodeURIComponent(url) : '';
+    }
+
+    function getSelectedOfferKeys() {
+      return [...document.querySelectorAll('input[name="offer"]:checked')].map(x => x.value);
+    }
+
+    function renderOffers(list) {
+      els.offersBox.innerHTML = list.map(o => `
+        <label class="offer-item">
+          <input type="checkbox" name="offer" value="${escapeHtml(o.key)}" />
+          <span>${escapeHtml(o.label)}</span>
+        </label>
+      `).join('');
     }
 
     function updatePreview() {
@@ -360,11 +355,10 @@
         alt ? 'Alt: ' + alt : ''
       ].filter(Boolean).join(' • ');
 
-      els.qrCode.src = gmb ? makeQrUrl(gmb) : '';
+      els.qrCode.src = makeQrUrl(gmb);
     }
 
-    function fillDealerFields(dsp) {
-      if (!dsp) return;
+    function fillDealer(dsp) {
       els.dealerName.value = dsp.dspName || '';
       els.address.value = dsp.address || '';
       els.city.value = dsp.city || '';
@@ -375,72 +369,56 @@
       updatePreview();
     }
 
-    function renderDsps(list) {
-      els.dspCode.innerHTML = '<option value="">Select dealer</option>' + list.map(d =>
-        `<option value="${escapeHtml(d.dspCode)}">${escapeHtml(d.dspCode)} - ${escapeHtml(d.dspName)}</option>`
-      ).join('');
-    }
-
-    function renderCampaigns(campaigns) {
-      els.campaign.innerHTML = campaigns.map(c =>
-        `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`
-      ).join('');
-    }
-
-    function escapeHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+    function renderCampaigns(list) {
+      els.campaign.innerHTML = list.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
     }
 
     async function fetchJson(url, options = {}) {
       const res = await fetch(url, options);
       const text = await res.text();
-
       let json;
       try {
         json = JSON.parse(text);
       } catch (e) {
         throw new Error('Expected JSON but got:\n' + text.slice(0, 300));
       }
-
-      if (!res.ok) {
-        throw new Error(json.error || text || 'Request failed');
-      }
-
       return json;
     }
 
-    async function loadInitialData() {
+    async function loadData() {
       setStatus('Loading...');
       const json = await fetchJson(API_URL, { method: 'GET' });
       if (!json.ok) throw new Error(json.error || 'Failed to load data');
 
       dsps = json.dsps || [];
-      renderDsps(dsps);
-      renderCampaigns(json.campaigns || []);
-      setStatus('Loaded successfully.');
+      offers = json.offers || [];
 
       if (dsps.length) {
-        els.dspCode.value = dsps[0].dspCode || '';
-        fillDealerFields(dsps[0]);
+        els.dspCode.innerHTML = '<option value="">Select dealer</option>' + dsps.map(d =>
+          `<option value="${escapeHtml(d.dspCode)}">${escapeHtml(d.dspCode)} - ${escapeHtml(d.dspName)}</option>`
+        ).join('');
+        fillDealer(dsps[0]);
+        els.dspCode.value = dsps[0].dspCode;
       }
+
+      renderCampaigns(json.campaigns || []);
+      renderOffers(offers);
+      updatePreview();
+      setStatus('Loaded successfully.');
     }
 
     async function generatePoster() {
       setStatus('Generating poster...');
       const payload = {
         dspCode: els.dspCode.value,
+        campaign: els.campaign.value,
+        selectedOffers: getSelectedOfferKeys(),
         dealer: els.dealerName.value,
         address: els.address.value,
         locality: els.city.value,
         state: els.state.value,
         phone: els.phone.value,
         alternateNo: els.alternateNo.value,
-        campaign: els.campaign.value,
         gmbUrl: els.gmbUrl.value,
         notes: els.notes.value
       };
@@ -451,36 +429,32 @@
         body: JSON.stringify(payload)
       });
 
-      if (!json.ok) {
-        throw new Error((json.debug && json.debug.join('\n')) || json.error || 'Failed to generate poster');
-      }
+      if (!json.ok) throw new Error((json.debug && json.debug.join('\n')) || json.error || 'Generation failed');
 
-      const data = json.data || {};
-      els.bgImage.src = data.bgImageDataUrl || '';
-      els.gmbUrl.value = data.gmbUrl || els.gmbUrl.value;
+      const d = json.data || {};
+      els.bgImage.src = d.bgImageDataUrl || '';
       updatePreview();
-
       setStatus('Poster generated successfully.');
     }
 
     async function downloadPoster() {
       const poster = document.getElementById('poster');
       const canvas = await html2canvas(poster, { scale: 2, useCORS: true, backgroundColor: null });
-      const link = document.createElement('a');
-      link.download = 'daikin_poster.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+      const a = document.createElement('a');
+      a.download = 'daikin_poster.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
     }
 
-    async function submitForReview() {
-      setStatus('Submitting for review...');
+    async function saveToSheet() {
       const payload = {
-        action: 'submit_for_review',
+        action: 'save_creative',
         dealerCode: els.dspCode.value,
         dealerName: els.dealerName.value,
         campaign: els.campaign.value,
-        headline_en: '',
-        body_en: '',
+        selectedOffers: getSelectedOfferKeys(),
+        gmbUrl: els.gmbUrl.value,
+        headline: 'Celebrate ' + els.campaign.value + ' with Daikin Comfort',
         imageDataUrl: els.bgImage.src || ''
       };
 
@@ -490,28 +464,28 @@
         body: JSON.stringify(payload)
       });
 
-      if (!json.ok) {
-        throw new Error(json.error || 'Failed to submit');
-      }
-
-      setStatus('Submitted for review.');
+      if (!json.ok) throw new Error(json.error || 'Save failed');
+      setStatus('Saved to sheet.');
     }
+
+    document.addEventListener('change', (e) => {
+      if (e.target && e.target.name === 'offer') updatePreview();
+    });
 
     els.dspCode.addEventListener('change', () => {
       const found = dsps.find(d => String(d.dspCode) === String(els.dspCode.value));
-      if (found) fillDealerFields(found);
+      if (found) fillDealer(found);
     });
 
     ['dealerName', 'address', 'city', 'state', 'phone', 'alternateNo', 'gmbUrl'].forEach(id => {
       document.getElementById(id).addEventListener('input', updatePreview);
     });
 
-    els.generateBtn.addEventListener('click', () => generatePoster().catch(err => setStatus(err.message)));
-    els.downloadBtn.addEventListener('click', () => downloadPoster().catch(err => setStatus(err.message)));
-    els.reviewBtn.addEventListener('click', () => submitForReview().catch(err => setStatus(err.message)));
+    document.getElementById('generateBtn').addEventListener('click', () => generatePoster().catch(err => setStatus(err.message)));
+    document.getElementById('downloadBtn').addEventListener('click', () => downloadPoster().catch(err => setStatus(err.message)));
+    document.getElementById('saveBtn').addEventListener('click', () => saveToSheet().catch(err => setStatus(err.message)));
 
-    loadInitialData().catch(err => setStatus(err.message));
-    updatePreview();
+    loadData().catch(err => setStatus(err.message));
   </script>
 </body>
 </html>
