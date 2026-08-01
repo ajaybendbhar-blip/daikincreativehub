@@ -46,9 +46,7 @@
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(18,34,56,.10);
     }
-    .panel {
-      padding: 16px;
-    }
+    .panel { padding: 16px; }
     .field { margin-bottom: 12px; }
     label {
       display: block;
@@ -183,7 +181,7 @@
 
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxiKXz_Zq045D3k28deCHFm5gR5eVpwC2tzwGfQPNko0wO8bMkjb178aH56Ro-3B8hU/exec';
+    const API_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
     const els = {
       campaign: document.getElementById('campaign'),
@@ -192,8 +190,6 @@
       status: document.getElementById('status'),
       bgImage: document.getElementById('bgImage')
     };
-
-    let offers = [];
 
     function setStatus(msg) {
       els.status.textContent = msg;
@@ -251,8 +247,7 @@
       if (!json.ok) throw new Error(json.error || 'Failed to load data');
 
       renderCampaigns(json.campaigns || []);
-      offers = json.offers || [];
-      renderOffers(offers);
+      renderOffers(json.offers || []);
 
       setStatus('Loaded successfully.');
     }
