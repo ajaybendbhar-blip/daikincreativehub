@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daikin Creative Generator</title>
+  <title>Daikin Creative Generator - Debug</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -35,7 +35,7 @@
     }
     .layout {
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 380px 1fr;
       gap: 16px;
       padding: 16px;
       align-items: start;
@@ -46,7 +46,9 @@
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(18,34,56,.10);
     }
-    .panel { padding: 16px; }
+    .panel {
+      padding: 16px;
+    }
     .field { margin-bottom: 12px; }
     label {
       display: block;
@@ -57,7 +59,7 @@
       text-transform: uppercase;
       letter-spacing: .04em;
     }
-    select, textarea {
+    select, textarea, input {
       width: 100%;
       border: 1px solid #d7dfeb;
       border-radius: 8px;
@@ -70,7 +72,7 @@
       resize: vertical;
     }
     .offers {
-      max-height: 220px;
+      max-height: 240px;
       overflow: auto;
       border: 1px solid #d7dfeb;
       border-radius: 10px;
@@ -111,6 +113,8 @@
       border-radius: 10px;
       white-space: pre-wrap;
       color: #52647b;
+      max-height: 280px;
+      overflow: auto;
     }
     .poster-wrap {
       padding: 14px;
@@ -133,6 +137,12 @@
       object-fit: cover;
       display: block;
     }
+    .debug-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #1f2d44;
+    }
     @media (max-width: 1080px) {
       .layout { grid-template-columns: 1fr; }
     }
@@ -143,7 +153,7 @@
     <div class="brand">D</div>
     <div>
       <div style="font-weight:700;">Daikin Creative Generator</div>
-      <div style="font-size:12px;color:#6b7a90;">Simple AI campaign image tool</div>
+      <div style="font-size:12px;color:#6b7a90;">Debug version for POST fetch issue</div>
     </div>
   </div>
 
@@ -172,7 +182,8 @@
       <div id="status" class="status">Loading...</div>
     </div>
 
-    <div class="card poster-wrap">
+    <div class="card panel">
+      <div class="debug-title">Generated Creative Preview</div>
       <div class="poster" id="poster">
         <img id="bgImage" class="poster-bg" alt="Generated creative background" />
       </div>
@@ -181,7 +192,7 @@
 
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbwdpqnCBRqpIMZ5FDmFX1mDgJuSrhGNZ_-xrHTwHlG-unrOCoMbxBghNACVh-awPX7A3g/exec';
+    const API_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
 
     const els = {
       campaign: document.getElementById('campaign'),
@@ -190,6 +201,8 @@
       status: document.getElementById('status'),
       bgImage: document.getElementById('bgImage')
     };
+
+    let offers = [];
 
     function setStatus(msg) {
       els.status.textContent = msg;
@@ -224,55 +237,82 @@
     }
 
     async function fetchJson(url, options = {}) {
+      setStatus('Requesting: ' + url);
       const res = await fetch(url, options);
       const text = await res.text();
+
+      setStatus(
+        'HTTP Status: ' + res.status + ' ' + res.statusText + '\n' +
+        'Raw response:\n' + text.slice(0, 1200)
+      );
 
       let json;
       try {
         json = JSON.parse(text);
       } catch (e) {
-        throw new Error('Expected JSON but got:\n' + text.slice(0, 300));
-      }
-
-      if (!res.ok) {
-        throw new Error(json.error || text || 'Request failed');
+        throw new Error('Response is not JSON. See status panel.');
       }
 
       return json;
     }
 
     async function loadData() {
-      setStatus('Loading...');
+      setStatus('Loading GET data...');
       const json = await fetchJson(API_URL, { method: 'GET' });
       if (!json.ok) throw new Error(json.error || 'Failed to load data');
 
       renderCampaigns(json.campaigns || []);
-      renderOffers(json.offers || []);
+      offers = json.offers || [];
+      renderOffers(offers);
 
-      setStatus('Loaded successfully.');
+      setStatus(
+        'Loaded successfully.\n' +
+        'Campaigns: ' + (json.campaigns || []).length + '\n' +
+        'Offers: ' + (json.offers || []).length
+      );
     }
 
     async function generateCreative() {
-      setStatus('Generating creative...');
       const payload = {
         campaign: els.campaign.value,
         selectedOffers: getSelectedOfferKeys(),
         notes: els.notes.value
       };
 
-      const json = await fetchJson(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      setStatus(
+        'POST payload:\n' + JSON.stringify(payload, null, 2) +
+        '\n\nSending request...'
+      );
 
-      if (!json.ok) {
-        throw new Error((json.debug && json.debug.join('\n')) || json.error || 'Generation failed');
+      try {
+        const json = await fetchJson(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!json.ok) {
+          setStatus(
+            'Backend returned error:\n' +
+            (json.error || 'Unknown error') +
+            '\n\nDebug:\n' +
+            JSON.stringify(json.debug || [], null, 2)
+          );
+          return;
+        }
+
+        const d = json.data || {};
+        els.bgImage.src = d.bgImageDataUrl || '';
+        setStatus(
+          'Creative generated successfully.\n\n' +
+          'Debug:\n' + JSON.stringify(json.debug || [], null, 2)
+        );
+      } catch (err) {
+        setStatus(
+          'FETCH FAILED:\n' + err.message +
+          '\n\nThis means the browser could not complete the POST call.'
+        );
       }
-
-      const d = json.data || {};
-      els.bgImage.src = d.bgImageDataUrl || '';
-      setStatus('Creative generated successfully.');
     }
 
     async function downloadCreative() {
@@ -285,14 +325,14 @@
     }
 
     document.getElementById('generateBtn').addEventListener('click', () =>
-      generateCreative().catch(err => setStatus(err.message))
+      generateCreative().catch(err => setStatus('GENERATE ERROR:\n' + err.message))
     );
 
     document.getElementById('downloadBtn').addEventListener('click', () =>
-      downloadCreative().catch(err => setStatus(err.message))
+      downloadCreative().catch(err => setStatus('DOWNLOAD ERROR:\n' + err.message))
     );
 
-    loadData().catch(err => setStatus(err.message));
+    loadData().catch(err => setStatus('LOAD ERROR:\n' + err.message));
   </script>
 </body>
 </html>
